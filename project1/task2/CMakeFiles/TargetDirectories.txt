@@ -1,0 +1,4 @@
+/home/taiwei/code/cvCode/project1/task2/CMakeFiles/vidDisplay.dir
+/home/taiwei/code/cvCode/project1/task2/CMakeFiles/timeBlur.dir
+/home/taiwei/code/cvCode/project1/task2/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/project1/task2/CMakeFiles/rebuild_cache.dir

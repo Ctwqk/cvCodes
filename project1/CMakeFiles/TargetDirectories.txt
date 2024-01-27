@@ -1,0 +1,4 @@
+/home/taiwei/code/cvCode/project1/CMakeFiles/imgDisplay.dir
+/home/taiwei/code/cvCode/project1/CMakeFiles/play.dir
+/home/taiwei/code/cvCode/project1/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/project1/CMakeFiles/rebuild_cache.dir
