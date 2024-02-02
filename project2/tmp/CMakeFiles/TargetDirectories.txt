@@ -1,0 +1,3 @@
+/home/taiwei/code/cvCode/project2/tmp/CMakeFiles/sy.dir
+/home/taiwei/code/cvCode/project2/tmp/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/project2/tmp/CMakeFiles/rebuild_cache.dir
