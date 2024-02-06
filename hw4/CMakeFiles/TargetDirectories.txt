@@ -1,0 +1,3 @@
+/home/taiwei/code/cvCode/hw4/CMakeFiles/colors.dir
+/home/taiwei/code/cvCode/hw4/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/hw4/CMakeFiles/rebuild_cache.dir
