@@ -244,6 +244,30 @@ features.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/features.cpp.s
 .PHONY : features.cpp.s
 
+home/taiwei/code/cvCode/project1/task2/filter.o: home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.o
+
+# target to build an object file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+
+home/taiwei/code/cvCode/project1/task2/filter.i: home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.i
+
+# target to preprocess a source file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+
+home/taiwei/code/cvCode/project1/task2/filter.s: home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.s
+
+# target to generate assembly for a file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+
 imgMatch.o: imgMatch.cpp.o
 .PHONY : imgMatch.o
 
@@ -314,6 +338,9 @@ help:
 	@echo "... features.o"
 	@echo "... features.i"
 	@echo "... features.s"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.o"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.i"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.s"
 	@echo "... imgMatch.o"
 	@echo "... imgMatch.i"
 	@echo "... imgMatch.s"

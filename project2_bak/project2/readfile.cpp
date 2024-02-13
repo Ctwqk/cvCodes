@@ -14,7 +14,7 @@ Prints out the full path name for each file. This can be used as an argument to
 fopen or to cv::imread.
 */
 
-int listImgs(char dirname[256], std::vector<char*> &images) {
+int listImgs(char dirname[256], std::vector<std::string> &images) {
 	char buffer[256];
 	FILE *fp;
 	DIR *dirp;
@@ -34,6 +34,7 @@ int listImgs(char dirname[256], std::vector<char*> &images) {
 		printf("Cannot open directory %s\n", dirname);
 		exit(-1);
 	}
+	std::string tmp;
 	// loop over all the files in the image file listing
 	while( (dp = readdir(dirp)) != NULL ) {
 		// check if the file is an image
@@ -46,12 +47,12 @@ int listImgs(char dirname[256], std::vector<char*> &images) {
 			strcpy(buffer, dirname);
 			strcat(buffer, "/");
 			strcat(buffer, dp->d_name);
-		//	tmp=buffer;
-			images.push_back(buffer);
-			printf("full path name: %s\n", buffer);
+			tmp=buffer;
+			images.push_back(tmp);
 		}
 		//printf("1 \n");
 	}
 	printf("Terminating\n");
+	//for(char* x:images) printf("%s \n",x);
 	return(0);
 }

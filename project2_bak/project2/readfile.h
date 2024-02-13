@@ -6,9 +6,6 @@
 #include <cstdlib>
 #include <dirent.h>
 #include <vector>
-#include <string>
-int listImgs(char dirname[256], std::vector<char *> &images); 
-
-
-
+#include <iostream>
+int listImgs(char dirname[256], std::vector<std::string> &images); 
 #endif

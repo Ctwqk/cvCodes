@@ -3,33 +3,102 @@
 #include "csv_util.h"
 #include "features.h"
 #include "readfile.h"
+#include <fstream>
 using namespace std;
 using namespace cv;
-vector<float> mat2vec(Mat &src){
-	if(src.type()!=CV_32F) src.convertTo(src,CV_32F);
-	vector<float> ans;
-	ans.assign((float*)src.datastart,(float*)src.dataend);
-	//return vector<float>(tmp.begin<float>(),tmp.end<float>());
-	return ans;
-}
+
 int main(int argc, char ** argv){
 
-	vector<char* > images;
+	vector<string > images;
 	listImgs(argv[1],images);
 	Mat img,feature;
-	char s[256];
-	int idx=0;
-	for (int i=0;i<images.size();i++){
-		strcpy(s,images[i]);
-		for(int j=0;j<256;j++){
-			if(s[j]=='\0') break;
-			printf("%c", s[j]);
+	vector<float> vecFeature,vecFeature2;
+	//char s[256];
+	int idx=0,flag=0;	
+	string targetFeature;
+	if(string(argv[3])=="7x7central") {
+		targetFeature=string(argv[2])+"/7x7csv";		
+	}
+	else if(string(argv[3])=="histogram"){
+		targetFeature=string(argv[2])+"/histcsv";
+	}
+	else if(string(argv[3])=="multihist"){
+		targetFeature=string(argv[2])+"/multihistcsv";
+	}
+	else if(string(argv[3])=="texturecolor"){
+		targetFeature=string(argv[2])+"/textcolor";
+	}
+	else if(string(argv[3])=="mycustom"){
+		targetFeature=string(argv[2])+"/mycustom";
+	}
+	ifstream file(targetFeature);
+	if(!file) {
+		ofstream newFile(targetFeature);	
+		if(newFile.is_open()) newFile.close();
+	}
+	else flag=1;
+	char * targetFeature_=new char[targetFeature.length()+1];
+	strcpy(targetFeature_,targetFeature.c_str());
+	if(string(argv[3])=="7x7central"){
+		for (string s:images){
+			img=imread(s);
+			central7x7(img,feature);
+			vector<float> tmp=mat2vec(feature);
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,tmp,flag);
+			if(flag) flag=0;
+			delete[] swa;
+		}		
+	}
+	else if(string(argv[3])=="histogram"){
+		for (string s:images){
+			img=imread(s);
+			histogram(img,vecFeature);
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,vecFeature,flag);
+			flag=0;
+			delete[] swa;
 		}
-		printf("%d \n",idx++);
-		img=imread(s);
-		central7x7(img,feature);
-		vector<float> tmp=mat2vec(feature);
-		append_image_data_csv("imgCsv", s,tmp);
-	}	
+	}
+	else if(string(argv[3])=="multihist"){
+		for (string s:images){
+			img=imread(s);
+			multiHist(img,vecFeature);
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,vecFeature,flag);
+			flag=0;
+			delete[] swa;
+		}
+	}
+	else if(string(argv[3])=="texturecolor"){
+		for (string s:images){
+			img=imread(s);
+			texture(img,vecFeature);
+			histogram(img,vecFeature2);
+			vecFeature.insert(vecFeature.end(),vecFeature2.begin(),vecFeature2.end());
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,vecFeature,flag);
+			flag=0;
+			delete[] swa;
+			//cout<<"done"<<endl;
+		}
+	}
+	else if(string(argv[3])=="mycustom"){
+		for(string s:images){
+			img=imread(s);
+			histogram(img,vecFeature);
+			searchCsv("featureCsvs/ResNet18_olym.csv",s,vecFeature2);		
+			vecFeature.insert(vecFeature.end(),vecFeature2.begin(),vecFeature2.end());
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,vecFeature,flag);
+			flag=0;
+			delete[] swa;
+		}
+	}
 	return 0;
 } 

@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/imgMatch.dir/dist.cpp.o.d"
   "CMakeFiles/imgMatch.dir/features.cpp.o"
   "CMakeFiles/imgMatch.dir/features.cpp.o.d"
+  "CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o"
+  "CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o.d"
   "CMakeFiles/imgMatch.dir/imgMatch.cpp.o"
   "CMakeFiles/imgMatch.dir/imgMatch.cpp.o.d"
   "imgMatch"
