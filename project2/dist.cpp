@@ -1,5 +1,6 @@
 #include "dist.h"
 
+//return the Euclidean distance of two given vector, require same sie
 float dist(vector<float> &feature1,const vector<float> &feature2){
 	float ans=0;
 	if(true){
@@ -14,9 +15,10 @@ float dist(vector<float> &feature1,const vector<float> &feature2){
 			ans+=tmp*tmp;
 		}
 	}
-	return -ans;
+	return -ans;  //in the imgMatch.cpp, all features will be sorted in descending order, I want the similar image at the front
 }	
-	
+
+//return the histogram intersection of two histogram,require same size
 float histDist(vector<float> &hist1, const vector<float> &hist2){
 	float ans=0;
 	int n=hist1.size();
@@ -29,6 +31,8 @@ float histDist(vector<float> &hist1, const vector<float> &hist2){
 	}
 	return ans;
 }
+
+//return the cosDist of two given vector, require same size
 float cosDist(vector<float> &feature1, const vector<float> &feature2){
 	int n=feature1.size();
 	if(feature2.size()!=n){
@@ -41,11 +45,14 @@ float cosDist(vector<float> &feature1, const vector<float> &feature2){
 		sum2+=feature2[i]*feature2[i];
 		sum+=feature1[i]*feature2[i];
 	}	
-	return -1+sum/sqrt(sum1)/sqrt(sum2);
+	return -1+sum/sqrt(sum1)/sqrt(sum2); //in the imgMatch.cpp, all features will be sorted in descending order, I want the similar image at the front
+
 	
 	
 	return 0;
 }
+
+//directly usage of cosDict
 float myDist(vector<float> &feature1, const vector<float> &feature2){
 	return  cosDist(feature1,feature2);
 }

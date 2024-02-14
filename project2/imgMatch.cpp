@@ -10,14 +10,13 @@ using namespace cv;
 
 int main(int argc,char **argv){
 	Mat	img;
-
 	Mat feature;
-	
 	vector<float> vecFeature,vecFeature2;	
-	
 	vector<vector<float>> features;
 	vector<char * > fileNames;
 	string targetFeature;
+
+	//this part fetch the target image, and the path to the csv file of given feature, and calculate the given type of feature of target image
 	if(string(argv[3])=="7x7central") {
 		img=imread(argv[1]);
 		targetFeature=string(argv[2])+"/7x7csv";		
@@ -59,6 +58,7 @@ int main(int argc,char **argv){
 		vecFeature.insert(vecFeature.end(),vecFeature2.begin(),vecFeature2.end());
 	}
 		
+	//this part check whether the path of csv file exist, if not, return error information
 	ifstream file(targetFeature);
 	if(!file){
 		cout<<"database not found"<<endl;
@@ -68,6 +68,8 @@ int main(int argc,char **argv){
 	strcpy(targetFeature_,targetFeature.c_str());
 	read_image_data_csv(targetFeature_, 	fileNames, features);
 	vector<pair<float, int>> rank;
+
+	//if the path exist, based on the type of feature, calculate the distance between every images and target image respectively
 	if(string(argv[3])=="7x7central"){
 		for(int i=0;i<fileNames.size();i++){
 			float tmp=dist(features[i],vecFeature);
@@ -109,6 +111,7 @@ int main(int argc,char **argv){
 	resize(img,img,Size(600,480));
 	imshow("src",img);
 		
+	//sort the result of distances, and show the given number of closest images
 	sort(rank.begin(),rank.end(),[](const pair<float,int> &a,const pair<float,int> &b){return a.first>b.first;});
 	vector<Mat> results(atoi(argv[4]));
 	string targetName;
@@ -123,11 +126,10 @@ int main(int argc,char **argv){
 		cout<<targetName<<endl;
 		imshow("fig"+to_string(i),results[i]);
 	}
+	//show the furthest 3 images
 	/*
 	cout<<"press any key to show least possible 3 images"<<endl;
 	waitKey(0);
-	//show least possible 3
-	
 	for(int i=0;i<3;i++){
 		if(string(argv[3])=="dnn"){
 			targetName="images/"+string(fileNames[rank[rank.size()-i-1].second]);

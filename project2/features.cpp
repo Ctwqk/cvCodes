@@ -27,7 +27,7 @@ vector<vector<float>> getFeatures(Mat &src){
 	return ans;
 }*/
 
-vector<float> mat2vec(Mat &src){
+vector<float> mat2vec(Mat &src){  //convert a cv::Mat into std::vector<float>
 	if(src.type()!=CV_32F) src.convertTo(src,CV_32F);
 	vector<float> ans;
 	ans.assign((float*)src.datastart,(float*)src.dataend);
@@ -35,7 +35,7 @@ vector<float> mat2vec(Mat &src){
 	return ans;
 }
 
-int central7x7(Mat &src,Mat &feature){
+int central7x7(Mat &src,Mat &feature){  //retrive the center 7x7 part of the Mat src
 	int row=src.rows,col=src.cols;
 	if(row<7||col<7){
 		cout<<"expected size > 7x7"<<endl;
@@ -46,7 +46,7 @@ int central7x7(Mat &src,Mat &feature){
 	return 0;
 }
 
-int histogram(Mat &src,vector<float> &feature){ //R&G
+int histogram(Mat &src,vector<float> &feature){ //R&G channels are used to prodece the histogram
 	int row=src.rows,col=src.cols;
 	float x,y,sum;
 	if(src.type()!=CV_32FC3) src.convertTo(src,CV_32FC3);
@@ -64,7 +64,7 @@ int histogram(Mat &src,vector<float> &feature){ //R&G
 	
 }
 
-int multiHist(Mat &src,vector<float> &feature){ //4 corners and center
+int multiHist(Mat &src,vector<float> &feature){ //4 corners and center are the ROI I chosen to concatenate and generate the histogram
 	int row=src.rows, col=src.cols;
 	Mat tmp=src(Rect(col/2-10,row/2-10,21,21)).clone();
 	vconcat(tmp,src(Rect(0,row-21,21,21)).clone(),tmp);
@@ -75,7 +75,7 @@ int multiHist(Mat &src,vector<float> &feature){ //4 corners and center
 	return 0;
 }
 
-int texture(Mat &src,vector<float> &feature){
+int texture(Mat &src,vector<float> &feature){  //reture a flatten histogram, which is produced by orientation and magnitude of sobel filtered src
 	int row=src.rows,col=src.cols;
 	float min=1000000,max=-1000000;
 	if(src.type()!=CV_32FC3) src.convertTo(src,CV_32FC3);
@@ -91,6 +91,8 @@ int texture(Mat &src,vector<float> &feature){
 		for(int j=0;j<col;j++){
 			for(int k=0;k<3;k++){
 				int tmp=3*j+k;
+				//calculate the angle(oritation) of given position
+				//and convert it from [-180,180] to [0,360]
 				aPtr[tmp]=180+atan2(yPtr[tmp],xPtr[tmp])*180/CV_PI;
 				mPtr[tmp]=sqrt(yPtr[tmp]*yPtr[tmp]+xPtr[tmp]*xPtr[tmp]);
 				if(min>mPtr[tmp]) min=mPtr[tmp];
@@ -98,6 +100,7 @@ int texture(Mat &src,vector<float> &feature){
 			}
 		}
 	}
+	//normalize if are not all zeros
 	max-min?mag=mag/(max-min):mag=Mat::zeros(row,col,CV_32FC3);
 	for(int i=0;i<row;i++){
 		const float* aPtr=ang.ptr<float>(i);
@@ -111,7 +114,7 @@ int texture(Mat &src,vector<float> &feature){
 	}		
 	return 0;
 }
-int gaborHist(Mat &src,vector<float> &feature){
+int gaborHist(Mat &src,vector<float> &feature){  //calculate the gabor filtered src and then calculate histogram based on that; gabor filter used the function provided by openCv
 	Mat gaborKernel = getGaborKernel(cv::Size(30, 30), 1, 0, 1, 0.02);
 	Mat tmp;
 	src.convertTo(tmp,CV_32F);
@@ -135,6 +138,7 @@ int gaborHist(Mat &src,vector<float> &feature){
 	return 0;
 }
 
+//given the directory of images(imgsName), and the name of target image(tarName), return the DNN embedding(feature) of target image
 int searchCsv(string imgsName, string tarName, vector<float> &feature){
 	char* imgsName_=new char[imgsName.size()+1];
 	strcpy(imgsName_,imgsName.c_str());
@@ -150,9 +154,11 @@ int searchCsv(string imgsName, string tarName, vector<float> &feature){
 	cout<<"target not fount"<<endl;
 	return -1;
 }	
+
+//do DFT and then retrieve histogram based on several ROIs of the frequency domain spectrum
 int fourierHist(Mat &src,vector<float> &feature){
-	int SCALE=8;
-	float TIME=1/4;
+	int SCALE=8; //this determine the size of every ROI
+	float TIME=1/4;  //this determine how much outer part will be abandoned, TIME * 2 = 1/2 in this case
 	Mat oriImg;
 	cvtColor(src,oriImg, COLOR_BGR2GRAY);
 
@@ -169,6 +175,10 @@ int fourierHist(Mat &src,vector<float> &feature){
 	//planes[0]+=Scalar::all(1);
 	log(planes[0]+1,planes[0]);
 	normalize(planes[0],planes[0],0,1,NORM_MINMAX);
+	
+	/*upon part is DFT*/
+	
+	//abandon the outer 1/2 part and then retrive the 4 corners
 	Mat featureMat=planes[0](Rect(col*TIME,row*TIME,SCALE,SCALE));
 	hconcat(featureMat,planes[0](Rect(col*TIME,row*(1-TIME)-SCALE,SCALE,SCALE)),featureMat);
 	hconcat(featureMat,planes[0](Rect(col*(1-TIME)-SCALE,row*TIME,SCALE,SCALE)),featureMat);
@@ -180,5 +190,5 @@ int fourierHist(Mat &src,vector<float> &feature){
 	//cout<<featureMat.size()<<" "<<feature.size()<<endl;
 	for(auto &i:feature) i*=11.843754;
 	return 0;
-	//11.843754
+	//11.843754 is the maximum of DNN embedding, this makesure the two part are in same range, with same scale
 }

@@ -8,7 +8,6 @@ using namespace std;
 using namespace cv;
 
 int main(int argc, char ** argv){
-
 	vector<string > images;
 	listImgs(argv[1],images);
 	Mat img,feature;
@@ -16,6 +15,8 @@ int main(int argc, char ** argv){
 	//char s[256];
 	int idx=0,flag=0;	
 	string targetFeature;
+	
+	//for given type of feature, set the path toward certain csv file
 	if(string(argv[3])=="7x7central") {
 		targetFeature=string(argv[2])+"/7x7csv";		
 	}
@@ -34,14 +35,19 @@ int main(int argc, char ** argv){
 	else if(string(argv[3])=="mycustom"){
 		targetFeature=string(argv[2])+"/mycustom";
 	}
+
+	//if the csv file doesn't exist, create it
 	ifstream file(targetFeature);
 	if(!file) {
 		ofstream newFile(targetFeature);	
 		if(newFile.is_open()) newFile.close();
 	}
+	//if it exists, set reset flag to 1, which means the csv file will be reset
 	else flag=1;
 	char * targetFeature_=new char[targetFeature.length()+1];
 	strcpy(targetFeature_,targetFeature.c_str());
+
+	//for given feature type, calculate features for every image and restore the result in the csv file
 	if(string(argv[3])=="7x7central"){
 		for (string s:images){
 			img=imread(s);
