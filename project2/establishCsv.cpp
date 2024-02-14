@@ -90,8 +90,9 @@ int main(int argc, char ** argv){
 	else if(string(argv[3])=="mycustom"){
 		for(string s:images){
 			img=imread(s);
-			histogram(img,vecFeature);
+			fourierHist(img,vecFeature);
 			searchCsv("featureCsvs/ResNet18_olym.csv",s,vecFeature2);		
+			//cout<<vecFeature.size()<<" "<<vecFeature2.size()<<endl;
 			vecFeature.insert(vecFeature.end(),vecFeature2.begin(),vecFeature2.end());
 			char* swa=new char[s.size()+1];	
 			strcpy(swa,s.c_str());

@@ -47,5 +47,5 @@ float cosDist(vector<float> &feature1, const vector<float> &feature2){
 	return 0;
 }
 float myDist(vector<float> &feature1, const vector<float> &feature2){
-	return dist(feature1,feature2);
+	return  cosDist(feature1,feature2);
 }

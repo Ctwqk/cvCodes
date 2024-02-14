@@ -48,10 +48,10 @@ int main(int argc,char **argv){
 	else if(string(argv[3])=="mycustom"){
 		img=imread(string(argv[1]),IMREAD_COLOR);
 		targetFeature=string(argv[2])+"/mycustom";
-		histogram(img,vecFeature);
+		fourierHist(img,vecFeature);
 		searchCsv(string(argv[2])+"/ResNet18_olym.csv",string(argv[1]),vecFeature2);
+		//cout<<vecFeature.size()<<" "<<vecFeature2.size()<<endl;
 		vecFeature.insert(vecFeature.end(),vecFeature2.begin(),vecFeature2.end());
-		
 	}
 		
 	ifstream file(targetFeature);
@@ -92,6 +92,8 @@ int main(int argc,char **argv){
 
 	}
 	else if(string(argv[3])=="mycustom"){
+		//for(auto i : vecFeature) cout<<i<<" ";
+		cout<<endl;
 		for(int i=0;i<fileNames.size();i++){
 			float tmp=myDist(features[i],vecFeature);
 			rank.push_back({tmp,i});

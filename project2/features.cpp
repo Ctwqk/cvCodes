@@ -1,5 +1,4 @@
 #include "features.h"
-#include "../project1/task2/filter.h"
 /*
 vector<float> mat2vec(Mat &src){
 	if(src.type()!=CV_32F) src.convertTo(src,CV_32F);
@@ -128,30 +127,35 @@ int searchCsv(string imgsName, string tarName, vector<float> &feature){
 	cout<<"target not fount"<<endl;
 	return -1;
 }	
-int fourierHist(Mat &src,vector<float> feature){
+int fourierHist(Mat &src,vector<float> &feature){
+	int SCALE=32;
+	float TIME=1/4;
 	Mat oriImg;
-	cvtColor(src,oriImg, CV_BGR2GRAY);
+	cvtColor(src,oriImg, COLOR_BGR2GRAY);
 
-	int row=getOptimalDFTSize(src.rows),col=getOptimalDFTSize(src.cols);
+	int row=getOptimalDFTSize(oriImg.rows),col=getOptimalDFTSize(oriImg.cols);
 	copyMakeBorder(oriImg,oriImg,0,row-src.rows,0,col-src.cols,BORDER_CONSTANT,Scalar::all(0));
-
-	Mat planes[]={oriImg,Mat::zeros(oriImg.size(),CV_32F)};
-	planes[0].convertTo(planes[0],CV_32F);
+	//oriImg=oriImg(Rect(0,0,col,row));
+	Mat planes[]={Mat_<float>(oriImg),Mat::zeros(oriImg.size(),CV_32F)};
+	//planes[0].convertTo(planes[0],CV_32F);
 	Mat cmplxPlane;
 	merge(planes,2,cmplxPlane);
 	dft(cmplxPlane,cmplxPlane);
 	split(cmplxPlane,planes);
+	magnitude(planes[0],planes[1],planes[0]);
+	//planes[0]+=Scalar::all(1);
 	log(planes[0]+1,planes[0]);
-	Mat featureMat=planes[0](Rect(0,0,16,16)),tmp=planes[0](Rect(0,col-16,16,16));
-	vconcat(featureMat,planes[0](Rect(row-16,0,16,16)),featureMat);
-	vconcat(tmp,planes[0](Rect(row-16,col-16,16,16)),tmp);
-	hconcat(featureMat,tmp,featureMat);
-
-	histogram(featureMat,feature);
-	auto max=*max_element(feature.begin(),feature.end());
-	for(auto &a:feature)a/=max;
-	return 0;
-}
-				
+	normalize(planes[0],planes[0],0,1,NORM_MINMAX);
+	Mat featureMat=planes[0](Rect(col*TIME,row*TIME,SCALE,SCALE));
+	hconcat(featureMat,planes[0](Rect(col*TIME,row*(1-TIME)-SCALE,SCALE,SCALE)),featureMat);
+	hconcat(featureMat,planes[0](Rect(col*(1-TIME)-SCALE,row*TIME,SCALE,SCALE)),featureMat);
+	hconcat(featureMat,planes[0](Rect(col*(1-TIME)-SCALE,row*(1-TIME)-SCALE,SCALE,SCALE)),featureMat);
+	float x,y,sum;
+	if(featureMat.type()!=CV_32F) featureMat.convertTo(src,CV_32F);
 	
-
+	feature.assign((float*)featureMat.datastart,(float*)featureMat.dataend);
+	//cout<<featureMat.size()<<" "<<feature.size()<<endl;
+	for(auto &i:feature) i*=11.843754;
+	return 0;
+	//11.843754
+}
