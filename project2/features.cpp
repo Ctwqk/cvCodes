@@ -111,6 +111,29 @@ int texture(Mat &src,vector<float> &feature){
 	}		
 	return 0;
 }
+int gaborHist(Mat &src,vector<float> &feature){
+	Mat gaborKernel = getGaborKernel(cv::Size(30, 30), 1, 0, 1, 0.02);
+	Mat tmp;
+	src.convertTo(tmp,CV_32F);
+	cvtColor(tmp,tmp,COLOR_BGR2GRAY);
+	filter2D(tmp,tmp,CV_32F,gaborKernel);
+	
+	double xmin[4],xmax[4];
+    minMaxIdx(tmp,xmin,xmax);
+
+    tmp.convertTo(tmp, CV_8U, 255.0/(xmax[0]-xmin[0]),-255*xmin[0] /(xmax[0] -xmin[0]));
+	
+	int row=tmp.rows,col=tmp.cols;
+	tmp.convertTo(tmp,CV_8U);
+	feature=vector<float>(33,0);
+	for(int i=0;i<row;i++){
+		uchar* cptr=tmp.ptr<uchar>(i);
+		for(int j=0;j<col;j++){
+			feature[int(cptr[j]/8)]++;
+		}
+	}
+	return 0;
+}
 
 int searchCsv(string imgsName, string tarName, vector<float> &feature){
 	char* imgsName_=new char[imgsName.size()+1];
@@ -128,7 +151,7 @@ int searchCsv(string imgsName, string tarName, vector<float> &feature){
 	return -1;
 }	
 int fourierHist(Mat &src,vector<float> &feature){
-	int SCALE=32;
+	int SCALE=8;
 	float TIME=1/4;
 	Mat oriImg;
 	cvtColor(src,oriImg, COLOR_BGR2GRAY);

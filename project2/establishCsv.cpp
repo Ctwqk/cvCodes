@@ -28,6 +28,9 @@ int main(int argc, char ** argv){
 	else if(string(argv[3])=="texturecolor"){
 		targetFeature=string(argv[2])+"/textcolor";
 	}
+	else if(string(argv[3])=="gabor"){
+		targetFeature=string(argv[2])+"/gaborhist";
+	}
 	else if(string(argv[3])=="mycustom"){
 		targetFeature=string(argv[2])+"/mycustom";
 	}
@@ -87,6 +90,18 @@ int main(int argc, char ** argv){
 			//cout<<"done"<<endl;
 		}
 	}
+	else if(string(argv[3])=="gabor"){
+		for (string s:images){
+			img=imread(s);
+			gaborHist(img,vecFeature);
+			char* swa=new char[s.size()+1];	
+			strcpy(swa,s.c_str());
+			append_image_data_csv(targetFeature_, swa,vecFeature,flag);
+			flag=0;
+			delete[] swa;
+		}
+	}
+
 	else if(string(argv[3])=="mycustom"){
 		for(string s:images){
 			img=imread(s);

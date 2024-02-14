@@ -1,0 +1,3 @@
+/home/taiwei/code/cvCode/temp/CMakeFiles/four.dir
+/home/taiwei/code/cvCode/temp/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/temp/CMakeFiles/rebuild_cache.dir

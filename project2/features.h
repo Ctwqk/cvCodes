@@ -20,4 +20,7 @@ int texture(Mat &src,vector<float> &feature);
 
 int searchCsv(string imgsName, string tarName, vector<float> &feature);
 
-int fourierHist(Mat &src,vector<float> &feature);
+int fourierHist(Mat &src,vector<float> &feature);  
+
+int gaborHist(Mat &src,vector<float> &feature);
+		
