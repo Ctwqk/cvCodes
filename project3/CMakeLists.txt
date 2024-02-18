@@ -9,5 +9,5 @@ add_executable(main main.cpp threshold.cpp denoise.cpp region.cpp)
 target_link_Libraries(main ${OpenCV_LIBS})
 
 
-add_executable(debug debug.cpp region.cpp)
+add_executable(debug debug.cpp region.cpp denoise.cpp)
 target_link_Libraries(debug ${OpenCV_LIBS})

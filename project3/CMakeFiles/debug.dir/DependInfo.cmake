@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/taiwei/code/cvCode/project3/debug.cpp" "CMakeFiles/debug.dir/debug.cpp.o" "gcc" "CMakeFiles/debug.dir/debug.cpp.o.d"
+  "/home/taiwei/code/cvCode/project3/denoise.cpp" "CMakeFiles/debug.dir/denoise.cpp.o" "gcc" "CMakeFiles/debug.dir/denoise.cpp.o.d"
   "/home/taiwei/code/cvCode/project3/region.cpp" "CMakeFiles/debug.dir/region.cpp.o" "gcc" "CMakeFiles/debug.dir/region.cpp.o.d"
   )
 

@@ -194,16 +194,19 @@ int regionize(Mat &src, Mat &dst,int num){
 	}
 	dst=Mat::zeros(src.size(),src.type());
 
+	set<int> check;
 	for(int i=0;i<row;i++){
 		uchar* ptr=dst.ptr<uchar>(i);
 		tmp=i*col;
 		for(int j=0;j<col;j++){
 			if(array[tmp]>=0){
 				ptr[j]=find(tmp,array,elemNum);
+				check.insert((int) ptr[j]);
 			}
 			tmp++;
 		}
 	}
+	cout<<check.size()<<endl;
 	
 	normalize(dst,dst,0,63,NORM_MINMAX);	
 
@@ -236,5 +239,3 @@ int mapToColor(Mat &map,Mat &dst,int num){
 	dst*=255;
 	return 0;
 }
-	
-

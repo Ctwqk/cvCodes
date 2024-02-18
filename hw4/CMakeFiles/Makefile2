@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /home/taiwei/code/cvCode/hw4
 
 # The main recursive "all" target.
 all: CMakeFiles/colors.dir/all
+all: CMakeFiles/makeHist.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/colors.dir/clean
+clean: CMakeFiles/makeHist.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -99,6 +101,32 @@ colors: CMakeFiles/colors.dir/rule
 CMakeFiles/colors.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/colors.dir/build.make CMakeFiles/colors.dir/clean
 .PHONY : CMakeFiles/colors.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/makeHist.dir
+
+# All Build rule for target.
+CMakeFiles/makeHist.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/taiwei/code/cvCode/hw4/CMakeFiles --progress-num=4,5 "Built target makeHist"
+.PHONY : CMakeFiles/makeHist.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/makeHist.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/hw4/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/makeHist.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/hw4/CMakeFiles 0
+.PHONY : CMakeFiles/makeHist.dir/rule
+
+# Convenience name for target.
+makeHist: CMakeFiles/makeHist.dir/rule
+.PHONY : makeHist
+
+# clean rule for target.
+CMakeFiles/makeHist.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/clean
+.PHONY : CMakeFiles/makeHist.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

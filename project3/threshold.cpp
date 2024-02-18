@@ -89,6 +89,7 @@ float otsuThreshold(Mat &tmp,int &pos){
 	return max;
 }
 int myThreshold(Mat &src,Mat &dst, int threshold, int upper){
+	if(!threshold) threshold++;
 	int row=src.rows,col=src.cols;
 	dst=Mat(row,col,CV_8U,Scalar((uchar)upper));
 	for(int i=0;i<row;i++){

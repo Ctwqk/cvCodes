@@ -129,6 +129,32 @@ four/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/four.dir/build.make CMakeFiles/four.dir/build
 .PHONY : four/fast
 
+#=============================================================================
+# Target rules for targets named myFour
+
+# Build rule for target.
+myFour: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 myFour
+.PHONY : myFour
+
+# fast build rule for target.
+myFour/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/build
+.PHONY : myFour/fast
+
+#=============================================================================
+# Target rules for targets named fourier
+
+# Build rule for target.
+fourier: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fourier
+.PHONY : fourier
+
+# fast build rule for target.
+fourier/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/build
+.PHONY : fourier/fast
+
 four.o: four.cpp.o
 .PHONY : four.o
 
@@ -153,6 +179,54 @@ four.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/four.dir/build.make CMakeFiles/four.dir/four.cpp.s
 .PHONY : four.cpp.s
 
+fourier.o: fourier.cpp.o
+.PHONY : fourier.o
+
+# target to build an object file
+fourier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/fourier.cpp.o
+.PHONY : fourier.cpp.o
+
+fourier.i: fourier.cpp.i
+.PHONY : fourier.i
+
+# target to preprocess a source file
+fourier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/fourier.cpp.i
+.PHONY : fourier.cpp.i
+
+fourier.s: fourier.cpp.s
+.PHONY : fourier.s
+
+# target to generate assembly for a file
+fourier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/fourier.cpp.s
+.PHONY : fourier.cpp.s
+
+myFour.o: myFour.cpp.o
+.PHONY : myFour.o
+
+# target to build an object file
+myFour.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/myFour.cpp.o
+.PHONY : myFour.cpp.o
+
+myFour.i: myFour.cpp.i
+.PHONY : myFour.i
+
+# target to preprocess a source file
+myFour.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/myFour.cpp.i
+.PHONY : myFour.cpp.i
+
+myFour.s: myFour.cpp.s
+.PHONY : myFour.s
+
+# target to generate assembly for a file
+myFour.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/myFour.cpp.s
+.PHONY : myFour.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +236,17 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... four"
+	@echo "... fourier"
+	@echo "... myFour"
 	@echo "... four.o"
 	@echo "... four.i"
 	@echo "... four.s"
+	@echo "... fourier.o"
+	@echo "... fourier.i"
+	@echo "... fourier.s"
+	@echo "... myFour.o"
+	@echo "... myFour.i"
+	@echo "... myFour.s"
 .PHONY : help
 
 

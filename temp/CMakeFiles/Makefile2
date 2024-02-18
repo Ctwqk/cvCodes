@@ -64,6 +64,8 @@ CMAKE_BINARY_DIR = /home/taiwei/code/cvCode/temp
 
 # The main recursive "all" target.
 all: CMakeFiles/four.dir/all
+all: CMakeFiles/myFour.dir/all
+all: CMakeFiles/fourier.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +74,8 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/four.dir/clean
+clean: CMakeFiles/myFour.dir/clean
+clean: CMakeFiles/fourier.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -99,6 +103,58 @@ four: CMakeFiles/four.dir/rule
 CMakeFiles/four.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/four.dir/build.make CMakeFiles/four.dir/clean
 .PHONY : CMakeFiles/four.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/myFour.dir
+
+# All Build rule for target.
+CMakeFiles/myFour.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/taiwei/code/cvCode/temp/CMakeFiles --progress-num=5,6 "Built target myFour"
+.PHONY : CMakeFiles/myFour.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/myFour.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/temp/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/myFour.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/temp/CMakeFiles 0
+.PHONY : CMakeFiles/myFour.dir/rule
+
+# Convenience name for target.
+myFour: CMakeFiles/myFour.dir/rule
+.PHONY : myFour
+
+# clean rule for target.
+CMakeFiles/myFour.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myFour.dir/build.make CMakeFiles/myFour.dir/clean
+.PHONY : CMakeFiles/myFour.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/fourier.dir
+
+# All Build rule for target.
+CMakeFiles/fourier.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/taiwei/code/cvCode/temp/CMakeFiles --progress-num=3,4 "Built target fourier"
+.PHONY : CMakeFiles/fourier.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/fourier.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/temp/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fourier.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taiwei/code/cvCode/temp/CMakeFiles 0
+.PHONY : CMakeFiles/fourier.dir/rule
+
+# Convenience name for target.
+fourier: CMakeFiles/fourier.dir/rule
+.PHONY : fourier
+
+# clean rule for target.
+CMakeFiles/fourier.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fourier.dir/build.make CMakeFiles/fourier.dir/clean
+.PHONY : CMakeFiles/fourier.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

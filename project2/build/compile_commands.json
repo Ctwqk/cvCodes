@@ -38,5 +38,10 @@
   "directory": "/home/taiwei/code/cvCode/project2/build",
   "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/features.cpp.o -c /home/taiwei/code/cvCode/project2/features.cpp",
   "file": "/home/taiwei/code/cvCode/project2/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o -c /home/taiwei/code/cvCode/project1/task2/filter.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/filter.cpp"
 }
 ]

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/debug.dir/debug.cpp.o"
   "CMakeFiles/debug.dir/debug.cpp.o.d"
+  "CMakeFiles/debug.dir/denoise.cpp.o"
+  "CMakeFiles/debug.dir/denoise.cpp.o.d"
   "CMakeFiles/debug.dir/region.cpp.o"
   "CMakeFiles/debug.dir/region.cpp.o.d"
   "debug"

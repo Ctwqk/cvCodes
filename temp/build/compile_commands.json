@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/temp/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/four.dir/four.cpp.o -c /home/taiwei/code/cvCode/temp/four.cpp",
+  "file": "/home/taiwei/code/cvCode/temp/four.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/temp/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/myFour.dir/myFour.cpp.o -c /home/taiwei/code/cvCode/temp/myFour.cpp",
+  "file": "/home/taiwei/code/cvCode/temp/myFour.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/temp/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/fourier.dir/fourier.cpp.o -c /home/taiwei/code/cvCode/temp/fourier.cpp",
+  "file": "/home/taiwei/code/cvCode/temp/fourier.cpp"
+}
+]

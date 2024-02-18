@@ -129,6 +129,19 @@ colors/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/colors.dir/build.make CMakeFiles/colors.dir/build
 .PHONY : colors/fast
 
+#=============================================================================
+# Target rules for targets named makeHist
+
+# Build rule for target.
+makeHist: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 makeHist
+.PHONY : makeHist
+
+# fast build rule for target.
+makeHist/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/build
+.PHONY : makeHist/fast
+
 colors.o: colors.cpp.o
 .PHONY : colors.o
 
@@ -177,6 +190,30 @@ kmeans.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/colors.dir/build.make CMakeFiles/colors.dir/kmeans.cpp.s
 .PHONY : kmeans.cpp.s
 
+makeHist.o: makeHist.cpp.o
+.PHONY : makeHist.o
+
+# target to build an object file
+makeHist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/makeHist.cpp.o
+.PHONY : makeHist.cpp.o
+
+makeHist.i: makeHist.cpp.i
+.PHONY : makeHist.i
+
+# target to preprocess a source file
+makeHist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/makeHist.cpp.i
+.PHONY : makeHist.cpp.i
+
+makeHist.s: makeHist.cpp.s
+.PHONY : makeHist.s
+
+# target to generate assembly for a file
+makeHist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/makeHist.dir/build.make CMakeFiles/makeHist.dir/makeHist.cpp.s
+.PHONY : makeHist.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +223,16 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... colors"
+	@echo "... makeHist"
 	@echo "... colors.o"
 	@echo "... colors.i"
 	@echo "... colors.s"
 	@echo "... kmeans.o"
 	@echo "... kmeans.i"
 	@echo "... kmeans.s"
+	@echo "... makeHist.o"
+	@echo "... makeHist.i"
+	@echo "... makeHist.s"
 .PHONY : help
 
 

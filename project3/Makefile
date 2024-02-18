@@ -172,6 +172,7 @@ denoise.o: denoise.cpp.o
 # target to build an object file
 denoise.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.o
 .PHONY : denoise.cpp.o
 
 denoise.i: denoise.cpp.i
@@ -180,6 +181,7 @@ denoise.i: denoise.cpp.i
 # target to preprocess a source file
 denoise.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.i
 .PHONY : denoise.cpp.i
 
 denoise.s: denoise.cpp.s
@@ -188,6 +190,7 @@ denoise.s: denoise.cpp.s
 # target to generate assembly for a file
 denoise.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.s
 .PHONY : denoise.cpp.s
 
 main.o: main.cpp.o

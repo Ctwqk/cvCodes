@@ -5,3 +5,6 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 add_executable(colors colors.cpp kmeans.cpp )
 target_link_Libraries(colors  ${OpenCV_LIBS})
+
+add_executable(makeHist makeHist.cpp)
+target_link_Libraries(makeHist ${OpenCV_LIBS})
