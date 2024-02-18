@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/main.cpp.o -c /home/taiwei/code/cvCode/project3/main.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/main.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/threshold.cpp.o -c /home/taiwei/code/cvCode/project3/threshold.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/threshold.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/debug.cpp.o -c /home/taiwei/code/cvCode/project3/debug.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/debug.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
+}
+]
