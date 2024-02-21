@@ -193,6 +193,33 @@ denoise.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.s
 .PHONY : denoise.cpp.s
 
+features.o: features.cpp.o
+.PHONY : features.o
+
+# target to build an object file
+features.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.o
+.PHONY : features.cpp.o
+
+features.i: features.cpp.i
+.PHONY : features.i
+
+# target to preprocess a source file
+features.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.i
+.PHONY : features.cpp.i
+
+features.s: features.cpp.s
+.PHONY : features.s
+
+# target to generate assembly for a file
+features.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.s
+.PHONY : features.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -284,6 +311,9 @@ help:
 	@echo "... denoise.o"
 	@echo "... denoise.i"
 	@echo "... denoise.s"
+	@echo "... features.o"
+	@echo "... features.i"
+	@echo "... features.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

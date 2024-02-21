@@ -21,6 +21,11 @@
 },
 {
   "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
   "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/debug.cpp.o -c /home/taiwei/code/cvCode/project3/debug.cpp",
   "file": "/home/taiwei/code/cvCode/project3/debug.cpp"
 },
@@ -33,5 +38,10 @@
   "directory": "/home/taiwei/code/cvCode/project3",
   "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
   "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
 }
 ]

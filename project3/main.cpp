@@ -4,6 +4,7 @@
 #include "threshold.h"
 #include "cleanup.h"
 #include "region.h"
+#include "features.h"
 using namespace std;
 using namespace cv;
 
@@ -22,8 +23,7 @@ int main(int argc, char** argv){
 	cvtColor(src,planes[3],COLOR_BGR2GRAY);
 	for(int i=0;i<4;i++) imshow(to_string(i),planes[i]);
 	*/
-	if(argc==2)	toBinary(src,dst);
-	if(argc==3) toBinary(src,dst,atoi(argv[2]));
+	toBinary(src,dst);
 	//adaptiveThreshold(planes[3],dst,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,71,6);
 
 	imshow("src",src);
@@ -37,11 +37,21 @@ int main(int argc, char** argv){
 	denoise(dst,dst);
 	imshow("pur",dst);
 	
-	regionize(dst,dst,2);
+	regionize(dst,dst);
 	
 	imshow("reg",dst);
-	mapToColor(dst,dst,3);
-	imshow("colorReg",dst);
+	Mat planes[3];
+	split(dst,planes);
+	RotatedRect ans;
+	int idx=atoi(argv[2]);
+	cout<<centralMoment_pq(planes[idx],ans)*180.0/M_PI<<endl;
+
+	Point2f vertices[4];
+	ans.points(vertices);
+	for(int i=0;i<4;i++){
+		line(planes[idx],vertices[i],vertices[(i+1)%4],Scalar(255));	
+	}
+	imshow("box",planes[idx]);
 
 	waitKey(0);
 	return 0;

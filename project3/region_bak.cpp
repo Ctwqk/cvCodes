@@ -45,7 +45,7 @@ void showArr(int* array,int row,int col){
 	cout<<endl;
 }
 int cutEdgeRegion2(int *array,int row,int col){
-	int EDGE=2,size=4*(row+col);
+	int EDGE=5,size=4*(row+col);
 	int queue[size];
 	
 	int front=0,rear=0;
@@ -62,10 +62,10 @@ int cutEdgeRegion2(int *array,int row,int col){
 			array[idx2++]=-2;
 				
 		}
-		for(int j=EDGE;j<row-EDGE;j++){
+		for(int j=EDGE+1;j<row-EDGE-1;j++){
 			idx=col*j;
 			if(i==EDGE){
-				if(array[idx+i]>=0) queue[rear++]=idx;
+				if(array[idx+i]>=0) queue[rear++]=idx+i;
 				if(array[idx+col-i-1]>=0) queue[rear++]=idx+col-i-1;
 			}
 			array[idx+i]=-2;
@@ -194,18 +194,54 @@ int regionize(Mat &src, Mat &dst,int num){
 	}
 	dst=Mat::zeros(src.size(),src.type());
 
+	set<int> check;
 	for(int i=0;i<row;i++){
 		uchar* ptr=dst.ptr<uchar>(i);
 		tmp=i*col;
 		for(int j=0;j<col;j++){
 			if(array[tmp]>=0){
 				ptr[j]=find(tmp,array,elemNum);
+				check.insert((int) ptr[j]);
 			}
 			tmp++;
 		}
 	}
+	cout<<check.size()<<endl;
 	
-	normalize(dst,dst,0,255,NORM_MINMAX);	
+	normalize(dst,dst,0,63,NORM_MINMAX);	
+
 	delete[] array;
+	return 0;
+}
+int mapToColor(Mat &map,Mat &dst,int num){
+	if(num>6){
+		cout<<"we have only 6 channel"<<endl;
+		return -1;
+	}
+	int row=map.rows,col=map.cols;
+	Mat planes[6];
+	fill(planes,planes+6,Mat::zeros(row,col,CV_8U));
+	int hist[64]={0};
+	for(int i=0;i<row;i++){
+		uchar* ptr=map.ptr<uchar>(i);
+		for(int j=0;j<col;j++){
+			if(ptr[j])hist[(int)ptr[j]]++;
+
+		}
+	}
+	int i=0;
+	for(i=0;i<num;i++){
+		int pos=distance(hist,max_element(hist,hist+64));
+		if(!pos||hist[pos]<1000) break;
+		compare(map,pos,planes[i],CMP_EQ);
+		hist[pos]=0;
+	}
+	for(int i=0;i<3;i++){
+		add(planes[3+i],planes[i],planes[i]);
+		add(planes[3+i],planes[(i+1)%3],planes[(i+1)%3]);
+	}
+
+	merge(planes,3,dst);
+	dst*=255;
 	return 0;
 }

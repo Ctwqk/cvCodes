@@ -5,9 +5,9 @@ include_directories( ${OpenCV_INCLUDE_DIRS})
 
 
 
-add_executable(main main.cpp threshold.cpp denoise.cpp region.cpp)
+add_executable(main main.cpp threshold.cpp denoise.cpp region.cpp features.cpp)
 target_link_Libraries(main ${OpenCV_LIBS})
 
 
-add_executable(debug debug.cpp region.cpp denoise.cpp)
+add_executable(debug debug.cpp region.cpp denoise.cpp features.cpp)
 target_link_Libraries(debug ${OpenCV_LIBS})

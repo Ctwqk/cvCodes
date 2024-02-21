@@ -1,5 +1,6 @@
-CMakeFiles/main.dir/main.cpp.o: \
- /home/taiwei/code/cvCode/project3/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/main.dir/features.cpp.o: \
+ /home/taiwei/code/cvCode/project3/features.cpp \
+ /usr/include/stdc-predef.h /home/taiwei/code/cvCode/project3/features.h \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -146,7 +147,8 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
- /usr/local/include/opencv4/opencv2/imgproc.hpp \
+ /usr/local/include/opencv4/opencv2/opencv.hpp \
+ /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
  /usr/local/include/opencv4/opencv2/core/cvdef.h \
  /usr/local/include/opencv4/opencv2/core/version.hpp \
@@ -160,7 +162,6 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
  /usr/include/c++/11/stdlib.h \
  /usr/local/include/opencv4/opencv2/core/base.hpp \
- /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/include/c++/11/climits \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
@@ -260,8 +261,6 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/core/optim.hpp \
  /usr/local/include/opencv4/opencv2/core/ovx.hpp \
  /usr/local/include/opencv4/opencv2/core/cvdef.h \
- /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
- /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/features2d.hpp \
  /usr/local/include/opencv4/opencv2/flann/miniflann.hpp \
@@ -322,6 +321,8 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
  /usr/local/include/opencv4/opencv2/videoio.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
  /usr/local/include/opencv4/opencv2/ml.hpp \
  /usr/local/include/opencv4/opencv2/ml/ml.inl.hpp \
  /usr/local/include/opencv4/opencv2/objdetect.hpp \
@@ -359,8 +360,4 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
- /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/taiwei/code/cvCode/project3/threshold.h \
- /home/taiwei/code/cvCode/project3/cleanup.h \
- /home/taiwei/code/cvCode/project3/region.h \
- /home/taiwei/code/cvCode/project3/features.h
+ /usr/local/include/opencv4/opencv2/video/background_segm.hpp

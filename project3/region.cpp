@@ -38,14 +38,13 @@ int uni(int x,int y,int *array,int &size){
 void showArr(int* array,int row,int col){
 	for(int i=0;i<row;i++){
 		for(int j=0;j<col;j++){
-			cout<<array[i*col+j]<<" ";
-		}
+			cout<<array[i*col+j]<<" "; }
 		cout<<endl;
 	}
 	cout<<endl;
 }
 int cutEdgeRegion2(int *array,int row,int col){
-	int EDGE=5,size=4*(row+col);
+	int EDGE=5,size=4*(row+col),endPoint=row*col/6;
 	int queue[size];
 	
 	int front=0,rear=0;
@@ -74,8 +73,8 @@ int cutEdgeRegion2(int *array,int row,int col){
 	}
 	int dir[][2]={{0,1},{1,0},{0,-1},{-1,0},{1,-1},{-1,1},{1,1},{-1,-1}};
 
-	int x,y,z;
-	while(rear!=front){
+	int x,y,z,count=0;
+	while(rear!=front&&count<endPoint){
 		int tmp=queue[front%size];
 		front++;
 		idx=tmp/col;
@@ -86,6 +85,7 @@ int cutEdgeRegion2(int *array,int row,int col){
 			z=y*col+x;
 			if(array[z]>=0){
 				array[z]=-2;
+				count++;
 				queue[rear%size]=z;
 				rear++;
 				if(rear-front>=size){
@@ -192,50 +192,48 @@ int regionize(Mat &src, Mat &dst,int num){
 		idx++;
 		if(array[idx]>=0&&array[idx+1]>=0) uni(idx,idx+1,array,elemNum);
 	}
-	dst=Mat::zeros(src.size(),src.type());
-
-	set<int> check;
+	dst=Mat::zeros(src.size(),CV_32F);
+	map<int,int> check;
 	for(int i=0;i<row;i++){
-		uchar* ptr=dst.ptr<uchar>(i);
-		tmp=i*col;
+		float *ptr=dst.ptr<float>(i);
+		idx=col*i;
 		for(int j=0;j<col;j++){
-			if(array[tmp]>=0){
-				ptr[j]=find(tmp,array,elemNum);
-				check.insert((int) ptr[j]);
-			}
-			tmp++;
+			if(array[idx]<0){
+				idx++;
+				continue;
+			}	
+			tmp=find(idx,array,elemNum);
+			if(check.find(tmp)==check.end()) check[tmp]=1;
+			else check[tmp]++;
+			ptr[j]=array[idx];
+			idx++;
 		}
 	}
-	cout<<check.size()<<endl;
-	
-	normalize(dst,dst,0,63,NORM_MINMAX);	
-
-	delete[] array;
-	return 0;
-}
-int mapToColor(Mat &map,Mat &dst,int num){
-	if(num>3){
-		cout<<"we have only 3 channel"<<endl;
-		return -1;
-	}
-	int row=map.rows,col=map.cols;
-	Mat planes[3];
-	fill(planes,planes+3,Mat::zeros(row,col,CV_8U));
-	int hist[64]={0};
-	for(int i=0;i<row;i++){
-		uchar* ptr=map.ptr<uchar>(i);
-		for(int j=0;j<col;j++){
-			if(ptr[j])hist[(int)ptr[j]]++;
-
+	struct comp{
+		bool operator()(const pair<int,int> &a,const pair<int,int>&b) const{
+			return a.second==b.second?a.first>b.first:a.second>b.second;
 		}
+	};
+
+	set<pair<int,int> ,comp> ans(check.begin(),check.end());
+	Mat *planes=new Mat[num];
+	fill(planes,planes+6,Mat::zeros(src.size(),CV_8U));
+	idx=0;
+	for(pair<int,int> p:ans){
+		if(p.first==0||p.second<1000||idx>=num) break;
+
+		compare(dst,p.first,planes[idx++],CMP_EQ);
 	}
-	for(int i=0;i<num;i++){
-		int pos=distance(hist,max_element(hist,hist+64));
-		if(!pos||hist[pos]<1000) break;
-		compare(map,pos,planes[i],CMP_EQ);
-		hist[pos]=0;
+
+	for(int i=0;i<3;i++){
+		add(planes[3+i],planes[i],planes[i]);
+		add(planes[3+i],planes[(i+1)%3],planes[(i+1)%3]);
 	}
 	merge(planes,3,dst);
+	
 	dst*=255;
+	
+	delete[] planes;
+	delete[] array;
 	return 0;
 }

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/denoise.cpp.o"
   "CMakeFiles/main.dir/denoise.cpp.o.d"
+  "CMakeFiles/main.dir/features.cpp.o"
+  "CMakeFiles/main.dir/features.cpp.o.d"
   "CMakeFiles/main.dir/main.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o.d"
   "CMakeFiles/main.dir/region.cpp.o"
