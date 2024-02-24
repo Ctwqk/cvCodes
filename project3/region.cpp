@@ -2,38 +2,28 @@
 using namespace std;
 using namespace cv;
 
-int find(int x,int*array,int &size){
-	
-	if(x>=size){
-		cout<<"query out of range: x"<<endl;
-		return -1;
-	}
-	int tmp[256],idx=0;	
-	while(x!=array[x]){
-		if(array[x]<0) {
-			cout<<x<<": catch"<<endl;
-			break;
-		}
-		if(idx<256)tmp[idx++]=x;
-		x=array[x];	
-	}
-	for(int i=0;i<idx;i++){
-		array[tmp[i]]=x;
-	}
-	return x;
+int find(int x,int**array){
+	if(array[x][0]!=x) array[x][0]=find(array[x][0],array);
+	return array[x][0];
 }
-int uni(int x,int y,int *array,int &size){
-	if(x>=size||y>=size){
-		cout<<"query out of range: x,y"<<endl;
-		return -1;
-	}
-	x=find(x,array,size);
-	y=find(y,array,size);
+int uni(int x,int y,int **array){
+	x=find(x,array);
+	y=find(y,array);
 	if(x==y){
 		return y;
 	}
-	array[x]=y;
-	return y;
+	if(array[y][1]==array[x][1]){
+		array[x][0]=y;
+		array[y][1]++;
+		return y;
+	}
+	else if(array[y][1]>array[x][1]){
+		array[x][0]=y;
+	}
+	else array[y][0]=x;
+	//array[x][0]=y;
+	//return y;
+	return -1;
 }
 void showArr(int* array,int row,int col){
 	for(int i=0;i<row;i++){
@@ -71,18 +61,16 @@ int cutEdgeRegion2(int *array,int row,int col){
 			array[idx+col-i-1]=-2;
 		}
 	}
-	int dir[][2]={{0,1},{1,0},{0,-1},{-1,0},{1,-1},{-1,1},{1,1},{-1,-1}};
+	int dir[][2]={{0,1},{1,0},{0,-1},{-1,0}/*,{1,-1},{-1,1},{1,1},{-1,-1}*/};
 
-	int x,y,z,count=0;
+	int z,count=0;
 	while(rear!=front&&count<endPoint){
 		int tmp=queue[front%size];
 		front++;
 		idx=tmp/col;
 		idx2=tmp%col;
 		for(int i=0;i<4;i++){
-			y=idx+dir[i][1];
-			x=idx2+dir[i][0];
-			z=y*col+x;
+			z=(idx+dir[i][1])*col+idx2+dir[i][0];
 			if(array[z]>=0){
 				array[z]=-2;
 				count++;
@@ -118,28 +106,22 @@ int cutEdgeRegion(int* array,int row,int col){
 			array[idx+col-i-1]=-2;
 		}
 	}
-
 	int m=min(row,col);
 	for(int i=EDGE;i<m;i++){
 		idx=i*col;
-		
 		for(int j=0;j<col-0;j++){
 			if(array[idx+j]>=0&&array[idx+j-col]==-2)array[idx+j]=-2;
 			if(array[size-idx-col+j]>=0&&array[size-idx+j]==-2)array[size-idx-col+j]=-2;
-
 		}
-
 		for(int j=0;j<row-0;j++){
 			idx=j*col;
 			if(array[idx+i]>=0&&array[idx+i-1]==-2) array[col+i]=-2;
 			if(array[idx+col-i-1]>=0&&array[idx+col-i]==-2) array[idx+col-i-1]=-2;
 		}	
 	}
-
-
 	return 0;
 }	
-int regionize(Mat &src, Mat &dst,int num){
+vector<Mat> regionize(Mat &src, Mat &dst,int num){
 	//for debug
 	/*
 	double min,max;
@@ -153,44 +135,45 @@ int regionize(Mat &src, Mat &dst,int num){
 	src/=255;
 	int row=src.rows, col=src.cols;
 	int elemNum=src.total();
-	int* array=new int[elemNum]();
+	int** array=new int*[elemNum];
+	int *array2=new int[elemNum]();
 	int tmp=0;
 	for(int i=0;i<row;i++){
 		uchar* ptr=src.ptr<uchar>(i);
 		for(int j=0;j<col;j++){
 			tmp=i*col+j;
+			array[tmp]=new int[2]();
 			//if(!ptr[j]){
 			if(ptr[j]==0){
-				array[tmp]=-1;
+				array2[tmp]=-1;
 			}
 			else {
-				array[tmp]=tmp;
+				array2[tmp]=tmp;
 			}
 		}
 	}
-
-	if(num>=0) cutEdgeRegion2(array,row,col);
+	cutEdgeRegion2(array2,row,col);
+	for(int i=0;i<elemNum;i++)array[i][0]=array2[i];
 	int idx;			
 	for(int i=0;i<row-1;i++){
 		int j=0;
 		idx=i*col;
 		for(j=0;j<col-1;j++){
-			if(array[idx]<0){
-			//if(prev[j]==0){
+			if(array[idx][0]<0){
 				idx++;
 			    continue;	
 			}
-			if(array[idx+1]>=0) uni(idx,idx+1,array,elemNum);
-			if(array[idx+col]>=0) uni(idx,idx+col,array,elemNum);
+			if(array[idx+1][0]>=0) uni(idx,idx+1,array);
+			if(array[idx+col][0]>=0) uni(idx,idx+col,array);
 			idx++;
 		}
-		if(array[idx]>=0&&array[idx+col]>=0){
-			uni(idx,idx+col,array,elemNum);
+		if(array[idx][0]>=0&&array[idx+col][0]>=0){
+			uni(idx,idx+col,array);
 		}	
 	}
 	for(int j=0;j<col-1;j++){
 		idx++;
-		if(array[idx]>=0&&array[idx+1]>=0) uni(idx,idx+1,array,elemNum);
+		if(array[idx][0]>=0&&array[idx+1][0]>=0) uni(idx,idx+1,array);
 	}
 	dst=Mat::zeros(src.size(),CV_32F);
 	map<int,int> check;
@@ -198,14 +181,14 @@ int regionize(Mat &src, Mat &dst,int num){
 		float *ptr=dst.ptr<float>(i);
 		idx=col*i;
 		for(int j=0;j<col;j++){
-			if(array[idx]<0){
+			if(array[idx][0]<0){
 				idx++;
 				continue;
 			}	
-			tmp=find(idx,array,elemNum);
+			tmp=find(idx,array);
 			if(check.find(tmp)==check.end()) check[tmp]=1;
 			else check[tmp]++;
-			ptr[j]=array[idx];
+			ptr[j]=array[idx][0];
 			idx++;
 		}
 	}
@@ -214,9 +197,8 @@ int regionize(Mat &src, Mat &dst,int num){
 			return a.second==b.second?a.first>b.first:a.second>b.second;
 		}
 	};
-
 	set<pair<int,int> ,comp> ans(check.begin(),check.end());
-	Mat *planes=new Mat[num];
+	Mat *planes=new Mat[6];
 	fill(planes,planes+6,Mat::zeros(src.size(),CV_8U));
 	idx=0;
 	for(pair<int,int> p:ans){
@@ -224,6 +206,8 @@ int regionize(Mat &src, Mat &dst,int num){
 
 		compare(dst,p.first,planes[idx++],CMP_EQ);
 	}
+	vector<Mat> maps;
+	transform(planes,planes+6,back_inserter<vector<Mat>>(maps),[](const Mat &map){return map.clone();});
 
 	for(int i=0;i<3;i++){
 		add(planes[3+i],planes[i],planes[i]);
@@ -232,8 +216,8 @@ int regionize(Mat &src, Mat &dst,int num){
 	merge(planes,3,dst);
 	
 	dst*=255;
-	
 	delete[] planes;
 	delete[] array;
-	return 0;
+	delete[] array2;
+	return maps;
 }

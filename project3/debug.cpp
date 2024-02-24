@@ -1,6 +1,8 @@
 #include <iostream>
 #include "region.h"
 #include "denoise.h"
+#include "features.h"
+#include "dist.h"
 using namespace std;
 using namespace cv;
 int main(int argc,char** argv){
@@ -29,8 +31,17 @@ int main(int argc,char** argv){
 	src=imread(argv[1],IMREAD_GRAYSCALE);
 	denoise(src,src);
 	imshow("src",src);
-	regionize(src,ans);
-	imshow("reg",ans*4);
-	waitKey(0);
+	vector<Mat> maps=regionize(src,ans);
+	imshow("reg",ans);
+	RotatedRect rect;
+	vector<float> features;
+	int idx=0;
+	for(auto a:maps){
+		imshow(to_string(idx++),a);
+		features=featureBox(a,rect);
+		drawBox(rect,features,ans);
+	}
+	imshow("fin",ans);
+	char c=waitKey(0);
 	return 0;
 }

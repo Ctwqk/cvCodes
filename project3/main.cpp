@@ -2,7 +2,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/opencv.hpp>
 #include "threshold.h"
-#include "cleanup.h"
+#include "denoise.h"
 #include "region.h"
 #include "features.h"
 using namespace std;
@@ -24,7 +24,6 @@ int main(int argc, char** argv){
 	for(int i=0;i<4;i++) imshow(to_string(i),planes[i]);
 	*/
 	toBinary(src,dst);
-	//adaptiveThreshold(planes[3],dst,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,71,6);
 
 	imshow("src",src);
 	for(int i=0;i<dst.rows;i++){
@@ -36,23 +35,12 @@ int main(int argc, char** argv){
 	imshow("bin",dst);
 	denoise(dst,dst);
 	imshow("pur",dst);
-	
 	regionize(dst,dst);
-	
 	imshow("reg",dst);
 	Mat planes[3];
 	split(dst,planes);
 	RotatedRect ans;
 	int idx=atoi(argv[2]);
-	cout<<centralMoment_pq(planes[idx],ans)*180.0/M_PI<<endl;
-
-	Point2f vertices[4];
-	ans.points(vertices);
-	for(int i=0;i<4;i++){
-		line(planes[idx],vertices[i],vertices[(i+1)%4],Scalar(255));	
-	}
-	imshow("box",planes[idx]);
-
 	waitKey(0);
 	return 0;
 }

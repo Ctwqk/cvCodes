@@ -4,8 +4,8 @@
 #include <opencv2/opencv.hpp>
 #include <set>
 #include <map>
-int regionize(cv::Mat &src,cv::Mat &dst,int num=6);
-int mapToColor(cv::Mat &map,cv::Mat &dst,int num=6);
+std::vector<cv::Mat> regionize(cv::Mat &src,cv::Mat &dst,int num=6);
+//int mapToColor(cv::Mat &map,cv::Mat &dst,int num=6);
 
 
 

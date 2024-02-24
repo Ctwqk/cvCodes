@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.o"
+  "CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.o.d"
+  "CMakeFiles/debug.dir/csv_util.cpp.o"
+  "CMakeFiles/debug.dir/csv_util.cpp.o.d"
   "CMakeFiles/debug.dir/debug.cpp.o"
   "CMakeFiles/debug.dir/debug.cpp.o.d"
   "CMakeFiles/debug.dir/denoise.cpp.o"

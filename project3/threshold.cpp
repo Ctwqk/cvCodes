@@ -30,11 +30,11 @@ float kmeanThreshold(Mat &tmp,int &pos){
 				}
 			}
 		}
-		tmpX=(float)bins[0]/nums[0];
-		tmpY=(float)bins[1]/nums[1];	
-		err=min(abs(tmpX-centroids[0]),abs(tmpY-centroids[1]));
-		centroids[0]=tmpX;
-		centroids[1]=tmpY;
+		tmpX=centroids[0]-(float)bins[0]/nums[0];
+		tmpY=centroids[1]-(float)bins[1]/nums[1];	
+		err=tmpX>tmpY?tmpY:tmpX;
+		centroids[0]+=tmpX;
+		centroids[1]+=tmpY;
 	}
 	err=(centroids[0]+centroids[1])/2;
 	pos=err;
@@ -69,7 +69,7 @@ float otsuThreshold(Mat &tmp,int &pos){
 		sum1+=i*hist[i];
 		sum+=hist[i];
 	}
-	float wl=0,wr=sum,mul,mur,tmpl=0,tmpr=sum1;
+	float wl=0,wr=sum,mud,tmpl=0,tmpr=sum1;
 	float max=0,icv;
 	int idx=0;
 	for(int i=0;i<255;i++){
@@ -77,9 +77,8 @@ float otsuThreshold(Mat &tmp,int &pos){
 		wr-=hist[i];
 		tmpl+=i*hist[i];
 		tmpr-=i*hist[i];
-		mul=tmpl/wl;
-		mur=tmpr/wr;
-		icv=(mul-mur)*(mul-mur)*wl*wr;
+		mud=tmpl/wl-tmpr/wr;
+		icv=mud*mud*wl*wr;
 		if(icv>max){
 			max=icv;
 			idx=i;

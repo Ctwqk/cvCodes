@@ -1,6 +1,6 @@
 CMakeFiles/main.dir/denoise.cpp.o: \
  /home/taiwei/code/cvCode/project3/denoise.cpp /usr/include/stdc-predef.h \
- /home/taiwei/code/cvCode/project3/cleanup.h /usr/include/c++/11/iostream \
+ /home/taiwei/code/cvCode/project3/denoise.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \

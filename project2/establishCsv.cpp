@@ -1,5 +1,3 @@
-#include <iostream>
-#include <opencv2/opencv.hpp>
 #include "csv_util.h"
 #include "features.h"
 #include "readfile.h"

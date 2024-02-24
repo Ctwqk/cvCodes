@@ -142,6 +142,98 @@ debug/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/build
 .PHONY : debug/fast
 
+#=============================================================================
+# Target rules for targets named vidDis
+
+# Build rule for target.
+vidDis: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vidDis
+.PHONY : vidDis
+
+# fast build rule for target.
+vidDis/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/build
+.PHONY : vidDis/fast
+
+#=============================================================================
+# Target rules for targets named recognize
+
+# Build rule for target.
+recognize: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 recognize
+.PHONY : recognize
+
+# fast build rule for target.
+recognize/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/build
+.PHONY : recognize/fast
+
+NetWorkThings/dnnEmbedding.o: NetWorkThings/dnnEmbedding.cpp.o
+.PHONY : NetWorkThings/dnnEmbedding.o
+
+# target to build an object file
+NetWorkThings/dnnEmbedding.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/NetWorkThings/dnnEmbedding.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/NetWorkThings/dnnEmbedding.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/NetWorkThings/dnnEmbedding.cpp.o
+.PHONY : NetWorkThings/dnnEmbedding.cpp.o
+
+NetWorkThings/dnnEmbedding.i: NetWorkThings/dnnEmbedding.cpp.i
+.PHONY : NetWorkThings/dnnEmbedding.i
+
+# target to preprocess a source file
+NetWorkThings/dnnEmbedding.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/NetWorkThings/dnnEmbedding.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/NetWorkThings/dnnEmbedding.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/NetWorkThings/dnnEmbedding.cpp.i
+.PHONY : NetWorkThings/dnnEmbedding.cpp.i
+
+NetWorkThings/dnnEmbedding.s: NetWorkThings/dnnEmbedding.cpp.s
+.PHONY : NetWorkThings/dnnEmbedding.s
+
+# target to generate assembly for a file
+NetWorkThings/dnnEmbedding.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/NetWorkThings/dnnEmbedding.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/NetWorkThings/dnnEmbedding.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/NetWorkThings/dnnEmbedding.cpp.s
+.PHONY : NetWorkThings/dnnEmbedding.cpp.s
+
+csv_util.o: csv_util.cpp.o
+.PHONY : csv_util.o
+
+# target to build an object file
+csv_util.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/csv_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/csv_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/csv_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/csv_util.cpp.o
+.PHONY : csv_util.cpp.o
+
+csv_util.i: csv_util.cpp.i
+.PHONY : csv_util.i
+
+# target to preprocess a source file
+csv_util.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/csv_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/csv_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/csv_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/csv_util.cpp.i
+.PHONY : csv_util.cpp.i
+
+csv_util.s: csv_util.cpp.s
+.PHONY : csv_util.s
+
+# target to generate assembly for a file
+csv_util.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/csv_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/csv_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/csv_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/csv_util.cpp.s
+.PHONY : csv_util.cpp.s
+
 debug.o: debug.cpp.o
 .PHONY : debug.o
 
@@ -173,6 +265,8 @@ denoise.o: denoise.cpp.o
 denoise.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/denoise.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/denoise.cpp.o
 .PHONY : denoise.cpp.o
 
 denoise.i: denoise.cpp.i
@@ -182,6 +276,8 @@ denoise.i: denoise.cpp.i
 denoise.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/denoise.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/denoise.cpp.i
 .PHONY : denoise.cpp.i
 
 denoise.s: denoise.cpp.s
@@ -191,7 +287,33 @@ denoise.s: denoise.cpp.s
 denoise.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/denoise.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/denoise.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/denoise.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/denoise.cpp.s
 .PHONY : denoise.cpp.s
+
+dist.o: dist.cpp.o
+.PHONY : dist.o
+
+# target to build an object file
+dist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/dist.cpp.o
+.PHONY : dist.cpp.o
+
+dist.i: dist.cpp.i
+.PHONY : dist.i
+
+# target to preprocess a source file
+dist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/dist.cpp.i
+.PHONY : dist.cpp.i
+
+dist.s: dist.cpp.s
+.PHONY : dist.s
+
+# target to generate assembly for a file
+dist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/dist.cpp.s
+.PHONY : dist.cpp.s
 
 features.o: features.cpp.o
 .PHONY : features.o
@@ -200,6 +322,8 @@ features.o: features.cpp.o
 features.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/features.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/features.cpp.o
 .PHONY : features.cpp.o
 
 features.i: features.cpp.i
@@ -209,6 +333,8 @@ features.i: features.cpp.i
 features.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/features.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/features.cpp.i
 .PHONY : features.cpp.i
 
 features.s: features.cpp.s
@@ -218,6 +344,8 @@ features.s: features.cpp.s
 features.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/features.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/features.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/features.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/features.cpp.s
 .PHONY : features.cpp.s
 
 main.o: main.cpp.o
@@ -244,6 +372,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+recognize.o: recognize.cpp.o
+.PHONY : recognize.o
+
+# target to build an object file
+recognize.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/recognize.cpp.o
+.PHONY : recognize.cpp.o
+
+recognize.i: recognize.cpp.i
+.PHONY : recognize.i
+
+# target to preprocess a source file
+recognize.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/recognize.cpp.i
+.PHONY : recognize.cpp.i
+
+recognize.s: recognize.cpp.s
+.PHONY : recognize.s
+
+# target to generate assembly for a file
+recognize.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/recognize.cpp.s
+.PHONY : recognize.cpp.s
+
 region.o: region.cpp.o
 .PHONY : region.o
 
@@ -251,6 +403,8 @@ region.o: region.cpp.o
 region.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/region.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/region.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/region.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/region.cpp.o
 .PHONY : region.cpp.o
 
 region.i: region.cpp.i
@@ -260,6 +414,8 @@ region.i: region.cpp.i
 region.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/region.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/region.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/region.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/region.cpp.i
 .PHONY : region.cpp.i
 
 region.s: region.cpp.s
@@ -269,6 +425,8 @@ region.s: region.cpp.s
 region.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/region.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/region.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/region.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/region.cpp.s
 .PHONY : region.cpp.s
 
 threshold.o: threshold.cpp.o
@@ -277,6 +435,8 @@ threshold.o: threshold.cpp.o
 # target to build an object file
 threshold.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/threshold.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/threshold.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/threshold.cpp.o
 .PHONY : threshold.cpp.o
 
 threshold.i: threshold.cpp.i
@@ -285,6 +445,8 @@ threshold.i: threshold.cpp.i
 # target to preprocess a source file
 threshold.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/threshold.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/threshold.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/threshold.cpp.i
 .PHONY : threshold.cpp.i
 
 threshold.s: threshold.cpp.s
@@ -293,7 +455,33 @@ threshold.s: threshold.cpp.s
 # target to generate assembly for a file
 threshold.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/threshold.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/threshold.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/recognize.dir/build.make CMakeFiles/recognize.dir/threshold.cpp.s
 .PHONY : threshold.cpp.s
+
+vidDis.o: vidDis.cpp.o
+.PHONY : vidDis.o
+
+# target to build an object file
+vidDis.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/vidDis.cpp.o
+.PHONY : vidDis.cpp.o
+
+vidDis.i: vidDis.cpp.i
+.PHONY : vidDis.i
+
+# target to preprocess a source file
+vidDis.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/vidDis.cpp.i
+.PHONY : vidDis.cpp.i
+
+vidDis.s: vidDis.cpp.s
+.PHONY : vidDis.s
+
+# target to generate assembly for a file
+vidDis.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vidDis.dir/build.make CMakeFiles/vidDis.dir/vidDis.cpp.s
+.PHONY : vidDis.cpp.s
 
 # Help Target
 help:
@@ -305,24 +493,41 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... debug"
 	@echo "... main"
+	@echo "... recognize"
+	@echo "... vidDis"
+	@echo "... NetWorkThings/dnnEmbedding.o"
+	@echo "... NetWorkThings/dnnEmbedding.i"
+	@echo "... NetWorkThings/dnnEmbedding.s"
+	@echo "... csv_util.o"
+	@echo "... csv_util.i"
+	@echo "... csv_util.s"
 	@echo "... debug.o"
 	@echo "... debug.i"
 	@echo "... debug.s"
 	@echo "... denoise.o"
 	@echo "... denoise.i"
 	@echo "... denoise.s"
+	@echo "... dist.o"
+	@echo "... dist.i"
+	@echo "... dist.s"
 	@echo "... features.o"
 	@echo "... features.i"
 	@echo "... features.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... recognize.o"
+	@echo "... recognize.i"
+	@echo "... recognize.s"
 	@echo "... region.o"
 	@echo "... region.i"
 	@echo "... region.s"
 	@echo "... threshold.o"
 	@echo "... threshold.i"
 	@echo "... threshold.s"
+	@echo "... vidDis.o"
+	@echo "... vidDis.i"
+	@echo "... vidDis.s"
 .PHONY : help
 
 

@@ -1,0 +1,3 @@
+/home/taiwei/code/cvCode/project3/NetWorkThings/CMakeFiles/dnn.dir
+/home/taiwei/code/cvCode/project3/NetWorkThings/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/project3/NetWorkThings/CMakeFiles/rebuild_cache.dir

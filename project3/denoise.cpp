@@ -1,4 +1,4 @@
-#include "cleanup.h"
+#include "denoise.h"
 using namespace std;
 using namespace cv;
 //operation: 0-grow 1-shrink
