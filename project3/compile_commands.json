@@ -36,36 +36,6 @@
 },
 {
   "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/debug.cpp.o -c /home/taiwei/code/cvCode/project3/debug.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/debug.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project3/csv_util.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/csv_util.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/debug.dir/NetWorkThings/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
   "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/vidDis.cpp.o -c /home/taiwei/code/cvCode/project3/vidDis.cpp",
   "file": "/home/taiwei/code/cvCode/project3/vidDis.cpp"
 },
@@ -101,42 +71,7 @@
 },
 {
   "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/recognize.cpp.o -c /home/taiwei/code/cvCode/project3/recognize.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/recognize.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/dist.cpp.o -c /home/taiwei/code/cvCode/project3/dist.cpp",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/dist.cpp.o -c /home/taiwei/code/cvCode/project3/dist.cpp",
   "file": "/home/taiwei/code/cvCode/project3/dist.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/threshold.cpp.o -c /home/taiwei/code/cvCode/project3/threshold.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/threshold.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project3/csv_util.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/csv_util.cpp"
-},
-{
-  "directory": "/home/taiwei/code/cvCode/project3",
-  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/recognize.dir/NetWorkThings/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp",
-  "file": "/home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp"
 }
 ]

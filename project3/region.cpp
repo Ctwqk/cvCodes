@@ -1,22 +1,27 @@
 #include "region.h"
 using namespace std;
 using namespace cv;
-
+// x: whose root is what we want to find
+// array: the union-find set
 int find(int x,int**array){
 	if(array[x][0]!=x) array[x][0]=find(array[x][0],array);
 	return array[x][0];
 }
+// x&y: given node to union
+// array: union-find set
 int uni(int x,int y,int **array){
 	x=find(x,array);
 	y=find(y,array);
 	if(x==y){
 		return y;
 	}
+	//if is with same rank, union x to y and increase the rank of y by 1
 	if(array[y][1]==array[x][1]){
 		array[x][0]=y;
 		array[y][1]++;
 		return y;
 	}
+	//else union to the one with higher rank
 	else if(array[y][1]>array[x][1]){
 		array[x][0]=y;
 	}
@@ -25,20 +30,20 @@ int uni(int x,int y,int **array){
 	//return y;
 	return -1;
 }
-void showArr(int* array,int row,int col){
-	for(int i=0;i<row;i++){
-		for(int j=0;j<col;j++){
-			cout<<array[i*col+j]<<" "; }
-		cout<<endl;
-	}
-	cout<<endl;
-}
+//cut off the border regions with BFS
+//array: the flatted image
+//row&col: the size of origin image
 int cutEdgeRegion2(int *array,int row,int col){
+	//EDGE: the range that is regarded as border, any region that connect with border will be deleted.
+	//size: the size of the Queue for BFS
+	//endPoint: how many point you want to cut off at most
 	int EDGE=5,size=4*(row+col),endPoint=row*col/6;
+	endPoint=row*col;//I want to erase as much as possible
 	int queue[size];
 	
 	int front=0,rear=0;
 	int idx,idx2;
+	//push the border into queue
 	for(int i=0;i<=EDGE;i++){
 		idx=(row-1-i)*col;
 		idx2=i*col;
@@ -61,9 +66,12 @@ int cutEdgeRegion2(int *array,int row,int col){
 			array[idx+col-i-1]=-2;
 		}
 	}
+
+	//4-connected
 	int dir[][2]={{0,1},{1,0},{0,-1},{-1,0}/*,{1,-1},{-1,1},{1,1},{-1,-1}*/};
 
 	int z,count=0;
+	//BFS
 	while(rear!=front&&count<endPoint){
 		int tmp=queue[front%size];
 		front++;
@@ -90,6 +98,7 @@ int cutEdgeRegion2(int *array,int row,int col){
 	return 0;
 }
 
+//a more naive method to cut off edge
 int cutEdgeRegion(int* array,int row,int col){
 	int EDGE=10; //define the width of edge;
 	int idx,idx2,size=col*row;
@@ -121,6 +130,11 @@ int cutEdgeRegion(int* array,int row,int col){
 	}
 	return 0;
 }	
+
+//this function depart the given image into regions
+//src: given binary image
+//dst: output image with each region in different color
+//num: maximum number of region, default to 6 
 vector<Mat> regionize(Mat &src, Mat &dst,int num){
 	//for debug
 	/*
@@ -138,6 +152,7 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 	int** array=new int*[elemNum];
 	int *array2=new int[elemNum]();
 	int tmp=0;
+	//union-find need 2-D array, but edge cutting want 1-D array so...
 	for(int i=0;i<row;i++){
 		uchar* ptr=src.ptr<uchar>(i);
 		for(int j=0;j<col;j++){
@@ -152,7 +167,9 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 			}
 		}
 	}
+
 	cutEdgeRegion2(array2,row,col);
+	//union-find to seperate regions
 	for(int i=0;i<elemNum;i++)array[i][0]=array2[i];
 	int idx;			
 	for(int i=0;i<row-1;i++){
@@ -176,6 +193,7 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 		if(array[idx][0]>=0&&array[idx+1][0]>=0) uni(idx,idx+1,array);
 	}
 	dst=Mat::zeros(src.size(),CV_32F);
+	//counting the number of pixels of each region
 	map<int,int> check;
 	for(int i=0;i<row;i++){
 		float *ptr=dst.ptr<float>(i);
@@ -192,6 +210,7 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 			idx++;
 		}
 	}
+	//sort regions based on their area
 	struct comp{
 		bool operator()(const pair<int,int> &a,const pair<int,int>&b) const{
 			return a.second==b.second?a.first>b.first:a.second>b.second;
@@ -201,6 +220,7 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 	Mat *planes=new Mat[6];
 	fill(planes,planes+6,Mat::zeros(src.size(),CV_8U));
 	idx=0;
+	//choose first 6 largest region and ignore the regions less than 1000 pixels
 	for(pair<int,int> p:ans){
 		if(p.first==0||p.second<1000||idx>=num) break;
 
@@ -208,13 +228,12 @@ vector<Mat> regionize(Mat &src, Mat &dst,int num){
 	}
 	vector<Mat> maps;
 	transform(planes,planes+6,back_inserter<vector<Mat>>(maps),[](const Mat &map){return map.clone();});
-
+	//color these regions in order of Blue Green Red Cyan Yellow ane Magenta
 	for(int i=0;i<3;i++){
 		add(planes[3+i],planes[i],planes[i]);
 		add(planes[3+i],planes[(i+1)%3],planes[(i+1)%3]);
 	}
 	merge(planes,3,dst);
-	
 	dst*=255;
 	delete[] planes;
 	delete[] array;

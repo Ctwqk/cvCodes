@@ -10,6 +10,7 @@ using namespace cv;
 
 int main(int argc, char** argv){
 	Mat dst,src=imread(argv[1]);
+	resize(src,src,Size(480,600));
 //	resize(src,src,Size(50,50),0,0);
 	/*
 	Mat planes[3];
@@ -40,7 +41,6 @@ int main(int argc, char** argv){
 	Mat planes[3];
 	split(dst,planes);
 	RotatedRect ans;
-	int idx=atoi(argv[2]);
 	waitKey(0);
 	return 0;
 }

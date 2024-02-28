@@ -366,4 +366,5 @@ CMakeFiles/vidDis.dir/vidDis.cpp.o: \
  /home/taiwei/code/cvCode/project3/features.h \
  /home/taiwei/code/cvCode/project3/csv_util.h \
  /home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.h \
- /usr/include/x86_64-linux-gnu/sys/time.h
+ /usr/include/x86_64-linux-gnu/sys/time.h \
+ /home/taiwei/code/cvCode/project3/dist.h

@@ -3,6 +3,9 @@
 using namespace std;
 using namespace cv;
 
+//using kmean to seperate the pixels to 2 and use the medium of 2 centroid as threshold
+//tmp: input image
+//pos: the threshold
 float kmeanThreshold(Mat &tmp,int &pos){
 	int row=tmp.rows,col=tmp.cols;
 	float TOL=0.00001;
@@ -41,6 +44,9 @@ float kmeanThreshold(Mat &tmp,int &pos){
 	return err;	
 }
 
+//directly using the average value of image as threshold
+//tmp: origin image
+//pos: threshold
 float averageThreshold(Mat &tmp,int &pos){
 	int row=tmp.rows,col=tmp.cols;
 	float threshold,sum;
@@ -55,6 +61,9 @@ float averageThreshold(Mat &tmp,int &pos){
 	return threshold;
 }
 
+//use otsu method. Find the threshold that miximize the inter-class variance
+//tmp: origin image
+//pos: threshold
 float otsuThreshold(Mat &tmp,int &pos){
 	float hist[256]={},col=tmp.cols,row=tmp.rows,theta[256]={};
 	float sum=0,scale=col*row, sum1=0;
@@ -72,6 +81,7 @@ float otsuThreshold(Mat &tmp,int &pos){
 	float wl=0,wr=sum,mud,tmpl=0,tmpr=sum1;
 	float max=0,icv;
 	int idx=0;
+	//using dynamic programing to accelerate the progress
 	for(int i=0;i<255;i++){
 		wl+=hist[i];
 		wr-=hist[i];
@@ -87,6 +97,12 @@ float otsuThreshold(Mat &tmp,int &pos){
 	pos=idx;
 	return max;
 }
+
+//given an image and a threshold, depart the image into foreground and background
+//src: origin image
+//dst: output binary image
+//threshold: thresohld:
+//upper: the value for foreground pixels
 int myThreshold(Mat &src,Mat &dst, int threshold, int upper){
 	if(!threshold) threshold++;
 	int row=src.rows,col=src.cols;
@@ -101,6 +117,11 @@ int myThreshold(Mat &src,Mat &dst, int threshold, int upper){
 	return 0;
 }
 
+//given a color image, calculate the binary image
+//src: origin color image
+//dst: output binary image
+//idx: which channel is used for calculate the grayscale image:
+//0: Blue 1: Green 1: Red 4: opencv grayscale 
 int toBinary(Mat &src,Mat &dst,int idx){
 	Mat tmp=src.clone();
 	Mat grays[4];
@@ -109,10 +130,12 @@ int toBinary(Mat &src,Mat &dst,int idx){
 	//  float err=kmeanThreshold(tmp);	
 	float errs[4]={};
 	int pos[4]={};
+	//choose the channel that gives the largest interclass variance
 	for(int i=0;i<4;i++){
 		errs[i]=otsuThreshold(grays[i],pos[i]);
 		//cout<<errs[i]<<endl;
 	}
+	//in pratice I found the interclass variance from grayscale channel should be doubled
 	errs[3]*=2;
 	if(idx<0)idx=distance(errs,max_element(begin(errs),end(errs)));	
 	//cout<<idx<<endl;

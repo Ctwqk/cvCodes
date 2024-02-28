@@ -28,11 +28,14 @@ int main(int argc,char** argv){
 	cout<<dst;
 */
 	Mat src,ans;
-	src=imread(argv[1],IMREAD_GRAYSCALE);
+	src=imread(argv[1]);
+	resize(src,src,Size(480,600));
 	denoise(src,src);
 	imshow("src",src);
+	waitKey();
 	vector<Mat> maps=regionize(src,ans);
 	imshow("reg",ans);
+	waitKey();
 	RotatedRect rect;
 	vector<float> features;
 	int idx=0;

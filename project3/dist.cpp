@@ -1,7 +1,7 @@
 #include "dist.h"
 
 //return the Euclidean distance of two given vector, require same sie
-float dist(vector<float> &feature1,const vector<float> &feature2){
+float dist(const vector<float> &feature1,const vector<float> &feature2){
 	float ans=0;
 	if(true){
 		int n=feature1.size();
@@ -33,7 +33,7 @@ float histDist(vector<float> &hist1, const vector<float> &hist2){
 }
 
 //return the cosDist of two given vector, require same size
-float cosDist(vector<float> &feature1, const vector<float> &feature2){
+float cosDist(const vector<float> &feature1, const vector<float> &feature2){
 	int n=feature1.size();
 	if(feature2.size()!=n){
 		cout<<"expect same size: "<<n<<"!="<<feature2.size()<<endl;
@@ -45,7 +45,7 @@ float cosDist(vector<float> &feature1, const vector<float> &feature2){
 		sum2+=feature2[i]*feature2[i];
 		sum+=feature1[i]*feature2[i];
 	}	
-	return -1+sum/sqrt(sum1)/sqrt(sum2); //in the imgMatch.cpp, all features will be sorted in descending order, I want the similar image at the front
+	return 1-sum/sqrt(sum1)/sqrt(sum2); //in the imgMatch.cpp, all features will be sorted in descending order, I want the similar image at the front
 
 	
 	

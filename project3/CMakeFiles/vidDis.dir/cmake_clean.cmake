@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/vidDis.dir/csv_util.cpp.o.d"
   "CMakeFiles/vidDis.dir/denoise.cpp.o"
   "CMakeFiles/vidDis.dir/denoise.cpp.o.d"
+  "CMakeFiles/vidDis.dir/dist.cpp.o"
+  "CMakeFiles/vidDis.dir/dist.cpp.o.d"
   "CMakeFiles/vidDis.dir/features.cpp.o"
   "CMakeFiles/vidDis.dir/features.cpp.o.d"
   "CMakeFiles/vidDis.dir/region.cpp.o"
