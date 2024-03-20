@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project4",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/main.cpp.o -c /home/taiwei/code/cvCode/project4/main.cpp",
+  "file": "/home/taiwei/code/cvCode/project4/main.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project4",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/CalPos.dir/CalPos.cpp.o -c /home/taiwei/code/cvCode/project4/CalPos.cpp",
+  "file": "/home/taiwei/code/cvCode/project4/CalPos.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project4",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/RobustFeature.dir/RobustFeature.cpp.o -c /home/taiwei/code/cvCode/project4/RobustFeature.cpp",
+  "file": "/home/taiwei/code/cvCode/project4/RobustFeature.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project4",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/extension.dir/extension.cpp.o -c /home/taiwei/code/cvCode/project4/extension.cpp",
+  "file": "/home/taiwei/code/cvCode/project4/extension.cpp"
+}
+]
