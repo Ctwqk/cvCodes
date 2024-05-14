@@ -1,0 +1,77 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/main.cpp.o -c /home/taiwei/code/cvCode/project3/main.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/main.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/threshold.cpp.o -c /home/taiwei/code/cvCode/project3/threshold.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/threshold.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project3/csv_util.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/csv_util.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/NetWorkThings/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/vidDis.cpp.o -c /home/taiwei/code/cvCode/project3/vidDis.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/vidDis.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/threshold.cpp.o -c /home/taiwei/code/cvCode/project3/threshold.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/threshold.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/denoise.cpp.o -c /home/taiwei/code/cvCode/project3/denoise.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/denoise.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/region.cpp.o -c /home/taiwei/code/cvCode/project3/region.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/region.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/features.cpp.o -c /home/taiwei/code/cvCode/project3/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project3/csv_util.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/csv_util.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/NetWorkThings/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/NetWorkThings/dnnEmbedding.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project3",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDis.dir/dist.cpp.o -c /home/taiwei/code/cvCode/project3/dist.cpp",
+  "file": "/home/taiwei/code/cvCode/project3/dist.cpp"
+}
+]
