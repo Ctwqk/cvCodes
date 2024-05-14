@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/establishCsv.dir/readfile.cpp.o -c /home/taiwei/code/cvCode/project2/readfile.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/readfile.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/establishCsv.dir/establishCsv.cpp.o -c /home/taiwei/code/cvCode/project2/establishCsv.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/establishCsv.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/establishCsv.dir/features.cpp.o -c /home/taiwei/code/cvCode/project2/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/establishCsv.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project2/csv_util.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/csv_util.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/imgMatch.cpp.o -c /home/taiwei/code/cvCode/project2/imgMatch.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/imgMatch.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project2/csv_util.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/csv_util.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/dist.cpp.o -c /home/taiwei/code/cvCode/project2/dist.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/dist.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/features.cpp.o -c /home/taiwei/code/cvCode/project2/features.cpp",
+  "file": "/home/taiwei/code/cvCode/project2/features.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project2/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o -c /home/taiwei/code/cvCode/project1/task2/filter.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/filter.cpp"
+}
+]

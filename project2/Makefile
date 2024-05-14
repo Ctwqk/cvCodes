@@ -130,17 +130,17 @@ establishCsv/fast:
 .PHONY : establishCsv/fast
 
 #=============================================================================
-# Target rules for targets named readfile
+# Target rules for targets named imgMatch
 
 # Build rule for target.
-readfile: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 readfile
-.PHONY : readfile
+imgMatch: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgMatch
+.PHONY : imgMatch
 
 # fast build rule for target.
-readfile/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/readfile.dir/build.make CMakeFiles/readfile.dir/build
-.PHONY : readfile/fast
+imgMatch/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/build
+.PHONY : imgMatch/fast
 
 csv_util.o: csv_util.cpp.o
 .PHONY : csv_util.o
@@ -148,6 +148,7 @@ csv_util.o: csv_util.cpp.o
 # target to build an object file
 csv_util.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/csv_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/csv_util.cpp.o
 .PHONY : csv_util.cpp.o
 
 csv_util.i: csv_util.cpp.i
@@ -156,6 +157,7 @@ csv_util.i: csv_util.cpp.i
 # target to preprocess a source file
 csv_util.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/csv_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/csv_util.cpp.i
 .PHONY : csv_util.cpp.i
 
 csv_util.s: csv_util.cpp.s
@@ -164,7 +166,32 @@ csv_util.s: csv_util.cpp.s
 # target to generate assembly for a file
 csv_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/csv_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/csv_util.cpp.s
 .PHONY : csv_util.cpp.s
+
+dist.o: dist.cpp.o
+.PHONY : dist.o
+
+# target to build an object file
+dist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/dist.cpp.o
+.PHONY : dist.cpp.o
+
+dist.i: dist.cpp.i
+.PHONY : dist.i
+
+# target to preprocess a source file
+dist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/dist.cpp.i
+.PHONY : dist.cpp.i
+
+dist.s: dist.cpp.s
+.PHONY : dist.s
+
+# target to generate assembly for a file
+dist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/dist.cpp.s
+.PHONY : dist.cpp.s
 
 establishCsv.o: establishCsv.cpp.o
 .PHONY : establishCsv.o
@@ -196,6 +223,7 @@ features.o: features.cpp.o
 # target to build an object file
 features.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/features.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/features.cpp.o
 .PHONY : features.cpp.o
 
 features.i: features.cpp.i
@@ -204,6 +232,7 @@ features.i: features.cpp.i
 # target to preprocess a source file
 features.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/features.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/features.cpp.i
 .PHONY : features.cpp.i
 
 features.s: features.cpp.s
@@ -212,14 +241,63 @@ features.s: features.cpp.s
 # target to generate assembly for a file
 features.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/features.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/features.cpp.s
 .PHONY : features.cpp.s
+
+home/taiwei/code/cvCode/project1/task2/filter.o: home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.o
+
+# target to build an object file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.o
+
+home/taiwei/code/cvCode/project1/task2/filter.i: home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.i
+
+# target to preprocess a source file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.i
+
+home/taiwei/code/cvCode/project1/task2/filter.s: home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.s
+
+# target to generate assembly for a file
+home/taiwei/code/cvCode/project1/task2/filter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+.PHONY : home/taiwei/code/cvCode/project1/task2/filter.cpp.s
+
+imgMatch.o: imgMatch.cpp.o
+.PHONY : imgMatch.o
+
+# target to build an object file
+imgMatch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/imgMatch.cpp.o
+.PHONY : imgMatch.cpp.o
+
+imgMatch.i: imgMatch.cpp.i
+.PHONY : imgMatch.i
+
+# target to preprocess a source file
+imgMatch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/imgMatch.cpp.i
+.PHONY : imgMatch.cpp.i
+
+imgMatch.s: imgMatch.cpp.s
+.PHONY : imgMatch.s
+
+# target to generate assembly for a file
+imgMatch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgMatch.dir/build.make CMakeFiles/imgMatch.dir/imgMatch.cpp.s
+.PHONY : imgMatch.cpp.s
 
 readfile.o: readfile.cpp.o
 .PHONY : readfile.o
 
 # target to build an object file
 readfile.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/readfile.dir/build.make CMakeFiles/readfile.dir/readfile.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/readfile.cpp.o
 .PHONY : readfile.cpp.o
 
 readfile.i: readfile.cpp.i
@@ -227,7 +305,7 @@ readfile.i: readfile.cpp.i
 
 # target to preprocess a source file
 readfile.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/readfile.dir/build.make CMakeFiles/readfile.dir/readfile.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/readfile.cpp.i
 .PHONY : readfile.cpp.i
 
 readfile.s: readfile.cpp.s
@@ -235,7 +313,7 @@ readfile.s: readfile.cpp.s
 
 # target to generate assembly for a file
 readfile.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/readfile.dir/build.make CMakeFiles/readfile.dir/readfile.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/establishCsv.dir/build.make CMakeFiles/establishCsv.dir/readfile.cpp.s
 .PHONY : readfile.cpp.s
 
 # Help Target
@@ -247,16 +325,25 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... establishCsv"
-	@echo "... readfile"
+	@echo "... imgMatch"
 	@echo "... csv_util.o"
 	@echo "... csv_util.i"
 	@echo "... csv_util.s"
+	@echo "... dist.o"
+	@echo "... dist.i"
+	@echo "... dist.s"
 	@echo "... establishCsv.o"
 	@echo "... establishCsv.i"
 	@echo "... establishCsv.s"
 	@echo "... features.o"
 	@echo "... features.i"
 	@echo "... features.s"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.o"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.i"
+	@echo "... home/taiwei/code/cvCode/project1/task2/filter.s"
+	@echo "... imgMatch.o"
+	@echo "... imgMatch.i"
+	@echo "... imgMatch.s"
 	@echo "... readfile.o"
 	@echo "... readfile.i"
 	@echo "... readfile.s"

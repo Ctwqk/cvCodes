@@ -14,7 +14,7 @@ The function returns a std::vector of char* for the filenames and a 2D std::vect
 #include <cstdio>
 #include <cstring>
 #include <vector>
-#include "opencv2/opencv.hpp"
+#include <opencv2/opencv.hpp>
 
 /*
   reads a string from a CSV file. the 0-terminated string is returned in the char array os.
@@ -40,7 +40,6 @@ int getstring( FILE *fp, char os[] ) {
   }
   // printf("\n"); // uncomment for debugging
   os[p] = '\0';
-
   return(eol); // return true if eol
 }
 
@@ -194,6 +193,7 @@ int read_image_data_csv( char *filename, std::vector<char *> &filenames, std::ve
     char *fname = new char[strlen(img_file)+1];
     strcpy(fname, img_file);
     filenames.push_back( fname );
+//	printf("%s\n",img_file);
   }
   fclose(fp);
   printf("Finished reading CSV file\n");
@@ -207,6 +207,5 @@ int read_image_data_csv( char *filename, std::vector<char *> &filenames, std::ve
     }
     printf("\n");
   }
-
   return(0);
 }

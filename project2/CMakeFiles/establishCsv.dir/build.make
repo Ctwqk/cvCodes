@@ -69,10 +69,24 @@ include CMakeFiles/establishCsv.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/establishCsv.dir/flags.make
 
+CMakeFiles/establishCsv.dir/readfile.cpp.o: CMakeFiles/establishCsv.dir/flags.make
+CMakeFiles/establishCsv.dir/readfile.cpp.o: readfile.cpp
+CMakeFiles/establishCsv.dir/readfile.cpp.o: CMakeFiles/establishCsv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/establishCsv.dir/readfile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/establishCsv.dir/readfile.cpp.o -MF CMakeFiles/establishCsv.dir/readfile.cpp.o.d -o CMakeFiles/establishCsv.dir/readfile.cpp.o -c /home/taiwei/code/cvCode/project2/readfile.cpp
+
+CMakeFiles/establishCsv.dir/readfile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/establishCsv.dir/readfile.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/taiwei/code/cvCode/project2/readfile.cpp > CMakeFiles/establishCsv.dir/readfile.cpp.i
+
+CMakeFiles/establishCsv.dir/readfile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/establishCsv.dir/readfile.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/taiwei/code/cvCode/project2/readfile.cpp -o CMakeFiles/establishCsv.dir/readfile.cpp.s
+
 CMakeFiles/establishCsv.dir/establishCsv.cpp.o: CMakeFiles/establishCsv.dir/flags.make
 CMakeFiles/establishCsv.dir/establishCsv.cpp.o: establishCsv.cpp
 CMakeFiles/establishCsv.dir/establishCsv.cpp.o: CMakeFiles/establishCsv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/establishCsv.dir/establishCsv.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/establishCsv.dir/establishCsv.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/establishCsv.dir/establishCsv.cpp.o -MF CMakeFiles/establishCsv.dir/establishCsv.cpp.o.d -o CMakeFiles/establishCsv.dir/establishCsv.cpp.o -c /home/taiwei/code/cvCode/project2/establishCsv.cpp
 
 CMakeFiles/establishCsv.dir/establishCsv.cpp.i: cmake_force
@@ -86,7 +100,7 @@ CMakeFiles/establishCsv.dir/establishCsv.cpp.s: cmake_force
 CMakeFiles/establishCsv.dir/features.cpp.o: CMakeFiles/establishCsv.dir/flags.make
 CMakeFiles/establishCsv.dir/features.cpp.o: features.cpp
 CMakeFiles/establishCsv.dir/features.cpp.o: CMakeFiles/establishCsv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/establishCsv.dir/features.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/establishCsv.dir/features.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/establishCsv.dir/features.cpp.o -MF CMakeFiles/establishCsv.dir/features.cpp.o.d -o CMakeFiles/establishCsv.dir/features.cpp.o -c /home/taiwei/code/cvCode/project2/features.cpp
 
 CMakeFiles/establishCsv.dir/features.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/establishCsv.dir/features.cpp.s: cmake_force
 CMakeFiles/establishCsv.dir/csv_util.cpp.o: CMakeFiles/establishCsv.dir/flags.make
 CMakeFiles/establishCsv.dir/csv_util.cpp.o: csv_util.cpp
 CMakeFiles/establishCsv.dir/csv_util.cpp.o: CMakeFiles/establishCsv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/establishCsv.dir/csv_util.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/establishCsv.dir/csv_util.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/establishCsv.dir/csv_util.cpp.o -MF CMakeFiles/establishCsv.dir/csv_util.cpp.o.d -o CMakeFiles/establishCsv.dir/csv_util.cpp.o -c /home/taiwei/code/cvCode/project2/csv_util.cpp
 
 CMakeFiles/establishCsv.dir/csv_util.cpp.i: cmake_force
@@ -113,6 +127,7 @@ CMakeFiles/establishCsv.dir/csv_util.cpp.s: cmake_force
 
 # Object files for target establishCsv
 establishCsv_OBJECTS = \
+"CMakeFiles/establishCsv.dir/readfile.cpp.o" \
 "CMakeFiles/establishCsv.dir/establishCsv.cpp.o" \
 "CMakeFiles/establishCsv.dir/features.cpp.o" \
 "CMakeFiles/establishCsv.dir/csv_util.cpp.o"
@@ -120,6 +135,7 @@ establishCsv_OBJECTS = \
 # External object files for target establishCsv
 establishCsv_EXTERNAL_OBJECTS =
 
+establishCsv: CMakeFiles/establishCsv.dir/readfile.cpp.o
 establishCsv: CMakeFiles/establishCsv.dir/establishCsv.cpp.o
 establishCsv: CMakeFiles/establishCsv.dir/features.cpp.o
 establishCsv: CMakeFiles/establishCsv.dir/csv_util.cpp.o
@@ -140,7 +156,7 @@ establishCsv: /usr/local/lib/libopencv_flann.so.4.9.0
 establishCsv: /usr/local/lib/libopencv_imgproc.so.4.9.0
 establishCsv: /usr/local/lib/libopencv_core.so.4.9.0
 establishCsv: CMakeFiles/establishCsv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable establishCsv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/taiwei/code/cvCode/project2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable establishCsv"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/establishCsv.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
