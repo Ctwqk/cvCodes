@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project1/task2",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDisplay.dir/vidDisplay.cpp.o -c /home/taiwei/code/cvCode/project1/task2/vidDisplay.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/vidDisplay.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project1/task2",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDisplay.dir/filter.cpp.o -c /home/taiwei/code/cvCode/project1/task2/filter.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/filter.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project1/task2",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/vidDisplay.dir/FaceDetect/faceDetect.cpp.o -c /home/taiwei/code/cvCode/project1/task2/FaceDetect/faceDetect.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/FaceDetect/faceDetect.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project1/task2",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/timeBlur.dir/timeBlur.cpp.o -c /home/taiwei/code/cvCode/project1/task2/timeBlur.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/timeBlur.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project1/task2",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/timeBlur.dir/filter.cpp.o -c /home/taiwei/code/cvCode/project1/task2/filter.cpp",
+  "file": "/home/taiwei/code/cvCode/project1/task2/filter.cpp"
+}
+]

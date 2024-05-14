@@ -206,7 +206,6 @@ int sobelX3x3(cv::Mat &src, cv::Mat &dst){
 	src.convertTo(tmp,CV_16SC3);
 	auxCalFunc_16U(x1,tmp.t(),mid,3,1); //calculate verticle filter
 	auxCalFunc_16U(x2,mid.t(),dst,3,1); //calculate horizonal filter
-	
 	return 0;
 }
 
