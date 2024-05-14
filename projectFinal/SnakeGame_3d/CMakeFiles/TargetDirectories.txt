@@ -1,0 +1,5 @@
+/home/taiwei/code/cvCode/projectFinal/SnakeGame_3d/CMakeFiles/snakegame.dir
+/home/taiwei/code/cvCode/projectFinal/SnakeGame_3d/CMakeFiles/main.dir
+/home/taiwei/code/cvCode/projectFinal/SnakeGame_3d/CMakeFiles/match_tmp.dir
+/home/taiwei/code/cvCode/projectFinal/SnakeGame_3d/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/projectFinal/SnakeGame_3d/CMakeFiles/rebuild_cache.dir

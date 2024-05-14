@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/snakegame.dir/snakegame.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/snakegame.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/snakegame.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/snakegame.dir/CalPos.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/CalPos.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/CalPos.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/main.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/main.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/main.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/saveOrReadPattern.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/saveOrReadPattern.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/saveOrReadPattern.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/match_tmp.dir/match_tmp.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/match_tmp.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/match_tmp.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/match_tmp.dir/patternMatch.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/patternMatch.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/patternMatch.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/projectFinal/SnakeGame",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4  -o CMakeFiles/match_tmp.dir/saveOrReadPattern.cpp.o -c /home/taiwei/code/cvCode/projectFinal/SnakeGame/saveOrReadPattern.cpp",
+  "file": "/home/taiwei/code/cvCode/projectFinal/SnakeGame/saveOrReadPattern.cpp"
+}
+]
