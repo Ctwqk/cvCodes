@@ -1,0 +1,5 @@
+/home/taiwei/code/cvCode/project5/CMakeFiles/filter.dir
+/home/taiwei/code/cvCode/project5/CMakeFiles/main.dir
+/home/taiwei/code/cvCode/project5/CMakeFiles/dnn.dir
+/home/taiwei/code/cvCode/project5/CMakeFiles/edit_cache.dir
+/home/taiwei/code/cvCode/project5/CMakeFiles/rebuild_cache.dir

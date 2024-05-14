@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/filter.dir/filter.cpp.o -c /home/taiwei/code/cvCode/project5/filter.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/filter.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/main.cpp.o -c /home/taiwei/code/cvCode/project5/main.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/main.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project5/dnnEmbedding.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/dnnEmbedding.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/main.dir/preprocess.cpp.o -c /home/taiwei/code/cvCode/project5/preprocess.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/preprocess.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/dnn.dir/dnnexample.cpp.o -c /home/taiwei/code/cvCode/project5/dnnexample.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/dnnexample.cpp"
+},
+{
+  "directory": "/home/taiwei/code/cvCode/project5",
+  "command": "/usr/bin/c++  -I/home/taiwei/code/pCode/cnpy -isystem /usr/local/include/opencv4  -o CMakeFiles/dnn.dir/dnnEmbedding.cpp.o -c /home/taiwei/code/cvCode/project5/dnnEmbedding.cpp",
+  "file": "/home/taiwei/code/cvCode/project5/dnnEmbedding.cpp"
+}
+]
