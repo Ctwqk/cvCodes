@@ -1,4 +1,0 @@
-/home/taiwei/code/cvCode/project3/CMakeFiles/main.dir
-/home/taiwei/code/cvCode/project3/CMakeFiles/vidDis.dir
-/home/taiwei/code/cvCode/project3/CMakeFiles/edit_cache.dir
-/home/taiwei/code/cvCode/project3/CMakeFiles/rebuild_cache.dir
