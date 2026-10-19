@@ -3,93 +3,58 @@
   Spring 2024
   CS 5330 Computer Vision
 
-  Example of how to time an image processing task.
+  Example of how to time an image processing task: compares the pixel-wise
+  5x5 blur (blur5x5_1) with the separable version (blur5x5_2).
 
-  Program takes a path to an image on the command line
+  usage: timeBlur <image> [--repeat N] [--max-width W]
 */
+#include <chrono>
+#include <cstdio>
 
-#include <cstdio> // a bunch of standard C/C++ functions like printf, scanf
-#include <cstring> // C/C++ functions for working with strings
-#include <cmath>
-#include <sys/time.h>
-#include "opencv2/opencv.hpp"
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+
+#include "app_io.h"
 #include "filter.h"
-// prototypes for the functions to test
-//int blur5x5_1( cv::Mat &src, cv::Mat &dst );
-//int blur5x5_2( cv::Mat &src, cv::Mat &dst );
 
-// returns a double which gives time in seconds
-double getTime() {
-  struct timeval cur;
-
-  gettimeofday( &cur, NULL );
-  return( cur.tv_sec + cur.tv_usec / 1000000.0 );
+namespace {
+// seconds per call
+template <typename F>
+double timeIt(int repeat, F&& f) {
+    const auto t0 = std::chrono::steady_clock::now();
+    for (int i = 0; i < repeat; i++) f();
+    return std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count() / repeat;
 }
-  
+}  // namespace
 
-// argc is # of command line parameters (including program name), argv is the array of strings
-// This executable is expecting the name of an image on the command line.
-
-int main(int argc, char *argv[]) {  // main function, execution starts here
-  cv::Mat src; // define a Mat data type (matrix/image), allocates a header, image data is null
-  cv::Mat dst; // cv::Mat to hold the output of the process
-  char filename[256]; // a string for the filename
-
-  // usage: checking if the user provided a filename
-  if(argc < 2) {
-    printf("Usage %s <image filename>\n", argv[0]);
-    exit(-1);
-  }
-  strcpy(filename, argv[1]); // copying 2nd command line argument to filename variable
-
-  // read the image
-  src = cv::imread(filename); // allocating the image data
-  // test if the read was successful
-  if(src.data == NULL) {  // src.data is the reference to the image data
-    printf("Unable to read image %s\n", filename);
-    exit(-1);
-  }
-
-  const int Ntimes = 10;
-	
-  //////////////////////////////
-  // set up the timing for version 1
-  double startTime = getTime();
-
-  // execute the file on the original image a couple of times
-  for(int i=0;i<Ntimes;i++) {
-    blur5x5_1( src, dst );
-  }
-
-  // end the timing
-  double endTime = getTime();
-
-  // compute the time per image
-  double difference = (endTime - startTime) / Ntimes;
-
-  // print the results
-  printf("Time per image (1): %.4lf seconds\n", difference );
-
-  //////////////////////////////
-  // set up the timing for version 2
-  startTime = getTime();
-
-  // execute the file on the original image a couple of times
-  for(int i=0;i<Ntimes;i++) {
-    blur5x5_2( src, dst );
-  }
-
-  // end the timing
-  endTime = getTime();
-
-  // compute the time per image
-  difference = (endTime - startTime) / Ntimes;
-
-  // print the results
-  printf("Time per image (2): %.4lf seconds\n", difference );
-  
-  // terminate the program
-  printf("Terminating\n");
-
-  return(0);
+int main(int argc, char* argv[]) {
+    try {
+        const cvc::Args args(argc, argv);
+        if (args.positional().empty()) {
+            std::printf("Usage %s <image filename> [--repeat N] [--max-width W]\n", argv[0]);
+            return 1;
+        }
+        cv::Mat src = cv::imread(args.positional()[0]);
+        if (src.empty()) {
+            std::fprintf(stderr, "Unable to read image %s\n", args.positional()[0].c_str());
+            return 2;
+        }
+        const int maxWidth = args.getInt("max-width", 0);
+        if (maxWidth > 0 && src.cols > maxWidth) {
+            cv::resize(src, src, cv::Size(maxWidth, src.rows * maxWidth / src.cols), 0, 0, cv::INTER_AREA);
+        }
+        const int repeat = args.getInt("repeat", 10);
+        cv::Mat dst1, dst2;
+        const double t1 = timeIt(repeat, [&] { blur5x5_1(src, dst1); });
+        const double t2 = timeIt(repeat, [&] { blur5x5_2(src, dst2); });
+        std::printf("image %dx%d, %d repeats\n", src.cols, src.rows, repeat);
+        std::printf("Time per image (1): %.4f seconds\n", t1);
+        std::printf("Time per image (2): %.4f seconds\n", t2);
+        std::printf("speed-up of the separable version: %.1fx, outputs identical: %s\n", t1 / t2,
+                    cv::norm(dst1, dst2, cv::NORM_INF) == 0 ? "yes" : "no");
+        return 0;
+    } catch (const std::exception& e) {
+        std::fprintf(stderr, "error: %s\n", e.what());
+        return 2;
+    }
 }

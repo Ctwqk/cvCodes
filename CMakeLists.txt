@@ -12,5 +12,6 @@ option(CVC_BUILD_PROJECTFINAL "Build projectFinal (AR snake game, SIFT pattern m
 
 include(cmake/cvc.cmake)
 
+add_subdirectory(project1)
 add_subdirectory(hw4)
 # (remaining projects are added below as they are migrated)
