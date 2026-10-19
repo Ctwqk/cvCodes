@@ -1,6 +1,7 @@
 #include "csv_util.h"
 
 #include <cerrno>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
@@ -42,7 +43,7 @@ bool parseFeatureLine(const std::string& rawLine, std::string& name, std::vector
         char* end = nullptr;
         errno = 0;
         const float v = std::strtof(tok.c_str(), &end);
-        if (tok.empty() || end == tok.c_str() || *end != '\0' || errno == ERANGE) {
+        if (tok.empty() || end == tok.c_str() || *end != '\0' || errno == ERANGE || !std::isfinite(v)) {
             if (err) *err = "bad numeric field '" + tok + "'";
             return false;
         }

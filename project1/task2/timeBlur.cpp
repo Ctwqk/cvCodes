@@ -29,10 +29,10 @@ double timeIt(int repeat, F&& f) {
 
 int main(int argc, char* argv[]) {
     try {
-        const cvc::Args args(argc, argv);
-        if (args.positional().empty()) {
+        const cvc::Args args(argc, argv, {"help"});
+        if (args.has("help") || args.positional().empty()) {
             std::printf("Usage %s <image filename> [--repeat N] [--max-width W]\n", argv[0]);
-            return 1;
+            return args.has("help") ? 0 : 1;
         }
         cv::Mat src = cv::imread(args.positional()[0]);
         if (src.empty()) {
@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
             cv::resize(src, src, cv::Size(maxWidth, src.rows * maxWidth / src.cols), 0, 0, cv::INTER_AREA);
         }
         const int repeat = args.getInt("repeat", 10);
+        if (repeat < 1) throw std::invalid_argument("--repeat must be positive");
         cv::Mat dst1, dst2;
         const double t1 = timeIt(repeat, [&] { blur5x5_1(src, dst1); });
         const double t2 = timeIt(repeat, [&] { blur5x5_2(src, dst2); });

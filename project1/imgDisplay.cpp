@@ -76,8 +76,8 @@ int main(int argc, char** argv) {
             cv::resize(picture, picture, cv::Size(maxWidth, picture.rows * maxWidth / picture.cols), 0, 0,
                        cv::INTER_AREA);
         }
-        const int brightness = args.getInt("brightness", 0);
-        const float contrast = static_cast<float>(args.getDouble("contrast", 1.0));
+        int brightness = args.getInt("brightness", 0);
+        float contrast = static_cast<float>(args.getDouble("contrast", 1.0));
         const std::string outDir = args.get("out", "");
 
         auto render = [&](const FilterEntry& e, cv::Mat& shown) {
@@ -117,10 +117,10 @@ int main(int argc, char** argv) {
                     ++failures;
                     continue;
                 }
-                cvc::writeImage(outDir + "/" + e->name + ".png", shown);
+                if (!cvc::writeImage(outDir + "/" + e->name + ".png", shown)) ++failures;
                 std::printf("%-13s %8.1f ms  -> %s/%s.png\n", e->name, ms, outDir.c_str(), e->name);
             }
-            return 0;
+            return failures ? 2 : 0;
         }
 
         // ---- interactive mode ----------------------------------------------
@@ -147,6 +147,11 @@ int main(int argc, char** argv) {
                 } while (std::ifstream(filename).good());
                 if (cvc::writeImage(filename, frame)) std::printf("saved %s\n", filename.c_str());
             }
+            if (c == '+' || c == '=') brightness += 10;
+            else if (c == '-') brightness -= 10;
+            else if (c == '>') contrast += 0.1f;
+            else if (c == '<') contrast = std::max(0.f, contrast - 0.1f);
+            else if (c == 'a') { brightness = 0; contrast = 1.f; }
             if (c >= 0) {
                 cv::Mat shown;
                 if (render(*current, shown) == 0) {

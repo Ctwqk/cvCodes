@@ -116,3 +116,11 @@ TEST_CASE("baseName") {
     CHECK(baseName("pic.jpg") == "pic.jpg");
     CHECK(baseName("a\\b\\pic.jpg") == "pic.jpg");
 }
+
+TEST_CASE("CSV rejects non-finite distances before they reach a sort comparator") {
+    std::string name, err;
+    std::vector<float> values;
+    CHECK_FALSE(parseFeatureLine("a,nan", name, values, &err));
+    CHECK_FALSE(parseFeatureLine("a,inf", name, values, &err));
+    CHECK_FALSE(parseFeatureLine("a,-inf", name, values, &err));
+}

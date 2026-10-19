@@ -17,7 +17,11 @@
 
 int main(int argc, char* argv[]) {
     try {
-        const cvc::Args args(argc, argv, {"headless"});
+        const cvc::Args args(argc, argv, {"headless", "help"});
+        if (args.has("help")) {
+            std::printf("usage: %s [--source 0|video|image] [--out DIR] [--max-frames N] [--headless]\n", argv[0]);
+            return 0;
+        }
         cv::VideoCapture cap = cvc::openSource(args.get("source", "0"));
         cvc::Viewer viewer = cvc::Viewer::fromArgs(args, "results/showFaces");
         const int maxFrames = args.getInt("max-frames", -1);
