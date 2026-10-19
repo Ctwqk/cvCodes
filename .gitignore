@@ -1,37 +1,53 @@
-# IDE and OS files
+# Build output (CMake / Make / Ninja)
+build/
+build-*/
+cmake-build-*/
+out/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+compile_commands.json
+.cache/
+.ninja_deps
+.ninja_log
+Makefile.bak
+
+# Compiled artifacts
+*.o
+*.obj
+*.a
+*.so
+*.exe
+*.out
+a.out
+
+# Generated at run time (see docs/ for the curated results)
+results/
+savedImg(*).jpg
+project2/featureCsvs/*
+!project2/featureCsvs/ResNet18_olym.csv
+
+# IDE / OS files
 .idea/
 .vscode/
 .DS_Store
 Thumbs.db
+__MACOSX/
+*.swp
+*.swo
+*.swn
+.~lock.*
 
-# Python cache and virtualenvs
+# Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 *_venv/
+.pytest_cache/
+.ruff_cache/
 
-# CMake and build output
-build/
-cmake-build-*/
-.cmake/
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-compile_commands.json
-Testing/
-.ninja_deps
-.ninja_log
-.cache/
-
-# Local logs and editor swaps
+# Logs
 *.log
-*.swp
-*.swo
-
-# Common compiled artifacts
-*.o
-*.obj
-*.exe
-*.out
-a.out
