@@ -14,5 +14,6 @@ include(cmake/cvc.cmake)
 
 add_subdirectory(project1)
 add_subdirectory(project2)
+add_subdirectory(project3)
 add_subdirectory(hw4)
 # (remaining projects are added below as they are migrated)
