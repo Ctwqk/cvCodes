@@ -124,3 +124,18 @@ TEST_CASE("CSV rejects non-finite distances before they reach a sort comparator"
     CHECK_FALSE(parseFeatureLine("a,inf", name, values, &err));
     CHECK_FALSE(parseFeatureLine("a,-inf", name, values, &err));
 }
+
+TEST_CASE("CSV writers create nested output directories and report blocked paths") {
+    const fs::path base = tmpPath("nested");
+    REQUIRE_FALSE(fs::exists(base));
+    const auto path = (base / "append" / "features.csv").string();
+    std::string err;
+    REQUIRE_MESSAGE(appendFeatureRow(path, "a", {1,2}, true, &err), err);
+    FeatureTable read;
+    REQUIRE(readFeatureTable(path, read));
+    CHECK(read.data == std::vector<std::vector<float>>{{1,2}});
+    REQUIRE(writeFeatureTable((base / "table" / "features.csv").string(), read, &err));
+    CHECK_FALSE(appendFeatureRow(path + "/blocked.csv", "b", {3}, true, &err));
+    CHECK_FALSE(err.empty());
+    fs::remove_all(base);
+}

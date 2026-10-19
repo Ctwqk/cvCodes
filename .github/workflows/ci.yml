@@ -34,7 +34,7 @@ jobs:
         run: bash scripts/demo.sh > results.log 2>&1
       - name: Upload results and test logs
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: headless-results
           path: |

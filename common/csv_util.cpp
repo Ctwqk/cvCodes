@@ -5,9 +5,22 @@
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
+#include <filesystem>
 #include <sstream>
 
 namespace cvc {
+namespace {
+bool prepareParent(const std::string& path, std::string* err) {
+    const auto parent = std::filesystem::path(path).parent_path();
+    if (parent.empty()) return true;
+    std::error_code ec;
+    std::filesystem::create_directories(parent, ec);
+    if (!ec) return true;
+    if (err) *err = "cannot create directory '" + parent.string() + "': " + ec.message();
+    return false;
+}
+}  // namespace
+
 
 std::string baseName(const std::string& path) {
     const size_t pos = path.find_last_of("/\\");
@@ -59,6 +72,7 @@ bool appendFeatureRow(const std::string& path, const std::string& name,
         if (err) *err = "name must not contain ',' or newlines: " + name;
         return false;
     }
+    if (!prepareParent(path, err)) return false;
     std::ofstream out(path, truncate ? std::ios::trunc : std::ios::app);
     if (!out) {
         if (err) *err = "cannot open '" + path + "' for writing";
@@ -73,6 +87,7 @@ bool writeFeatureTable(const std::string& path, const FeatureTable& table, std::
         if (err) *err = "names/data size mismatch";
         return false;
     }
+    if (!prepareParent(path, err)) return false;
     std::ofstream out(path, std::ios::trunc);
     if (!out) {
         if (err) *err = "cannot open '" + path + "' for writing";

@@ -16,7 +16,7 @@ struct FeatureTable {
 
 // Append one row to `path` (or create/truncate the file when `truncate` is
 // true). Returns false (and fills `err` if given) on failure. `name` must not
-// contain ',' or a newline.
+// contain ',' or a newline. Missing parent directories are created.
 bool appendFeatureRow(const std::string& path, const std::string& name,
                       const std::vector<float>& values, bool truncate = false,
                       std::string* err = nullptr);
@@ -26,7 +26,7 @@ bool appendFeatureRow(const std::string& path, const std::string& name,
 // `err` describes the offending line. Rows may have different lengths.
 bool readFeatureTable(const std::string& path, FeatureTable& table, std::string* err = nullptr);
 
-// Write the full table (truncating `path`).
+// Write the full table (truncating `path`), creating missing parent directories.
 bool writeFeatureTable(const std::string& path, const FeatureTable& table, std::string* err = nullptr);
 
 // Parse a single CSV line into name + values (exposed for tests).
