@@ -1,13 +1,11 @@
-cmake_minimum_required(VERSION  2.8)
-project(prject2)
-find_package(OpenCV REQUIRED)
-include_directories( ${OpenCV_INCLUDE_DIRS})
+cmake_minimum_required(VERSION 3.16)
+project(project2 LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../cmake/cvc.cmake")
 
-add_executable(establishCsv readfile.cpp establishCsv.cpp features.cpp csv_util.cpp )
-target_link_Libraries(establishCsv ${OpenCV_LIBS})
+# Feature extractors + feature registry / database building / ranking.
+cvc_add_library(project2_cbir SOURCES imgfeatures.cpp retrieval.cpp LIBS cvcommon)
 
+cvc_add_app(establishCsv SOURCES establishCsv.cpp LIBS project2_cbir)
+cvc_add_app(imgMatch SOURCES imgMatch.cpp LIBS project2_cbir)
 
-add_executable(imgMatch imgMatch.cpp csv_util.cpp dist.cpp features.cpp ../project1/task2/filter.cpp)
-target_link_Libraries(imgMatch ${OpenCV_LIBS})
-
-
+cvc_add_test(test_project2 SOURCES tests/test_features.cpp tests/test_retrieval.cpp LIBS project2_cbir)
