@@ -1,13 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
-project( projectFinal )
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-add_executable(snakegame snakegame.cpp CalPos.cpp)
-target_link_Libraries(snakegame ${OpenCV_LIBS})
-
-add_executable( main main.cpp saveOrReadPattern.cpp)
-target_link_Libraries(main ${OpenCV_LIBS})
-
-add_executable( match_tmp match_tmp.cpp patternMatch.cpp saveOrReadPattern.cpp)
-target_link_Libraries(match_tmp ${OpenCV_LIBS})
+cmake_minimum_required(VERSION 3.16)
+project(SnakeGame LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../../cmake/cvc.cmake")
+cvc_add_library(final_patterns SOURCES patternMatch.cpp saveOrReadPattern.cpp LIBS cvcommon)
+cvc_add_app(snakegame SOURCES snakegame.cpp CalPos.cpp LIBS cvcommon)
+cvc_add_app(buildPatterns SOURCES main.cpp LIBS final_patterns)
+cvc_add_app(matchPatterns SOURCES match_tmp.cpp LIBS final_patterns)
+cvc_add_test(test_projectFinal SOURCES tests/test_patterns.cpp LIBS final_patterns)

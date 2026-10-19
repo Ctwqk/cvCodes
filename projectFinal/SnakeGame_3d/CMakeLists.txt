@@ -1,13 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
-project( projectFinal_1 )
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-add_executable(snakegame snakegame.cpp CalPos.cpp)
-target_link_Libraries(snakegame ${OpenCV_LIBS})
-
-add_executable( main main.cpp saveOrReadPattern.cpp)
-target_link_Libraries(main ${OpenCV_LIBS})
-
-add_executable( match_tmp match_tmp.cpp patternMatch.cpp saveOrReadPattern.cpp)
-target_link_Libraries(match_tmp ${OpenCV_LIBS})
+cmake_minimum_required(VERSION 3.16)
+project(SnakeGame3D LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../../cmake/cvc.cmake")
+cvc_add_app(snakegame3d SOURCES snakegame.cpp CalPos.cpp LIBS cvcommon)
+# Pattern tools are shared with the planar game.
+if(NOT TARGET final_patterns)
+  add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../SnakeGame" "${CMAKE_BINARY_DIR}/snake2d")
+endif()

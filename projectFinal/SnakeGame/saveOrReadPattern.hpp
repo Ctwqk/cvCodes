@@ -10,7 +10,7 @@
 #include <opencv2/opencv.hpp>
 #include <fstream>
 #include <filesystem>
-#include <opencv2/xfeatures2d.hpp>
+#include <opencv2/features2d.hpp>
 
 
 int writePatternToCsv(std::vector<cv::KeyPoint> &keypoints, cv::Mat &descriptor,int &height,int&width, std::string filepath="pattern.txt",int mode=0);

@@ -1,25 +1,20 @@
-/*
- * Author:  Taiwei Cui
- * Time: 2024-4-18
- * build patterns(descrtitor and keypoints) from pattern images
- */
-#include <iostream>
-#include <opencv2/opencv.hpp>
-#include <opencv2/xfeatures2d/nonfree.hpp>
-#include <fstream>
-#include <opencv2/calib3d.hpp>
+/* Taiwei Cui, April 2024: build an image-pattern descriptor database. */
 #include "saveOrReadPattern.hpp"
+#include "app_io.h"
 
-using namespace std;
-using namespace cv;
-int main(int argc,char** argv){
-	if(argc<2){
-		establishPatterns("patternimages","pattern.txt",400,1);
-	}
-	else{
-		establishPatterns(argv[0],argv[1],400,1);
-	}
-
-	return 0;
-
+int main(int argc, char** argv) {
+    try {
+        const cvc::Args args(argc, argv, {"help"});
+        if (args.has("help")) {
+            std::cout << "usage: buildPatterns [--images DIR] [--out FILE]\n";
+            return 0;
+        }
+        const auto out = args.get("out", "results/patterns.txt");
+        const auto parent = std::filesystem::path(out).parent_path();
+        if (!parent.empty()) std::filesystem::create_directories(parent);
+        return establishPatterns(args.get("images", cvc::repoPath("project1")), out, 400, 1) == 0 ? 0 : 2;
+    } catch (const std::exception& e) {
+        std::cerr << "error: " << e.what() << '\n';
+        return 2;
+    }
 }

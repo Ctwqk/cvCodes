@@ -22,7 +22,7 @@ if(NOT DEFINED CVC_BUILD_TESTS)
 endif()
 
 # Every OpenCV module used anywhere in the repository (OpenCV 4.x).
-find_package(OpenCV 4 REQUIRED COMPONENTS
+find_package(OpenCV 4.4 REQUIRED COMPONENTS
              core imgproc imgcodecs highgui videoio calib3d objdetect dnn features2d video)
 
 # One output directory for all executables, whichever project they belong to.

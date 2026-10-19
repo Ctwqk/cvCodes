@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(projectFinal LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../cmake/cvc.cmake")
+add_subdirectory(SnakeGame)
+add_subdirectory(SnakeGame_3d)

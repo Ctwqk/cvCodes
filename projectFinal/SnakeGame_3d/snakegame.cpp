@@ -8,6 +8,8 @@
 #include <deque>
 #include <fstream>
 #include "CalPos.hpp"
+#include "app_io.h"
+#include <algorithm>
 
 using namespace cv;
 using namespace std;
@@ -59,7 +61,7 @@ public:
 			Point3f(-2.2366/2,-2.4271/2,0.5),
 			Point3f(-3.1468/2,2.9271/2,0.5),
 		};
-		snakeNode={Point3f(0.1,0.1,0.1),Point3f(0.9,0.1,0.1),Point3f(0.1,0.9,0.1),Point3f(0.9,0.9,0.1),Point3f(0.1,0.1,0.8),Point3f(0.9,0.1,0.8),Point3f(0.1,0.9,0.8),Point3f(0.9,0.9,0.1)};
+		snakeNode={Point3f(0.1,0.1,0.1),Point3f(0.9,0.1,0.1),Point3f(0.1,0.9,0.1),Point3f(0.9,0.9,0.1),Point3f(0.1,0.1,0.8),Point3f(0.9,0.1,0.8),Point3f(0.1,0.9,0.8),Point3f(0.9,0.9,0.8)};
 		//snakeNode={Point3f(initx+0.1,inity+0.1,high+0.1),Point3f(initx+0.9,inity+0.1,high+0.1),Point3f(initx+0.1,inity+0.9,high+0.1),Point3f(initx+0.9,inity+0.9,high+0.1),Point3f(initx+0.1,inity+0.1,high+0.8),Point3f(initx+0.9,inity+0.1,high+0.8),Point3f(initx+0.1,inity+0.9,high+0.8),Point3f(initx+0.9,inity+0.9,high)};
 		snakeBody.push_front(snakeNode);
 		for(Point3f &p:snakeBody.front()){
@@ -80,13 +82,13 @@ public:
 				tmp.push_back(Point3f(p[0]+initx+po.x,p[1]+inity+po.y,p[2]+high+po.z));
 			}
 			snakeBody.push_back(tmp);
-			
+
 		}
 		for(Point3f &p:foodBody){
 			p.x=food[0]+0.5+initx;
 			p.y=food[1]+0.5+inity;
 			p.z=food[2]+0.5+high;
-		}	
+		}
 		boundaries[0]=Point3f(initx,inity,high);
 		boundaries[1]=Point3f(initx,inity+width,high);
 		boundaries[2]=Point3f(initx+height,inity,high);
@@ -101,6 +103,10 @@ public:
         int fx = rand() % width;
         int fy = rand() % height;
 		int fz = rand() % thickness;
+        while (std::find(snake.begin(), snake.end(), vector<int>{fx, fy, fz}) != snake.end()) {
+            fx = rand() % width; fy = rand() % height;
+            fz = rand() % thickness;
+        }
         food = {fx, fy, fz};  // Make sure food is not placed on the snake
 		for(Point3f &p:foodBody){
 			p.x=fx+0.5+initx;
@@ -136,6 +142,7 @@ public:
         // Eating food
         if (newHead[0]-food[0]<=nodesize/2&&food[0]-newHead[0]<=nodesize/2&&newHead[1]-food[1]<=nodesize/2&&food[1]-newHead[1]<=nodesize/2&&newHead[2]-food[2]<=nodesize/2&&food[2]-newHead[2]<=nodesize/2) {
             score += 10;
+            if (snake.size() == static_cast<size_t>(width * height * thickness)) return false;
             placeFood();
         } else {
             snake.pop_back(); // Move the snake by removing the tail
@@ -184,17 +191,17 @@ public:
 		//cout<<food.first<<" "<<food.second<<endl;
 	}
 
-    int runGameLoop(int camera_idx,string cameraParas) {
+    int runGameLoop(const cvc::Args& args) {
         Mat gameFrame(height, width, CV_8UC3);
 		//cout<<camera_idx-1<<endl;
-		ifstream inStream(cameraParas);
+		ifstream inStream(args.get("calib", cvc::repoPath("projectFinal/SnakeGame_3d/intcPara.txt")));
 		if(!inStream){
 			cout<<"failed to read from file"<<endl;
 			return -1;
 		}
-		Mat camera_matrix(3,3,CV_64F);	
+		Mat camera_matrix = Mat::zeros(3,3,CV_64F);
 		vector<double> distCoef;
-		int x,y;
+		int x=0,y=0;
 		inStream>>x;
 		inStream>>y;
 		double *p=camera_matrix.ptr<double>(0);
@@ -205,19 +212,23 @@ public:
 		while(inStream>>value){
 			distCoef.push_back(value);
 		}
-		VideoCapture * vidCap=new VideoCapture(camera_idx);
-		if(!vidCap->isOpened()){
-			cout<<"failed to open camera"<<endl;
-			return -1;
-		}
+        if (x < 2 || y < 2 || camera_matrix.at<double>(0,0) <= 0 ||
+            camera_matrix.at<double>(1,1) <= 0 || distCoef.size() < 4) {
+            throw runtime_error("invalid calibration file");
+        }
+        auto vidCap = cvc::openSource(args.get("source", "0"));
+        auto viewer = cvc::Viewer::fromArgs(args, "results/snake");
+        const int maxFrames = args.getInt("max-frames", -1);
+
 		int framecounter=0;
 		Mat rvec,tvec;
 		vector<vector<Point3f>>  targets;
 		vector<vector<Point2f>>  results;
 		vector<Scalar> scalars{Scalar(0,0,255),Scalar(0,255,0),Scalar(255,0,0)};
 
-        for(;;) {
-			*vidCap>>gameFrame;
+        for(int frameIndex=0; maxFrames < 0 || frameIndex < maxFrames; ++frameIndex) {
+			vidCap >> gameFrame;
+            if (gameFrame.empty()) break;
             if (isStarted&&!(framecounter%10)&&!updateSnake()) break; // Update and check for game over
 			framecounter++;
             //gameFrame.setTo(Scalar(0, 0, 0)); // Clear screen
@@ -228,19 +239,19 @@ public:
 				putText(gameFrame,"no target found",Point2f(gameFrame.cols/4,gameFrame.rows/2),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"can not deploy play field",Point2f(gameFrame.cols/4,gameFrame.rows/2+40),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"press 'q' to quit",Point2f(gameFrame.cols/4,gameFrame.rows/2+80),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
-            	imshow("Snake Game", gameFrame);
-				char c=waitKey(5);
+				viewer.show("snake", gameFrame);
+				char c=viewer.waitKey(5);
 				if(c=='q') break;
 				continue;
 			}
-			if(!isStarted){
+			if(!isStarted && !viewer.headless()){
 				putText(gameFrame,"press 'w' 'a' 's' 'd'",Point2f(gameFrame.cols/4,gameFrame.rows/2-100),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"to move play field",Point2f(gameFrame.cols/4,gameFrame.rows/2-60),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"press '<' '>' ",Point2f(gameFrame.cols/4,gameFrame.rows/2-20),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"to up and down",Point2f(gameFrame.cols/4,gameFrame.rows/2+20),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"press 'b' 'c' ",Point2f(gameFrame.cols/4,gameFrame.rows/2+60),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 				putText(gameFrame,"to begin  and cease",Point2f(gameFrame.cols/4,gameFrame.rows/2+100),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
-					
+
 			}
 			else{
 				string snakePos="Snake Position: "+to_string(snake.front()[0])+" "+to_string(snake.front()[1])+" "+to_string(snake.front()[2]);
@@ -249,13 +260,13 @@ public:
 				putText(gameFrame,foodPos,Point2f(20,60),FONT_HERSHEY_SIMPLEX,1.0,Scalar(255,0,0),2);
 			}
 			renewImage(rvec,tvec,camera_matrix,distCoef,gameFrame);
-            imshow("Snake Game", gameFrame);
-            char key = waitKey(5); // Delay for 33 ms
+            viewer.show("snake", gameFrame);
+            char key = viewer.waitKey(5); // Delay for 33 ms
 			pair<int,int> newDir;
             if (key == 'q'){
 				cout<<"User Quit, Score: "<<score<<endl;
 				break;
-			}	
+			}
 			else if(key=='b') {
 				isStarted=1;
 			}
@@ -304,14 +315,24 @@ public:
 					refresh(gameFrame,rvec,tvec,camera_matrix,distCoef);
 				}
 			}
-			
+
         }
 		return 0;
     }
 };
 int main(int argc,char** argv) {
-	cout<<"333ddd"<<endl;
-    SnakeGame game(20,20,20);
-    game.runGameLoop(atoi(argv[1]),"intcPara.txt");
-    return 0;
+    try {
+        const cvc::Args args(argc, argv, {"headless", "help"});
+        if (args.has("help")) {
+            cout << "usage: snakegame3d [--source 0|video|image] [--calib FILE] [--out DIR] [--max-frames N] [--headless]\n";
+            return 0;
+        }
+        const int w = args.getInt("width", 20), h = args.getInt("height", 20);
+        if (w < 2 || h < 2 || w > 100 || h > 100) throw runtime_error("game dimensions must be 2..100");
+        SnakeGame game(w, h, 5);
+        return game.runGameLoop(args);
+    } catch (const exception& e) {
+        cerr << "error: " << e.what() << '\n';
+        return 2;
+    }
 }

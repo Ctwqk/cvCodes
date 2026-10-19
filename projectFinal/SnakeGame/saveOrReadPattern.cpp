@@ -4,6 +4,9 @@
  * save to or read from given .txt file the patterns of images.
  */
 #include "saveOrReadPattern.hpp"
+#include "app_io.h"
+#include <algorithm>
+#include <iomanip>
 using namespace std;
 using namespace cv;
 namespace fs = std::filesystem;
@@ -21,6 +24,8 @@ int writePatternToCsv(std::vector<cv::KeyPoint> &keypoints, cv::Mat &descriptor,
 		cout<<"failed to open or create given file"<<endl;
 		return -1;
 	}
+	if (descriptor.type() != CV_32F || descriptor.rows != static_cast<int>(keypoints.size())) return -1;
+	outStream << std::setprecision(9);
 	int row=descriptor.rows, col=descriptor.cols;
 	outStream<<row<<" ";
 	outStream<<col<<" ";
@@ -62,6 +67,7 @@ int readPatternsFromCsv(string csvFile,std::vector<std::vector<cv::KeyPoint>> &k
 	inStream>>col;
 	//cout<<row<<" "<<col<<" "<<num<<endl;
 	while(inStream>>num){
+        if (row <= 0 || row > 100000 || col != 128 || num != row) return -1;
 		//cout<<"readed"<<endl;
 		keypoints.push_back(vector<KeyPoint>());
 		for(int i=0;i<num;i++){
@@ -85,46 +91,33 @@ int readPatternsFromCsv(string csvFile,std::vector<std::vector<cv::KeyPoint>> &k
 		//cout<<descriptors.size()<<endl;
 		inStream>>x;
 		inStream>>y;
-		mat_3ds.push_back((Mat_<double> (3,4) << 0,0,x,x,0,y,0,y,1,1,1,1));
-		if(x>y){
-			x=1;
-			y/=x;
-		}
-		else{
-			y=1;
-			x/=y;
-		}
-		points2ds.push_back({Point2f(0,0),Point2f(0,y),Point2f(x,0),Point2f(x,y)});
-		points3ds.push_back({Point3f(0,0,0),Point3f(0,y,0),Point3f(x,0,0),Point3f(x,y,0)});
+        if (!inStream || x <= 0 || y <= 0) return -1;
+        // x is image height, y is width. Keep pixel coordinates for projection.
+        mat_3ds.push_back((Mat_<double>(3,4) << 0,0,y,y,0,x,0,x,1,1,1,1));
+        const float scale = static_cast<float>(std::max(x, y));
+        points3ds.push_back({Point3f(0,0,0),Point3f(0,x/scale,0),
+                            Point3f(y/scale,0,0),Point3f(y/scale,x/scale,0)});
 
 		inStream>>row;
 		inStream>>col;
 	}
 	inStream.close();
 
-	return 0;
+	return descriptors.empty() ? -1 : 0;
 }
 int establishPatterns(std::string imageFilePath, std::string patternFilePath,int minHessian,int mode){
-	vector<Mat> images;
-	Ptr<xfeatures2d::SURF> detector=xfeatures2d::SURF::create(minHessian);
-	Mat descriptor;
-	vector<KeyPoint> keypoints;
-	for(const auto& entry: fs::directory_iterator(imageFilePath)){
-		if(entry.is_regular_file()){
-			string filepath = entry.path().string();
-			Mat img = imread(filepath,IMREAD_GRAYSCALE);
-			if(!img.empty()){
-				detector->detectAndCompute(img,Mat(),keypoints,descriptor);
-				//cout<<descriptor.rows<<" "<<descriptor.cols<<endl;;
-				writePatternToCsv(keypoints,descriptor,img.rows,img.cols,patternFilePath);
-				Mat tmp;
-				cv::drawKeypoints(img,keypoints,tmp,Scalar::all(-1));	
-				cout<<keypoints.size()<<endl;
-				imshow("check",tmp);
-				waitKey(0);
-				
-			}
-		}
-	}
-	return 0;
+    const auto detector = SIFT::create(minHessian);
+    int written = 0;
+    for (const auto& path : cvc::listImages(imageFilePath)) {
+        Mat img = imread(path, IMREAD_GRAYSCALE), descriptor;
+        vector<KeyPoint> keypoints;
+        if (img.empty()) continue;
+        detector->detectAndCompute(img, noArray(), keypoints, descriptor);
+        if (descriptor.empty()) continue;
+        if (writePatternToCsv(keypoints, descriptor, img.rows, img.cols, patternFilePath,
+                              written == 0 ? mode : 0)) return -1;
+        cout << path << ": " << keypoints.size() << " SIFT features\n";
+        ++written;
+    }
+    return written ? 0 : -1;
 }
