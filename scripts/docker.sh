@@ -9,10 +9,8 @@ exec docker run --rm --name "pu-cvcodes-${$}" --memory 4g --memory-swap 4g --cpu
   -e OMP_NUM_THREADS=2 -e OPENBLAS_NUM_THREADS=2 -e OPENCV_FOR_THREADS_NUM=2 \
   ubuntu:24.04 bash -c '
     set -e
-    export DEBIAN_FRONTEND=noninteractive
-    apt-get update -qq
-    apt-get install -y --no-install-recommends build-essential cmake libopencv-dev \
-      python3-opencv python3-pytest python3-torch python3-torchvision python3-matplotlib python3-onnx
+    bash scripts/install-deps.sh
+    export PATH="/opt/pu-cvcodes-python/bin:$PATH"
     export TMPDIR="$(mktemp -d /tmp/pu-cvcodes-run-XXXXXX)"
     chown "$LOCAL_UID:$LOCAL_GID" "$TMPDIR"
     export MPLCONFIGDIR="$TMPDIR/matplotlib"

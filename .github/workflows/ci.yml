@@ -21,11 +21,11 @@ jobs:
       OPENCV_FOR_THREADS_NUM: '2'
       MPLCONFIGDIR: /tmp/pu-cvcodes-matplotlib
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install OpenCV and CPU Python dependencies
         run: |
-          apt-get update -qq
-          apt-get install -y --no-install-recommends build-essential cmake libopencv-dev python3-opencv python3-pytest python3-torch python3-torchvision python3-matplotlib python3-onnx
+          bash scripts/install-deps.sh
+          echo "/opt/pu-cvcodes-python/bin" >> "$GITHUB_PATH"
       - name: Build all projects, CTest, and independent project builds
         run: bash scripts/verify.sh
       - name: Python model, export, and transfer-learning tests
@@ -34,7 +34,7 @@ jobs:
         run: bash scripts/demo.sh > results.log 2>&1
       - name: Upload results and test logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: headless-results
           path: |
