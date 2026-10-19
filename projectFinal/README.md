@@ -8,7 +8,7 @@ build/bin/matchPatterns --patterns results/patterns.txt --source project1/cathed
 build/bin/snakegame3d --source 0 --calib results/my-camera.txt
 ```
 
-Run from the root after [building](../README.md#run-everything). Create real-camera intrinsics with Project 4 first; the old included intrinsics are only an example. `--source` accepts a camera, video or image sequence. `--headless --max-frames N --out DIR` saves overlays; `scripts/demo.sh` exercises both variants using synthetic camera views. `--width` and `--height` set game dimensions.
+Run from the root after [building](../README.md#run-everything). Create real-camera intrinsics with Project 4 first; the old included intrinsics are only an example. `--source` accepts a camera, video or image sequence. `--headless --max-frames N --out DIR` saves overlays; `scripts/demo.sh` exercises both variants using synthetic camera views. `--width` and `--height` set game dimensions; the 3D variant also accepts `--depth`. `--offset-x` and `--offset-y` position the field in board-square units, equivalent to moving it with the keyboard before starting. The demo uses `--offset-y -5` to place the field over the board.
 
 Controls: `w/a/s/d` move the field before starting and change direction during play; `b` starts, `c` pauses, `q` quits. In the 3D version, `<`/`>` change height or vertical direction. The pattern tracker is a separate experiment, not the game's input system.
 

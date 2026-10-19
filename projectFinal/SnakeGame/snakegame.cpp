@@ -200,7 +200,10 @@ public:
         const int maxFrames = args.getInt("max-frames", -1);
 
 		int framecounter=0;
-		Mat rvec,tvec;
+        Mat rvec,tvec;
+        initx = static_cast<float>(args.getDouble("offset-x", 0));
+        inity = static_cast<float>(args.getDouble("offset-y", 0));
+        refresh(gameFrame, rvec, tvec, camera_matrix, distCoef);
 		vector<vector<Point3f>>  targets;
 		vector<vector<Point2f>>  results;
 		vector<Scalar> scalars{Scalar(0,0,255),Scalar(0,255,0),Scalar(255,0,0)};
@@ -283,7 +286,7 @@ int main(int argc,char** argv) {
     try {
         const cvc::Args args(argc, argv, {"headless", "help"});
         if (args.has("help")) {
-            cout << "usage: snakegame [--source 0|video|image] [--calib FILE] [--out DIR] [--max-frames N] [--headless]\n";
+            cout << "usage: snakegame [--source 0|video|image] [--calib FILE] [--out DIR] [--max-frames N] [--headless] [--width W] [--height H] [--offset-x X] [--offset-y Y]\n";
             return 0;
         }
         const int w = args.getInt("width", 20), h = args.getInt("height", 20);

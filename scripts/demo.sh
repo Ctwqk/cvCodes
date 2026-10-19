@@ -24,6 +24,6 @@ export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 OPENCV_FOR_THREADS_NUM=2
 "$bin/filterViz" --out "$out/convolutions"
 "$bin/buildPatterns" --images project1 --out "$out/patterns.txt"
 "$bin/matchPatterns" --patterns "$out/patterns.txt" --source project1/cathedral.jpeg --out "$out/tracking" --max-frames 1 --headless
-"$bin/snakegame" --source "$out/video/frame_%04d.png" --calib "$out/intrinsics.txt" --width 8 --height 5 --out "$out/snake" --max-frames 12 --headless
-"$bin/snakegame3d" --source "$out/video/frame_%04d.png" --calib "$out/intrinsics.txt" --width 8 --height 5 --out "$out/snake3d" --max-frames 12 --headless
+"$bin/snakegame" --source "$out/video/frame_%04d.png" --calib "$out/intrinsics.txt" --width 8 --height 5 --offset-y -5 --out "$out/snake" --max-frames 12 --headless
+"$bin/snakegame3d" --source "$out/video/frame_%04d.png" --calib "$out/intrinsics.txt" --width 8 --height 5 --depth 2 --offset-y -5 --out "$out/snake3d" --max-frames 12 --headless
 python3 scripts/gallery.py "$out"

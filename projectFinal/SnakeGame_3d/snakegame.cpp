@@ -221,7 +221,10 @@ public:
         const int maxFrames = args.getInt("max-frames", -1);
 
 		int framecounter=0;
-		Mat rvec,tvec;
+        Mat rvec,tvec;
+        initx = static_cast<float>(args.getDouble("offset-x", 0));
+        inity = static_cast<float>(args.getDouble("offset-y", 0));
+        refresh(gameFrame, rvec, tvec, camera_matrix, distCoef);
 		vector<vector<Point3f>>  targets;
 		vector<vector<Point2f>>  results;
 		vector<Scalar> scalars{Scalar(0,0,255),Scalar(0,255,0),Scalar(255,0,0)};
@@ -324,12 +327,14 @@ int main(int argc,char** argv) {
     try {
         const cvc::Args args(argc, argv, {"headless", "help"});
         if (args.has("help")) {
-            cout << "usage: snakegame3d [--source 0|video|image] [--calib FILE] [--out DIR] [--max-frames N] [--headless]\n";
+            cout << "usage: snakegame3d [--source 0|video|image] [--calib FILE] [--out DIR] [--max-frames N] [--headless] [--width W] [--height H] [--offset-x X] [--offset-y Y] [--depth D]\n";
             return 0;
         }
         const int w = args.getInt("width", 20), h = args.getInt("height", 20);
         if (w < 2 || h < 2 || w > 100 || h > 100) throw runtime_error("game dimensions must be 2..100");
-        SnakeGame game(w, h, 5);
+        const int depth = args.getInt("depth", 5);
+        if (depth < 1 || depth > 100) throw runtime_error("depth must be 1..100");
+        SnakeGame game(w, h, depth);
         return game.runGameLoop(args);
     } catch (const exception& e) {
         cerr << "error: " << e.what() << '\n';
