@@ -42,13 +42,13 @@ public:
 		//boundaries.push_back(Point3f(initx+h,inity+w,high));
 
 		boundaries.push_back(Point3f(0,0,0));
-		boundaries.push_back(Point3f(0,w,0));
-		boundaries.push_back(Point3f(h,0,0));
-		boundaries.push_back(Point3f(h,w,0));
+		boundaries.push_back(Point3f(0,h,0));
+		boundaries.push_back(Point3f(w,0,0));
+		boundaries.push_back(Point3f(w,h,0));
 		boundaries.push_back(Point3f(0,0,t));
-		boundaries.push_back(Point3f(0,w,t));
-		boundaries.push_back(Point3f(h,0,t));
-		boundaries.push_back(Point3f(h,w,t));
+		boundaries.push_back(Point3f(0,h,t));
+		boundaries.push_back(Point3f(w,0,t));
+		boundaries.push_back(Point3f(w,h,t));
 
         // Place initial food
 		step=1;
@@ -90,13 +90,13 @@ public:
 			p.z=food[2]+0.5+high;
 		}
 		boundaries[0]=Point3f(initx,inity,high);
-		boundaries[1]=Point3f(initx,inity+width,high);
-		boundaries[2]=Point3f(initx+height,inity,high);
-		boundaries[3]=Point3f(initx+height,inity+width,high);
+		boundaries[1]=Point3f(initx,inity+height,high);
+		boundaries[2]=Point3f(initx+width,inity,high);
+		boundaries[3]=Point3f(initx+width,inity+height,high);
 		boundaries[4]=Point3f(initx,inity,high+thickness);
-		boundaries[5]=Point3f(initx,inity+width,high+thickness);
-		boundaries[6]=Point3f(initx+height,inity,high+thickness);
-		boundaries[7]=Point3f(initx+height,inity+width,high+thickness);
+		boundaries[5]=Point3f(initx,inity+height,high+thickness);
+		boundaries[6]=Point3f(initx+width,inity,high+thickness);
+		boundaries[7]=Point3f(initx+width,inity+height,high+thickness);
 	}
 
     void placeFood() {
