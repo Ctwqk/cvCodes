@@ -1,16 +1,14 @@
-cmake_minimum_required(VERSION 2.8)
-project( project4 )
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+cmake_minimum_required(VERSION 3.16)
+project(project4 LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../cmake/cvc.cmake")
 
-add_executable(main main.cpp)
-target_link_Libraries(main ${OpenCV_LIBS})
+# Calibration, pose estimation, AR drawing, Harris corners, synthetic chessboard views.
+cvc_add_library(project4_ar SOURCES ar_utils.cpp LIBS cvcommon)
 
-add_executable(CalPos CalPos.cpp)
-target_link_Libraries(CalPos ${OpenCV_LIBS})
+cvc_add_app(calibrate SOURCES calibrate.cpp LIBS project4_ar)
+cvc_add_app(CalPos SOURCES CalPos.cpp LIBS project4_ar)
+cvc_add_app(extension SOURCES extension.cpp LIBS project4_ar)
+cvc_add_app(RobustFeature SOURCES RobustFeature.cpp LIBS project4_ar)
+cvc_add_app(synthBoard SOURCES synthBoard.cpp LIBS project4_ar)
 
-add_executable(RobustFeature RobustFeature.cpp)
-target_link_Libraries(RobustFeature ${OpenCV_LIBS})
-
-add_executable(extension extension.cpp)
-target_link_Libraries(extension ${OpenCV_LIBS})
+cvc_add_test(test_project4 SOURCES tests/test_ar.cpp LIBS project4_ar)
