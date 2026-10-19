@@ -1,0 +1,44 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  opencv:
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:24.04
+      options: --memory 4g --memory-swap 4g --cpus 4
+    timeout-minutes: 25
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      OPENCV_FOR_THREADS_NUM: '2'
+      MPLCONFIGDIR: /tmp/pu-cvcodes-matplotlib
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenCV and CPU Python dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends build-essential cmake libopencv-dev python3-opencv python3-pytest python3-torch python3-torchvision python3-matplotlib python3-onnx
+      - name: Build all projects, CTest, and independent project builds
+        run: bash scripts/verify.sh
+      - name: Python model, export, and transfer-learning tests
+        run: python3 -m pytest project5/tests -q
+      - name: Reproduce gallery and evaluate included data
+        run: bash scripts/demo.sh > results.log 2>&1
+      - name: Upload results and test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: headless-results
+          path: |
+            results.log
+            results/demo/gallery
+            results/demo/mnist/confusion_matrix.txt
+            build/Testing/Temporary/LastTest.log
