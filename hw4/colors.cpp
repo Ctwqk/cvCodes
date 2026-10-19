@@ -3,107 +3,99 @@
   Spring 2024
   CS 5330
 
-  Execute k-means on the colors of an image
+  Execute k-means on the colors of an image and re-render the image with the
+  K colors chosen by the algorithm.
 
-  Display the image using the colors chosen by the k-means algorithm
+  Original course skeleton, extended in the portfolio upgrade with a proper
+  command line, seeded sampling, a palette report and file output (so it can
+  run without a display).
 */
-
-
 #include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <vector>
-#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <filesystem>
+#include <random>
+
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+
+#include "app_io.h"
+#include "colorquant.h"
 #include "kmeans.h"
 
-/*
-  Given a pixel and an array of pixels, returns the closest color in the array
- */
-cv::Vec3b closestColor( cv::Vec3b &pix, std::vector<cv::Vec3b> &colors ) {
-  int mincolor = 0;
-  int mindist = SSD( pix, colors[0] );
-
-  for(int i=1;i<colors.size();i++) {
-    int sse = SSD( pix, colors[i] );
-    if( sse < mindist ) {
-      mindist = sse;
-      mincolor = i;
-    }
-  }
-
-  return( colors[mincolor] );
+static void usage(const char* prog) {
+    std::printf(
+        "usage: %s <image> <number of colors> [options]\n"
+        "  --block B       sample one pixel per BxB block (default 4)\n"
+        "  --seed N        random seed (default 1)\n"
+        "  --max-iter N    maximum E-M iterations (default 10)\n"
+        "  --out DIR       write <name>_k<K>.png and <name>_k<K>_palette.png into DIR\n"
+        "  --headless      never open windows (automatic when no display is available)\n",
+        prog);
 }
 
-// Main function looks for a command line argument with the image filename and # of colors
-int main(int argc, char *argv[]) {
+int main(int argc, char** argv) {
+    try {
+        const cvc::Args args(argc, argv, {"headless", "help"});
+        if (args.has("help") || args.positional().size() < 2) {
+            usage(argv[0]);
+            return args.has("help") ? 0 : 1;
+        }
+        const std::string path = args.positional()[0];
+        const int ncolors = std::stoi(args.positional()[1]);
+        if (ncolors < 1 || ncolors > 66000) {
+            std::fprintf(stderr, "error: number of colors must be in [1, 66000]\n");
+            return 2;
+        }
+        const int B = args.getInt("block", 4);
+        const unsigned seed = static_cast<unsigned>(args.getInt("seed", 1));
+        const int maxIter = args.getInt("max-iter", 10);
 
-  cv::Mat src;
-  cv::Mat dst;  // viewing image
-  char filename[256];
-  int ncolors = 16;
+        cv::Mat src = cv::imread(path);
+        if (src.empty()) {
+            std::fprintf(stderr, "error: unable to read image '%s'\n", path.c_str());
+            return 2;
+        }
 
-  // error checking
-  if(argc < 3) {
-    printf("usage: %s <image filename> <# of colors>\n", argv[0]);
-    return(-1);
-  }
+        std::mt19937 rng(seed);
+        std::vector<cv::Vec3b> data = sampleColors(src, B, rng);
+        if (data.size() < static_cast<size_t>(ncolors)) {
+            std::fprintf(stderr, "error: only %zu samples for %d colors; lower --block or K\n",
+                         data.size(), ncolors);
+            return 2;
+        }
+        std::vector<cv::Vec3b> means;
+        std::vector<int> labels(data.size());
+        if (kmeans(data, means, labels.data(), ncolors, maxIter, 0, seed)) return 2;
 
-  // grab the filename
-  strcpy( filename, argv[1] );
+        cv::Mat dst = quantize(src, means);
+        const std::vector<double> shares = paletteShares(dst, means);
+        const double mse = meanSquaredError(src, dst);
 
-  // read the file
-  src = cv::imread( filename );  
-  if( src.data == NULL ) {
-    printf("error: unable to read filename %s\n", filename);
-    return(-2);
-  }
-	cv::namedWindow("Original",cv::WINDOW_NORMAL);
-	cv::resizeWindow("Original",800,600);
-  cv::imshow("Original", src );
+        std::printf("%s: %dx%d, K=%d, %zu samples, MSE %.1f\n", path.c_str(), src.cols, src.rows,
+                    ncolors, data.size(), mse);
+        for (size_t k = 0; k < means.size(); ++k) {
+            std::printf("  %s  %5.1f%%\n", toHex(means[k]).c_str(), 100.0 * shares[k]);
+        }
 
-  // grab the numbers of colors from the command line
-  int tcolors = atoi( argv[2] );
-  if( tcolors < 1 || tcolors > 66000 ) {
-    printf("error: number of colors must be in [1, 66000]\n");
-  }
-  else {
-    ncolors = tcolors;
-  }
-	//std::cout<<ncolors<<std::endl;	
-  // sample colors from the image using jitter sampling
-  // sample one color from each B x B block of the image
-  int B = 4;
-	
-  std::vector<cv::Vec3b> data;
-  for(int i=0;i<src.rows - B;i += B) {
-    for(int j=0;j<src.cols - B;j += B) {
-      int jx = rand() % B;
-      int jy = rand() % B;
-      data.push_back( src.at<cv::Vec3b>(i+jy, j+jx) );
+        cvc::Viewer viewer = cvc::Viewer::fromArgs(args);
+        if (args.has("out")) {
+            const std::string stem = std::filesystem::path(path).stem().string() + "_k" + std::to_string(ncolors);
+            cvc::writeImage(args.get("out") + "/" + stem + ".png", dst);
+            cvc::writeImage(args.get("out") + "/" + stem + "_palette.png", paletteStrip(means, shares));
+        }
+        if (!viewer.headless()) {
+            cv::namedWindow("Original", cv::WINDOW_NORMAL);
+            cv::resizeWindow("Original", 800, 600);
+            cv::imshow("Original", src);
+            cv::namedWindow("clustered", cv::WINDOW_NORMAL);
+            cv::resizeWindow("clustered", 800, 600);
+            cv::imshow("clustered", dst);
+            cv::waitKey(0);
+        }
+        return 0;
+    } catch (const std::exception& e) {
+        std::fprintf(stderr, "error: %s\n", e.what());
+        return 2;
     }
-  }
-
-  std::vector<cv::Vec3b> means;
-  int *labels = new int[data.size()];
-  if(kmeans( data, means, labels, ncolors ) ) {
-    printf("Erro using kmeans\n");
-    return(-1);
-  }
-  // kmeans should give a set of means (ncolors of them)
-  dst.create( src.size(), src.type() );
-  for(int i=0;i<src.rows;i++) {
-    for(int j=0;j<src.cols;j++) {
-      dst.at<cv::Vec3b>(i,j) = closestColor( src.at<cv::Vec3b>(i,j), means );
-    }
-  }
-
-	cv::namedWindow("clustered",cv::WINDOW_NORMAL);
-	cv::resizeWindow("clustered",800,600);
-  cv::imshow("clustered", dst );
-
-  cv::waitKey(0);
-
-  delete[] labels;
-
-  return(0);
 }

@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 2.8)
-project( hw1 )
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+cmake_minimum_required(VERSION 3.16)
+project(hw4 LANGUAGES CXX)
+include("${CMAKE_CURRENT_LIST_DIR}/../cmake/cvc.cmake")
 
-add_executable(colors colors.cpp kmeans.cpp )
-target_link_Libraries(colors  ${OpenCV_LIBS})
+cvc_add_library(hw4_kmeans SOURCES kmeans.cpp colorquant.cpp)
+
+cvc_add_app(colors SOURCES colors.cpp LIBS hw4_kmeans cvcommon)
+
+cvc_add_test(test_hw4 SOURCES tests/test_kmeans.cpp LIBS hw4_kmeans cvcommon)
