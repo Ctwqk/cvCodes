@@ -1,3 +1,5 @@
+Historical coursework notes. For current build and run commands, see README.md.
+
 My name: Taiwei Cui
 
 System: Ubuntu 22.04.3

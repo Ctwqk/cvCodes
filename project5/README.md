@@ -11,10 +11,19 @@ python3 project5/greek_transfer.py --epochs 15 --seed 0 --out results/greek
 python3 -m pytest project5/tests -q
 ```
 
-Use the [Docker environment](../README.md#run-everything), or install CPU PyTorch/torchvision followed by `pip install -r project5/requirements.txt` in your own virtual environment. The optional training command `python3 project5/mnist_model.py --epochs 5 --out-dir results/training` downloads the training split; it does not overwrite the supplied model by default. `export_filters.py` downloads the first training example when regenerating arrays. C++ evaluation and the full headless demo download no models or datasets.
+Use the [Docker environment](../README.md#run-everything), or install CPU wheels in your own virtual environment:
+
+```bash
+pip install torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cpu
+pip install -r project5/requirements.txt
+```
+
+The versions follow the [official PyTorch wheel matrix](https://pytorch.org/get-started/previous-versions/). The optional training command `python3 project5/mnist_model.py --epochs 5 --out-dir results/training` downloads the training split; it does not overwrite the supplied model by default. `export_filters.py` downloads the first training example when regenerating arrays. C++ evaluation and the full headless demo download no models or datasets.
 
 ![Actual MNIST predictions and errors](../docs/gallery/mnist.jpg)
 
-`mnistLive` thresholds and centres the largest digit component before classification. It is a single-digit demonstration, not OCR for arbitrary scenes. Greek transfer learning freezes the feature layers and learns a 3-class head on 27 images, with 14 test images; accuracy has high sampling uncertainty.
+`mnistLive` thresholds and centres the largest digit component before classification. It is a single-digit demonstration, not OCR for arbitrary scenes. Greek transfer learning freezes the feature layers and learns a 3-class head on 27 images, with 14 test images; accuracy has high sampling uncertainty. With the default 15 epochs and seed 0, this run scored **6/14 (42.9%)** on the test letters despite high training accuracy; it illustrates limited transfer and overfitting, not a reliable Greek OCR system.
 
 C++ tests cover IDX/NPY parsing, preprocessing and inference; Python tests verify weights, transforms, frozen layers, training, and OpenCV parity with both shipped and freshly exported ONNX models. Filter visualisation uses image correlation for interpretability, rather than claiming to reproduce the full normalised layer including bias and pooling.
+
+ONNX export deliberately uses the legacy exporter and opset 10 for OpenCV 4.6 compatibility. PyTorch reports deprecation warnings; migration to the newer exporter needs another cross-runtime parity check.
