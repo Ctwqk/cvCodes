@@ -1,6 +1,6 @@
 # cvCodes — computer vision, from pixels to augmented reality
 
-[![Build and test](https://github.com/Ctwqk/cvCodes/actions/workflows/ci.yml/badge.svg?branch=portfolio-upgrade)](https://github.com/Ctwqk/cvCodes/actions/workflows/ci.yml?query=branch%3Aportfolio-upgrade)
+[![Build and test](https://github.com/Ctwqk/cvCodes/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Ctwqk/cvCodes/actions/workflows/ci.yml?query=branch%3Amain)
 
 Graduate computer-vision coursework by **Taiwei Cui**: C++ image filters, content-based image retrieval, object recognition, camera calibration, AR, and CPU neural-network inference. The original CS 5330 algorithms are organised into testable libraries, runnable command-line programs, and reproducible headless demonstrations.
 
@@ -11,7 +11,7 @@ Graduate computer-vision coursework by **Taiwei Cui**: C++ image filters, conten
 Requires Git and Docker on Linux, with at least 4 GB available for the container. The checkout contains the images, MNIST test split, trained models, and precomputed ResNet18 features; it is several hundred MB. No GPU or webcam is needed for the demonstration.
 
 ```bash
-git clone --branch portfolio-upgrade https://github.com/Ctwqk/cvCodes.git
+git clone https://github.com/Ctwqk/cvCodes.git
 cd cvCodes
 bash scripts/docker.sh bash -c 'bash scripts/verify.sh build-quickstart && python3 -m pytest project5/tests -q && bash scripts/demo.sh build-quickstart/bin results/demo'
 ```
@@ -170,4 +170,4 @@ ctest --test-dir build/project2 --output-on-failure
 - Headless and interactive programs share the same algorithms. The synthetic calibration renderer is a controlled test fixture; it cannot establish real-world robustness.
 - The supplied models and photos are retained. Results record their actual successes and mistakes; no training run or accuracy is invented.
 - Linux/OpenCV 4.6 is exercised by CI. Camera interaction, other operating systems, lighting variation, and the original proposal's Qt GUI need follow-up work.
-- Original course-code attribution remains in source files. The owner still needs to choose a repository license and review redistribution permissions for course assets and pretrained models.
+- Original course-code attribution remains in source files. My code is released under the [MIT License](LICENSE); course-provided starter code, datasets, photos and pretrained models keep their original terms and are included for reproducibility only.
