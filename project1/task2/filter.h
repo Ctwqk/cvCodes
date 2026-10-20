@@ -38,7 +38,8 @@ int sobelY3x3(const cv::Mat& src, cv::Mat& dst);
 // Gradient magnitude sqrt(sx^2 + sy^2) of two CV_16SC3 Sobel images, saturated to CV_8UC3.
 int magnitude(const cv::Mat& sx, const cv::Mat& sy, cv::Mat& dst);
 
-// Blur, then quantise every channel into `levels` levels (bucket b = 255 / levels).
+// Blur, then quantise every channel into 1..255 uniform input bins, represented by
+// `levels` evenly spaced output values from 0 to 255 (one level produces 0).
 int blurQuantize(const cv::Mat& src, cv::Mat& dst, int levels = 10);
 
 // Zoom: crop a window twice the size of `face` around it and resize to 640x480 (in place on `tar`).

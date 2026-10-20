@@ -220,10 +220,12 @@ int blurQuantize(const cv::Mat& src, cv::Mat& dst, int levels) {
     if (!isBGR8(src) || levels < 1 || levels > 255) return -1;
     cv::Mat out;
     blur5x5_2(src, out);
-    const int b = std::max(1, 255 / levels);
     for (int i = 0; i < out.rows; i++) {
         uchar* p = out.ptr<uchar>(i);
-        for (int x = 0; x < 3 * out.cols; x++) p[x] = static_cast<uchar>((p[x] / b) * b);
+        for (int x = 0; x < 3 * out.cols; x++) {
+            const int bin = p[x] * levels / 256;
+            p[x] = levels == 1 ? 0 : static_cast<uchar>((bin * 255 + (levels - 1) / 2) / (levels - 1));
+        }
     }
     dst = out;
     return 0;

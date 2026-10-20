@@ -199,23 +199,46 @@ TEST_CASE("magnitude: 3-4-5, saturation, and input validation") {
     CHECK(magnitude(Mat(1, 2, CV_8UC3), sy, out) == -1);
 }
 
-TEST_CASE("blurQuantize: only multiples of the bucket size, levels validated") {
+TEST_CASE("blurQuantize: output levels cover the byte range and levels are validated") {
     const Mat img = randomBGR(30, 30, 5);
     Mat q;
-    REQUIRE(blurQuantize(img, q, 10) == 0);  // bucket 255 / 10 = 25
+    REQUIRE(blurQuantize(img, q, 10) == 0);
+    const std::set<uchar> palette = {0, 28, 57, 85, 113, 142, 170, 198, 227, 255};
     for (int i = 0; i < q.rows; i++)
         for (int j = 0; j < q.cols; j++)
-            for (int c = 0; c < 3; c++) CHECK(q.at<Vec3b>(i, j)[c] % 25 == 0);
+            for (int c = 0; c < 3; c++) CHECK(palette.count(q.at<Vec3b>(i, j)[c]) == 1);
     Mat flat(20, 20, CV_8UC3, cv::Scalar(200, 200, 200));
     REQUIRE(blurQuantize(flat, q, 10) == 0);
-    CHECK(q.at<Vec3b>(10, 10) == Vec3b(200, 200, 200));
+    CHECK(q.at<Vec3b>(10, 10) == Vec3b(198, 198, 198));
     Mat dst;
     CHECK(blurQuantize(img, dst, 0) == -1);
     CHECK(blurQuantize(img, dst, 256) == -1);
-    Mat full, blurred;
-    REQUIRE(blurQuantize(img, full, 255) == 0);  // bucket 1: identical to the plain blur
-    REQUIRE(blur5x5_2(img, blurred) == 0);
-    CHECK(equalMats(full, blurred));
+}
+
+TEST_CASE("blurQuantize produces the requested number of levels over the full byte range") {
+    // A one-row ramp is left unchanged by the blur, exposing every quantizer input.
+    Mat ramp(1, 256, CV_8UC3);
+    for (int value = 0; value < 256; ++value) {
+        ramp.at<Vec3b>(0, value) = Vec3b(value, value, value);
+    }
+    for (int levels : {1, 2, 10, 255}) {
+        INFO("levels=" << levels);
+        Mat out;
+        REQUIRE(blurQuantize(ramp, out, levels) == 0);
+        REQUIRE(out.size() == ramp.size());
+        REQUIRE(out.type() == CV_8UC3);
+        for (int channel = 0; channel < 3; ++channel) {
+            std::set<uchar> values;
+            for (int x = 0; x < out.cols; ++x) values.insert(out.at<Vec3b>(0, x)[channel]);
+            CHECK(values.size() == static_cast<size_t>(levels));
+            CHECK(out.at<Vec3b>(0, 0)[channel] == 0);
+            CHECK(out.at<Vec3b>(0, 255)[channel] == (levels == 1 ? 0 : 255));
+        }
+        if (levels == 2) {
+            CHECK(out.at<Vec3b>(0, 127) == Vec3b(0, 0, 0));
+            CHECK(out.at<Vec3b>(0, 128) == Vec3b(255, 255, 255));
+        }
+    }
 }
 
 TEST_CASE("confuseRedGreen") {
