@@ -1,5 +1,6 @@
 #include "dnnEmbedding.h"
 
+#include <algorithm>
 #include <iostream>
 
 #include <opencv2/highgui.hpp>
@@ -15,10 +16,12 @@ int getEmbedding(const cv::Mat& src, cv::Mat& embedding, const cv::Rect& bboxIn,
 
     cv::Mat roiImg = src(bbox);
     // pad so that the object keeps its aspect ratio when resized to 128 x 128
-    const int top = bbox.height > ORNet_size ? 10 : (ORNet_size - bbox.height) / 2 + 10;
-    const int left = bbox.width > ORNet_size ? 10 : (ORNet_size - bbox.width) / 2 + 10;
+    const int side = std::max(ORNet_size, std::max(bbox.width, bbox.height)) + 20;
+    const int top = (side - bbox.height) / 2;
+    const int left = (side - bbox.width) / 2;
     cv::Mat padImg;
-    cv::copyMakeBorder(roiImg, padImg, top, top, left, left, cv::BORDER_CONSTANT, 0);
+    cv::copyMakeBorder(roiImg, padImg, top, side - bbox.height - top,
+                       left, side - bbox.width - left, cv::BORDER_CONSTANT, 0);
     cv::resize(padImg, padImg, cv::Size(ORNet_size, ORNet_size));
 
     cv::Mat blob;

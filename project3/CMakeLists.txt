@@ -17,5 +17,5 @@ cvc_add_app(dnnexample SOURCES dnnexample.cpp LIBS project3_vision)
 
 cvc_add_test(test_project3
   SOURCES tests/test_threshold.cpp tests/test_denoise.cpp tests/test_region.cpp
-          tests/test_features_recognition.cpp tests/test_pipeline.cpp
+          tests/test_features_recognition.cpp tests/test_pipeline.cpp tests/test_embedding.cpp
   LIBS project3_vision)
