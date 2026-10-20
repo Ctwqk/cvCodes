@@ -81,10 +81,13 @@ int main(int argc, char** argv) {
             }
             db = std::move(kept);
         }
-        const std::vector<float> scale = columnStdDev(db);
+        std::vector<float> scale;
         std::vector<std::string> labels;
         for (size_t i = 0; i < seg.regions.size(); i++) {
             const std::vector<float> v = regionFeature(seg.regions[i], kind, &net);
+            if (cfg.kind == DistanceKind::ScaledEuclidean && scale.size() != v.size()) {
+                scale = columnStdDev(db, -1, v.size());
+            }
             const Classification c = classify(v, db, cfg, scale);
             labels.push_back(c.label.empty() ? "?" : c.label);
             std::printf("region %zu: %-8s (distance %.3f, nearest %s)\n", i + 1, labels.back().c_str(),

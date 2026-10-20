@@ -23,7 +23,10 @@ std::string labelFromFilename(const std::string& path) {
 
 std::vector<float> columnStdDev(const cvc::FeatureTable& db, long skipRow) {
     if (db.data.empty()) return {};
-    const size_t d = db.data[0].size();
+    return columnStdDev(db, skipRow, db.data[0].size());
+}
+
+std::vector<float> columnStdDev(const cvc::FeatureTable& db, long skipRow, size_t d) {
     std::vector<double> mean(d, 0.0), var(d, 0.0);
     size_t n = 0;
     for (size_t r = 0; r < db.data.size(); r++) {
@@ -49,7 +52,7 @@ Classification classify(const std::vector<float>& feature, const cvc::FeatureTab
     Classification result;
     std::vector<std::pair<float, size_t>> ranked;
     const std::vector<float> sd = (config.kind == DistanceKind::ScaledEuclidean && scale.empty())
-                                      ? columnStdDev(db, skipRow)
+                                      ? columnStdDev(db, skipRow, feature.size())
                                       : scale;
     for (size_t i = 0; i < db.size(); i++) {
         if (static_cast<long>(i) == skipRow || db.data[i].size() != feature.size()) continue;

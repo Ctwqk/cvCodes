@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstdio>
 #include <filesystem>
+#include <stdexcept>
 
 #include <opencv2/imgproc.hpp>
 
@@ -194,6 +195,31 @@ TEST_CASE("classify: k-NN vote, tie goes to the closest neighbour, leave-one-out
     CHECK(c.neighbours == std::vector<size_t>{1});
     CHECK(classify({0.f}, cvc::FeatureTable(), k1).label.empty());
     CHECK(classify({0.f, 1.f}, db, k1).label.empty());  // no row has two values
+}
+
+TEST_CASE("classify: scaled distance ignores a first database row of the wrong length") {
+    cvc::FeatureTable db;
+    db.names = {"incompatible:1", "a:1", "b:1"};
+    db.data = {{99.f}, {0.f, 0.f}, {1.f, 1000.f}};
+    ClassifierConfig cfg;  // scaled Euclidean
+    Classification result;
+    REQUIRE_NOTHROW(result = classify({0.1f, 600.f}, db, cfg));
+    // After scaling both columns, the query is closer to a. Unscaled distance
+    // would choose b because the second column dominates.
+    CHECK(result.label == "a");
+    CHECK(result.neighbours == std::vector<size_t>{1});
+    CHECK(std::isfinite(result.distance));
+
+    const auto scale = columnStdDev(db, -1, 2);
+    REQUIRE(scale.size() == 2);
+    CHECK(scale[0] == doctest::Approx(0.5f));
+    CHECK(scale[1] == doctest::Approx(500.f));
+    CHECK(classify({0.1f, 600.f}, db, cfg, scale).label == "a");
+    CHECK_THROWS_AS(classify({0.1f, 600.f}, db, cfg, {1.f}), std::invalid_argument);
+
+    REQUIRE_NOTHROW(result = classify({0.1f, 600.f}, db, cfg, {}, 1));
+    CHECK(result.label == "b");
+    CHECK(result.neighbours == std::vector<size_t>{2});
 }
 
 TEST_CASE("leaveOneOut: separable clusters are perfect, overlapping ones are not, matrix sums up") {

@@ -51,7 +51,6 @@ int main(int argc, char** argv) {
                 std::fprintf(stderr, "error: %s\n", err.c_str());
                 return 2;
             }
-            scale = columnStdDev(db);
         }
         cv::dnn::Net net;
         if (kind == FeatureKind::Dnn) net = cv::dnn::readNet(args.get("model", defaultModelPath()));
@@ -99,7 +98,12 @@ int main(int argc, char** argv) {
                     if (!cvc::appendFeatureRow(dbPath, name, v, false, &err)) std::fprintf(stderr, "%s\n", err.c_str());
                 }
                 std::string name;
-                if (classifyMode) name = classify(v, db, cfg, scale).label;
+                if (classifyMode) {
+                    if (cfg.kind == DistanceKind::ScaledEuclidean && scale.size() != v.size()) {
+                        scale = columnStdDev(db, -1, v.size());
+                    }
+                    name = classify(v, db, cfg, scale).label;
+                }
                 drawBox(r.box, r.features, view, name);
                 drawBox(r.box, r.features, seg.colored, name);
             }

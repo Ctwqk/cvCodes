@@ -32,10 +32,13 @@ std::string labelOf(const std::string& rowName);
 std::string labelFromFilename(const std::string& path);
 
 // Standard deviation of every column (population), optionally leaving out one row.
+// The two-argument form uses the first row's length. With `dimensions`, only rows
+// of that length participate, allowing a caller to cache scales for its queries.
 std::vector<float> columnStdDev(const cvc::FeatureTable& db, long skipRow = -1);
+std::vector<float> columnStdDev(const cvc::FeatureTable& db, long skipRow, size_t dimensions);
 
 // Classify `feature`; `scale` (see columnStdDev) is only used for ScaledEuclidean and is computed
-// from the database (without `skipRow`) when empty.
+// from comparable database rows (without `skipRow`) when empty.
 // `skipRow` excludes one database row (leave-one-out), -1 for none.
 Classification classify(const std::vector<float>& feature, const cvc::FeatureTable& db,
                         const ClassifierConfig& config, const std::vector<float>& scale = {}, long skipRow = -1);
