@@ -6,12 +6,14 @@
 build/bin/segment project3/Proj03Examples/img3P3.png --out results/segmentation --headless
 build/bin/buildDb --features shape --db results/shape.csv
 build/bin/evalDb --db results/shape.csv --metric scaled --k 1 --matrix
-build/bin/recognize project3/trainset/ball.jpg --db results/shape.csv --hold-out --out results/recognition --headless
+build/bin/recognize project3/trainset/ball1.jpg --db results/shape.csv --hold-out --out results/recognition --headless
 build/bin/buildDb --features dnn --db results/dnn.csv
 build/bin/evalDb --features dnn --db results/dnn.csv --metric cosine --k 1 --matrix
 ```
 
 Run from the root after [building](../README.md#run-everything). `vidDis --help` describes the interactive stream. `recognize --learn LABEL` appends a labelled observation; filename prefixes provide labels when building a directory. `--channel`, `--invert`, `--min-area`, and `--no-clean` expose segmentation choices.
+
+DNN crops are padded to a square before resizing, preserving large and odd-sized objects' aspect ratios. The included DNN database uses this preprocessing; rebuild older DNN CSVs with `buildDb --features dnn` before reusing them.
 
 ![Actual segmentation](../docs/gallery/segmentation.jpg)
 

@@ -68,10 +68,10 @@ build/bin/imgMatch project2/images/pic.0164.jpg dnn --out results/retrieval --he
 build/bin/segment project3/Proj03Examples/img3P3.png --out results/segmentation --headless
 build/bin/buildDb --features shape --db results/shape.csv
 build/bin/evalDb --db results/shape.csv --metric scaled --k 1 --matrix
-build/bin/recognize project3/trainset/ball.jpg --db results/shape.csv --hold-out --out results/recognition --headless
+build/bin/recognize project3/trainset/ball1.jpg --db results/shape.csv --hold-out --out results/recognition --headless
 ```
 
-[Project 3 guide](project3/README.md). On the 26-row collection, row-wise holdout scored **80.8% with shape features** and **61.5% with DNN features**. The small training collection is not a general object-detection benchmark. Multiple regions from one image can remain in a row-wise evaluation; see [measurement limitations](docs/RESULTS.md).
+[Project 3 guide](project3/README.md). On the 26-row collection, row-wise holdout scored **80.8% with shape features** and **69.2% with DNN features**. The small training collection is not a general object-detection benchmark. Multiple regions from one image can remain in a row-wise evaluation; see [measurement limitations](docs/RESULTS.md).
 
 ### Project 4 · calibration, pose, and augmented reality
 
@@ -152,6 +152,7 @@ flowchart LR
 | `cmake/`, `tests/`, `third_party/doctest/` | Shared C++17 build and vendored test harness |
 | `scripts/` | Bounded Docker environment, full/standalone verification, headless demos, gallery curation |
 | `docs/` | Small result gallery and [verification record](docs/RESULTS.md) |
+| `archive/original-coursework/` | [Byte-identical historical sources and provenance manifest](archive/original-coursework/README.md), excluded from builds |
 
 Each project also builds independently, for example:
 

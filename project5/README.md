@@ -22,7 +22,7 @@ The versions follow the [official PyTorch wheel matrix](https://pytorch.org/get-
 
 ![Actual MNIST predictions and errors](../docs/gallery/mnist.jpg)
 
-`mnistLive` thresholds and centres the largest digit component before classification. It is a single-digit demonstration, not OCR for arbitrary scenes. Greek transfer learning freezes the feature layers and learns a 3-class head on 27 images, with 14 test images; accuracy has high sampling uncertainty. With the default 15 epochs and seed 0, this run scored **6/14 (42.9%)** on the test letters despite high training accuracy; it illustrates limited transfer and overfitting, not a reliable Greek OCR system.
+`mnistLive` thresholds and centres the largest digit component before classification. It is a single-digit demonstration, not OCR for arbitrary scenes. Greek transfer learning freezes the feature layers and learns a 3-class head on 27 images. One of the 14 supplied test files is byte-identical to a training image, so evaluation excludes it and reports **13 test images**. With the default 15 epochs and seed 0, this run scored **5/13 (38.5%)**, replacing the earlier 6/14 (42.9%) that included the duplicate. All original images remain included; the excluded path is recorded in the metrics. The small dataset has high sampling uncertainty and illustrates limited transfer and overfitting, not a reliable Greek OCR system.
 
 C++ tests cover IDX/NPY parsing, preprocessing and inference; Python tests verify weights, transforms, frozen layers, training, and OpenCV parity with both shipped and freshly exported ONNX models. Filter visualisation uses image correlation for interpretability, rather than claiming to reproduce the full normalised layer including bias and pooling.
 

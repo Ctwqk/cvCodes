@@ -1,6 +1,6 @@
 """MNIST digit network for project 5: model definition, training and ONNX export.
 
-    python mnist_model.py                      # train 5 epochs, write weights + ONNX next to this file
+    python mnist_model.py                      # train 5 epochs, write weights + ONNX in results/training
     python mnist_model.py --epochs 1 --out-dir results/mnist --data results/data
 
 The ONNX file is what the C++ programs (mnistEval, mnistLive, ...) load with OpenCV DNN.

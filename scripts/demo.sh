@@ -13,6 +13,7 @@ export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 OPENCV_FOR_THREADS_NUM=2
 "$bin/segment" project3/Proj03Examples/img3P3.png --out "$out/segmentation" --headless
 "$bin/buildDb" --features shape --db "$out/shape.csv"
 "$bin/evalDb" --db "$out/shape.csv" --metric scaled --k 1 --matrix
+"$bin/recognize" project3/trainset/ball1.jpg --db "$out/shape.csv" --hold-out --out "$out/recognition" --headless
 "$bin/buildDb" --features dnn --db "$out/dnn.csv"
 "$bin/evalDb" --db "$out/dnn.csv" --features dnn --metric cosine --k 1 --matrix
 "$bin/synthBoard" --out "$out/calibration" --frames 20 --seed 1

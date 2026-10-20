@@ -11,10 +11,14 @@ bash scripts/docker.sh bash -c 'bash scripts/verify.sh build-quickstart && pytho
 ```
 
 - The top-level build produces **26 executables**.
-- CTest: **8 suites, 145 test cases, all passing**. This covers distances, CSV parsing/writing, filters, thresholding, morphology, regions, recognition, calibration, homography direction, K-means, IDX/NPY parsing and supplied-model inference.
+- CTest: **8 suites, 150 test cases, all passing**. This covers distances, CSV parsing/writing, filters, thresholding, morphology, regions, recognition, calibration, homography direction, K-means, IDX/NPY parsing and supplied-model inference.
 - All **9 standalone configurations** in `scripts/verify.sh` build successfully, including both final-project variants. Every program's `--help` exits successfully without accessing a camera.
-- Python: **9 tests passing**, including Greek-head training and comparison of PyTorch with both the supplied ONNX model and a fresh export (maximum permitted score difference: `1e-3`). The legacy ONNX exporter emits deprecation warnings; it is retained for compatibility with OpenCV 4.6/opset 10.
-- [Successful full-pipeline CI run](https://github.com/Ctwqk/cvCodes/actions/runs/39342936436). Its `headless-results` artifact contains the generated gallery, full demo log, MNIST confusion matrix and CTest log. The branch badge links to subsequent runs as changes land.
+- Python: **12 tests passing**, including Greek-head training and comparison of PyTorch with both the supplied ONNX model and a fresh export (maximum permitted score difference: `1e-3`). The legacy ONNX exporter emits deprecation warnings; it is retained for compatibility with OpenCV 4.6/opset 10.
+- [Full-pipeline CI runs](https://github.com/Ctwqk/cvCodes/actions/workflows/ci.yml?query=branch%3Aportfolio-upgrade). Each successful run's `headless-results` artifact contains the generated gallery, full demo log, MNIST confusion matrix and CTest log.
+
+The independent review reproduced the original 145 C++ cases, nine Python tests, all nine standalone builds, all eight gallery JPEGs byte for byte, and the full MNIST confusion matrix from committed files in a fresh directory. It then demonstrated failures for quantization level counts, K-means accumulator overflow, palettes larger than 800 colors, ragged-row scaling, DNN crop distortion, and Greek train/test overlap. The corrected suite has the passing counts above. Project 2 was also configured independently with tests enabled; both its own and common suites passed.
+
+The review retained all **48 deleted source/configuration paths**, using byte-identical archival copies or explicit duplicate mappings, and restored the original Project 1 submission notes. See the [source archive and hash manifest](../archive/original-coursework/README.md). Generated binaries and duplicated data remain removed. The documented recognition example now uses `ball1.jpg` because `ball.jpg` produces no retained region; the headless demo exercises that command. Corrected square padding changes the DNN result from 16/26 to 18/26, and the included DNN feature CSV has been regenerated.
 
 ## Measurements
 
@@ -24,17 +28,17 @@ bash scripts/docker.sh bash -c 'bash scripts/verify.sh build-quickstart && pytho
 | Colour quantisation | Cathedral, K=8, block=4, seed=1 | 19,200 colour samples; reconstruction MSE **217.1** |
 | CBIR | All **1,106** included photographs | Six feature databases rebuilt; histogram and supplied ResNet18 top-5 retrieval montages saved |
 | Shape recognition | 26 region rows, 5 classes; scaled distance, 1 neighbour | Leave-one-row-out **21/26 (80.8%)** |
-| DNN region recognition | Same 26 rows; supplied region network, cosine distance, 1 neighbour | Leave-one-row-out **16/26 (61.5%)** |
+| DNN region recognition | Same 26 rows; supplied region network, cosine distance, 1 neighbour | Leave-one-row-out **18/26 (69.2%)** |
 | Synthetic calibration | 20 seeded 640×480 views, true `fx=fy=520` | Board found in **20/20**; fitted focal length **519.681**; RMS reprojection **0.1363 px** |
 | AR sequence | 12 new synthetic views, estimated intrinsics | Board found in **12/12**; mean corner reprojection **0.140 px** |
 | Harris corners | Included cathedral, threshold 160 | **83** selected corners |
 | MNIST | All **10,000** included test digits; shipped ONNX model | **9,881 correct (98.81%)**, 119 errors; [full confusion matrix](mnist-confusion-matrix.txt) |
-| Greek transfer | 27 training images, 14 test images; 15 epochs, seed 0 | **6/14 (42.9%)** test accuracy; small-data transfer is weak |
+| Greek transfer | 27 training images, 13 evaluated test images after excluding one training duplicate; 15 epochs, seed 0 | **5/13 (38.5%)** test accuracy; small-data transfer is weak |
 | Learned filters | Supplied 10×5×5 kernels and 28×28 digit | Ten filter-response arrays and a contact sheet written |
 | Pattern matching | Cathedral registered and queried | **401** extracted SIFT features, **387** matched inliers |
 | AR games | Both variants, 12 synthetic frames each | Headless field overlays produced; interactive play not assessed |
 
-The Greek experiment is reproduced with `python3 project5/greek_transfer.py --epochs 15 --seed 0 --out results/greek`; it is separate from the C++ gallery script. Its [predictions](greek-predictions.png) and [epoch metrics](greek-metrics.json) are retained, including the errors.
+The Greek experiment is reproduced with `python3 project5/greek_transfer.py --epochs 15 --seed 0 --out results/greek`; it is separate from the C++ gallery script. Its [predictions](greek-predictions.png) and [epoch metrics](greek-metrics.json) are retained, including the errors. `greek_test/alpha/alpha_005.png` is byte-identical to `greek_train/alpha/alpha_004.png`; the script preserves both files but excludes the test copy by SHA-256 and records it in `excluded_test_samples`. The earlier **6/14 (42.9%)** included this correctly classified training image. Excluding it leaves **5/13 (38.5%)**, with an unchanged training history. Exact-byte filtering does not establish independence of handwriting sources or detect transformed duplicates.
 
 The SIFT demo is an identity-view smoke test; the unit tests separately validate a non-identity transform with permuted correspondence indices. It is not a viewpoint-robustness benchmark.
 
