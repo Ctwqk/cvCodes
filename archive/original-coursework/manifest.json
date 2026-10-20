@@ -1,0 +1,466 @@
+{
+  "source_commit": "ca45a2680d86d42d45fb84c630e268df49c9c1b1",
+  "hash_format": "Git SHA-1 blob object ID, including the blob header",
+  "scope": "Deleted original C++ and Python sources, headers, text source backups, handwritten CMake files, and the restored Project 1 submission notes. Exact duplicates are represented by one retained copy.",
+  "files": [
+    {
+      "original_path": "project1/play.cpp",
+      "git_blob_sha1": "fb6e4ea6c5404bd261f25295426790e7f3de665a",
+      "preserved_path": "archive/original-coursework/project1/play.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project1/imgDisplay.cpp",
+        "project1/task2/filter.cpp"
+      ]
+    },
+    {
+      "original_path": "project1/task2/CMakeLists.txt",
+      "git_blob_sha1": "f5a68449444e2c3944bc9b1a1b54e5c351f886e1",
+      "preserved_path": "archive/original-coursework/project1/task2/CMakeLists.txt",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project1/CMakeLists.txt"
+      ]
+    },
+    {
+      "original_path": "project1/task2/imgDisplay_bak.cpp",
+      "git_blob_sha1": "5d010efab7033ad0ae19302bd80ba295d2ce4aa7",
+      "preserved_path": "archive/original-coursework/project1/task2/imgDisplay_bak.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project1/imgDisplay.cpp",
+        "project1/task2/filter.cpp"
+      ]
+    },
+    {
+      "original_path": "project2/csv_util.cpp",
+      "git_blob_sha1": "1b314e7407cce2ef21df78a6a1188d72b3a97aa2",
+      "preserved_path": "archive/original-coursework/project2/csv_util.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/csv_util.cpp"
+      ]
+    },
+    {
+      "original_path": "project2/csv_util.h",
+      "git_blob_sha1": "5068ca5a349d0d2de76b1b6a61ed29136b8ea60f",
+      "preserved_path": "archive/original-coursework/project2/csv_util.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/csv_util.h"
+      ]
+    },
+    {
+      "original_path": "project2/dist.cpp",
+      "git_blob_sha1": "416ec87fa36d157183a118bace1d7e102ed79966",
+      "preserved_path": "archive/original-coursework/project2/dist.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/distance.cpp"
+      ]
+    },
+    {
+      "original_path": "project2/dist.h",
+      "git_blob_sha1": "fbca2021e7dcfa33634666351ddf75edcd2b06d2",
+      "preserved_path": "archive/original-coursework/project2/dist.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/distance.h"
+      ]
+    },
+    {
+      "original_path": "project2/features.cpp",
+      "git_blob_sha1": "a52aa11b24542c9f04e2c0078962fcf9d5867651",
+      "preserved_path": "archive/original-coursework/project2/features.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project2/imgfeatures.cpp",
+        "project2/retrieval.cpp"
+      ]
+    },
+    {
+      "original_path": "project2/features.h",
+      "git_blob_sha1": "f965ca9ff8d010c3001c16411f6c594f5e85c2bb",
+      "preserved_path": "archive/original-coursework/project2/features.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project2/imgfeatures.h",
+        "project2/retrieval.h"
+      ]
+    },
+    {
+      "original_path": "project2/myFour.cpp",
+      "git_blob_sha1": "3151fd2846b696ab7794a5944ff459dd8caafdca",
+      "preserved_path": "archive/original-coursework/project2/myFour.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project2/imgfeatures.cpp"
+      ],
+      "note": "Original file contains only an OpenCV include; preserved as an original source stub."
+    },
+    {
+      "original_path": "project2/readfile.cpp",
+      "git_blob_sha1": "fb0669d6a9cc0ec157a08ea510c254ef55d093cb",
+      "preserved_path": "archive/original-coursework/project2/readfile.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/app_io.cpp"
+      ]
+    },
+    {
+      "original_path": "project2/readfile.h",
+      "git_blob_sha1": "25350e49f361d7f9a91a9422cbc5c883f8b95ce0",
+      "preserved_path": "archive/original-coursework/project2/readfile.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/app_io.h"
+      ]
+    },
+    {
+      "original_path": "project3/CMakeLists_bak",
+      "git_blob_sha1": "ed5a0ee990c3e0be44a64a9f402a93b95f03119a",
+      "preserved_path": "archive/original-coursework/project3/CMakeLists_bak",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/CMakeLists.txt"
+      ]
+    },
+    {
+      "original_path": "project3/NetWorkThings/CMakeLists.txt",
+      "git_blob_sha1": "0427c2c06a1aa95bb7c9e8c4d860926669312571",
+      "preserved_path": "archive/original-coursework/project3/NetWorkThings/CMakeLists.txt",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/CMakeLists.txt"
+      ]
+    },
+    {
+      "original_path": "project3/NetWorkThings/dnnEmbedding.cpp",
+      "git_blob_sha1": "9609771671ace15b44f0f8285ece51a5830f08fd",
+      "preserved_path": "archive/original-coursework/project3/NetWorkThings/dnnEmbedding.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/dnnEmbedding.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/NetWorkThings/dnnEmbedding.h",
+      "git_blob_sha1": "032e12601627f9a132d544d55e0a4b14a1f5f7f3",
+      "preserved_path": "archive/original-coursework/project3/NetWorkThings/dnnEmbedding.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/dnnEmbedding.h"
+      ]
+    },
+    {
+      "original_path": "project3/NetWorkThings/dnnexample.cpp",
+      "git_blob_sha1": "474561f35de3860f1a5d90c33c280b2b8cc0694d",
+      "preserved_path": "archive/original-coursework/project3/NetWorkThings/dnnexample.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/dnnexample.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/csv_util.cpp",
+      "git_blob_sha1": "3d86561be6871af7c177fb25108b61be902dc5e7",
+      "preserved_path": "archive/original-coursework/project3/csv_util.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/csv_util.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/csv_util.h",
+      "git_blob_sha1": "5068ca5a349d0d2de76b1b6a61ed29136b8ea60f",
+      "preserved_path": "archive/original-coursework/project2/csv_util.h",
+      "disposition": "exact_duplicate_archived",
+      "modern_replacements": [
+        "common/csv_util.h"
+      ]
+    },
+    {
+      "original_path": "project3/debug.cpp",
+      "git_blob_sha1": "4151483f4c343f84a77d5cec66cd7a9e28612369",
+      "preserved_path": "archive/original-coursework/project3/debug.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/segment.cpp",
+        "project3/pipeline.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/dist.cpp",
+      "git_blob_sha1": "976cf1dfdc55ea20d88be2b809da1d16534346c9",
+      "preserved_path": "archive/original-coursework/project3/dist.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/distance.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/dist.h",
+      "git_blob_sha1": "b6258d24e6143d36acd5d1016e73e98a5cbd46cd",
+      "preserved_path": "archive/original-coursework/project3/dist.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "common/distance.h"
+      ]
+    },
+    {
+      "original_path": "project3/features.cpp",
+      "git_blob_sha1": "c137c341e3ba176a40d888513f4e442b41c026c2",
+      "preserved_path": "archive/original-coursework/project3/features.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/regionfeatures.cpp",
+        "project3/dnnEmbedding.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/features.h",
+      "git_blob_sha1": "3077437a5d59d4008d081e50ac408542b2946b31",
+      "preserved_path": "archive/original-coursework/project3/features.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/regionfeatures.h",
+        "project3/dnnEmbedding.h"
+      ]
+    },
+    {
+      "original_path": "project3/main.cpp",
+      "git_blob_sha1": "78d26d3bd5000534dbec993d6d2ba853403e0bd6",
+      "preserved_path": "archive/original-coursework/project3/main.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/segment.cpp",
+        "project3/pipeline.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/region_bak.cpp",
+      "git_blob_sha1": "b6facf65ec15022e6f1be36b48c259a973654682",
+      "preserved_path": "archive/original-coursework/project3/region_bak.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project3/region.cpp"
+      ]
+    },
+    {
+      "original_path": "project3/region_swa",
+      "git_blob_sha1": "b6facf65ec15022e6f1be36b48c259a973654682",
+      "preserved_path": "archive/original-coursework/project3/region_bak.cpp",
+      "disposition": "exact_duplicate_archived",
+      "modern_replacements": [
+        "project3/region.cpp"
+      ]
+    },
+    {
+      "original_path": "project4/RobustFeature_bak",
+      "git_blob_sha1": "05b90df4bc65fe724c2b87ed0f75dee382d036dd",
+      "preserved_path": "archive/original-coursework/project4/RobustFeature_bak",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project4/RobustFeature.cpp"
+      ],
+      "note": "The integralImg experiment has no maintained equivalent; replacement paths cover the other Sobel or Harris functionality only."
+    },
+    {
+      "original_path": "project4/extension_bak",
+      "git_blob_sha1": "8641f99c5ff08ce2d416efc7cf99865468d30a98",
+      "preserved_path": "archive/original-coursework/project4/extension_bak",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project4/extension.cpp",
+        "project4/ar_utils.cpp"
+      ]
+    },
+    {
+      "original_path": "project4/main.cpp",
+      "git_blob_sha1": "32fcd1741ddf459bfed64ce6e725e71f536ceb0e",
+      "preserved_path": "archive/original-coursework/project4/main.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project4/calibrate.cpp",
+        "project4/ar_utils.cpp"
+      ]
+    },
+    {
+      "original_path": "project4/sobel.cpp",
+      "git_blob_sha1": "f8370cc69addc404da3ebb28f2c6c811e5da5614",
+      "preserved_path": "archive/original-coursework/project4/sobel.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project1/task2/filter.cpp"
+      ],
+      "note": "The integralImg experiment has no maintained equivalent; replacement paths cover the other Sobel or Harris functionality only."
+    },
+    {
+      "original_path": "project4/sobel.h",
+      "git_blob_sha1": "5d525df81f622cfa0597a1ae005b334ec3b128b4",
+      "preserved_path": "archive/original-coursework/project4/sobel.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project1/task2/filter.h"
+      ],
+      "note": "The integralImg experiment has no maintained equivalent; replacement paths cover the other Sobel or Harris functionality only."
+    },
+    {
+      "original_path": "project5/dnnexample.cpp",
+      "git_blob_sha1": "503278a5ff6535f8eb960d33f788c76de0557c59",
+      "preserved_path": "archive/original-coursework/project5/dnnexample.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/dnnForward.cpp"
+      ]
+    },
+    {
+      "original_path": "project5/filter.cpp",
+      "git_blob_sha1": "ec42f8528bb90cf91d5df1db2a0ff86c14c4c746",
+      "preserved_path": "archive/original-coursework/project5/filter.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/filterViz_main.cpp",
+        "project5/filterviz.cpp"
+      ]
+    },
+    {
+      "original_path": "project5/main.cpp",
+      "git_blob_sha1": "4d5bfc603cf2223bbbd71e2bb6f88bcd4865a924",
+      "preserved_path": "archive/original-coursework/project5/main.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/mnistLive.cpp"
+      ]
+    },
+    {
+      "original_path": "project5/preprocess.cpp",
+      "git_blob_sha1": "238086fc6cb9bc97e36dabd699a406cbb2411f22",
+      "preserved_path": "archive/original-coursework/project5/preprocess.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/mnist.cpp"
+      ]
+    },
+    {
+      "original_path": "project5/preprocess.h",
+      "git_blob_sha1": "ec7e5f30bf51f217cfe8ccfa4ad6065986374da9",
+      "preserved_path": "archive/original-coursework/project5/preprocess.h",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/mnist.h"
+      ]
+    },
+    {
+      "original_path": "project5/script.py",
+      "git_blob_sha1": "32fae2d63aba1c677c2dbc9bd4c33b6d27f4e6c4",
+      "preserved_path": "archive/original-coursework/project5/script.py",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/mnist_model.py"
+      ]
+    },
+    {
+      "original_path": "project5/task2.py",
+      "git_blob_sha1": "3e5d06762fba45b25ecc70c63badf5f80ece2e20",
+      "preserved_path": "archive/original-coursework/project5/task2.py",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/export_filters.py",
+        "project5/greek_transfer.py"
+      ]
+    },
+    {
+      "original_path": "project5/use.py",
+      "git_blob_sha1": "91f6d34541bb3764f7e25b6b7d9d6958333d396b",
+      "preserved_path": "archive/original-coursework/project5/use.py",
+      "disposition": "archived",
+      "modern_replacements": [
+        "project5/predict_samples.py"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame/snakegame_bak",
+      "git_blob_sha1": "16df895efff4d572308bd6cab7599b55ff5010ae",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame/snakegame_bak",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/snakegame.cpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/main.cpp",
+      "git_blob_sha1": "506dfee4e09cc110a97d985a7f0aba1ba9f434d4",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame_3d/main.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/main.cpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/match_tmp.cpp",
+      "git_blob_sha1": "39cb7543845076f1b9435678687731e9596dcc6c",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame_3d/match_tmp.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/match_tmp.cpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/patternMatch.cpp",
+      "git_blob_sha1": "145dfb6fe5f0e787148f77ba20daeba8d58c53a2",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame_3d/patternMatch.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/patternMatch.cpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/patternMatch.hpp",
+      "git_blob_sha1": "e7ef25997f8f7d8bb2e92eb7580b0dcd0b841c65",
+      "preserved_path": "projectFinal/SnakeGame/patternMatch.hpp",
+      "disposition": "exact_duplicate_retained",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/patternMatch.hpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/saveOrReadPattern.cpp",
+      "git_blob_sha1": "c365e1fc04e7568d70064eb45ccf02aeff57479a",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame_3d/saveOrReadPattern.cpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/saveOrReadPattern.cpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/saveOrReadPattern.hpp",
+      "git_blob_sha1": "bd47118a29ee5be57b9969e56dd6ba75847e3569",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame_3d/saveOrReadPattern.hpp",
+      "disposition": "archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/saveOrReadPattern.hpp"
+      ]
+    },
+    {
+      "original_path": "projectFinal/SnakeGame_3d/snakegame_bak",
+      "git_blob_sha1": "16df895efff4d572308bd6cab7599b55ff5010ae",
+      "preserved_path": "archive/original-coursework/projectFinal/SnakeGame/snakegame_bak",
+      "disposition": "exact_duplicate_archived",
+      "modern_replacements": [
+        "projectFinal/SnakeGame/snakegame.cpp"
+      ],
+      "note": "Exact duplicate of the original planar-game backup, despite its 3D directory location."
+    },
+    {
+      "original_path": "project1/readme.txt",
+      "git_blob_sha1": "ed3b191cd71245a3cd69b9b4ea51f2a71fca00e0",
+      "preserved_path": "project1/readme.txt",
+      "disposition": "restored_original_path",
+      "modern_replacements": [
+        "project1/README.md"
+      ],
+      "note": "Original author submission notes and video URL."
+    }
+  ]
+}
