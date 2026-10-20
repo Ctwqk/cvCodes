@@ -1,0 +1,33 @@
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include "sobel.h"
+using namespace std;
+using namespace cv;
+
+int main(int argc,char** argv){
+	VideoCapture *cmrCap=new cmrCap(atoi(argv[1]));
+	if(!cmrCap->isOpened()){
+		cout<<"failed to turn on the camera"<<endl;
+		return -1;
+	}
+	Mat frame,src,sX,sY;	
+
+
+
+	for(;;){
+		char c=waitKey(10);
+		if(c=='q'){
+			destroyAllWindows();
+			waitKey(1);
+			break;
+		}
+		*cmrCap>>frame;
+		integralImg(frame,src);
+		
+
+
+		
+	}
+	return 0;
+
+}
