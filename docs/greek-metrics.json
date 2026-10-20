@@ -4,8 +4,11 @@
     "beta",
     "gamma"
   ],
-  "test_accuracy": 0.42857142857142855,
-  "test_samples": 14,
+  "test_accuracy": 0.38461538461538464,
+  "test_samples": 13,
+  "excluded_test_samples": [
+    "alpha/alpha_005.png"
+  ],
   "training": [
     {
       "epoch": 1,

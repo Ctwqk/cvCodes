@@ -121,8 +121,54 @@ def test_greek_transfer_learning_runs_and_fits_the_training_set(tmp_path):
         out=str(tmp_path),
     )
     result = greek_transfer.run(args)
-    assert result["test_samples"] == 14
+    assert result["test_samples"] == 13
+    assert result["excluded_test_samples"] == ["alpha/alpha_005.png"]
     assert 0.0 <= result["test_accuracy"] <= 1.0
     assert result["training"][-1]["train_accuracy"] > 0.6  # far above the 1/3 chance level
     assert (tmp_path / "predictions.png").exists()
     assert (tmp_path / "metrics.json").exists()
+
+
+@pytest.mark.parametrize("include_duplicate", [False, True])
+def test_greek_evaluation_excludes_training_content_regardless_of_filename_or_class(tmp_path, include_duplicate):
+    import argparse
+    import shutil
+
+    train = tmp_path / "train"
+    test = tmp_path / "test"
+    for label in ("alpha", "beta", "gamma"):
+        (train / label).mkdir(parents=True)
+        (test / label).mkdir(parents=True)
+        # Matching filenames alone do not imply overlap: these are distinct images.
+        shutil.copyfile(HERE / "greek_train" / label / f"{label}_001.png", train / label / "sample.png")
+        shutil.copyfile(HERE / "greek_test" / label / f"{label}_000.png", test / label / "sample.png")
+    if include_duplicate:
+        # A renamed, relabelled copy is still a training image and must be excluded.
+        shutil.copyfile(train / "beta/sample.png", test / "alpha/copied-training.png")
+
+    result = greek_transfer.run(argparse.Namespace(
+        weights=str(HERE / "mnist_model_weights.pth"),
+        train=str(train),
+        test=str(test),
+        epochs=0,
+        seed=0,
+        out="",
+    ))
+
+    assert result["test_samples"] == 3
+    assert result["excluded_test_samples"] == (["alpha/copied-training.png"] if include_duplicate else [])
+
+
+def test_greek_evaluation_rejects_a_test_set_containing_only_training_images():
+    import argparse
+
+    args = argparse.Namespace(
+        weights=str(HERE / "mnist_model_weights.pth"),
+        train=str(HERE / "greek_train"),
+        test=str(HERE / "greek_train"),
+        epochs=0,
+        seed=0,
+        out="",
+    )
+    with pytest.raises(ValueError, match="no held-out test images"):
+        greek_transfer.run(args)

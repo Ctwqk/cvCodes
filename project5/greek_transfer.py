@@ -1,7 +1,8 @@
 """Transfer learning: re-use the MNIST network to recognise the Greek letters alpha, beta and gamma.
 
 The convolutional layers and fc1 of the trained MNIST network are frozen; only a new 50 -> 3 output layer is
-trained on the 27 hand-written training letters (project5/greek_train) and evaluated on the 14 test letters.
+trained on the 27 hand-written training letters (project5/greek_train). Test files identical to training images
+are excluded from evaluation and reported explicitly.
 
     python greek_transfer.py                       # prints per-epoch accuracy and the test result
     python greek_transfer.py --out results/greek   # also writes predictions.png and metrics.json
@@ -9,6 +10,7 @@ trained on the 27 hand-written training letters (project5/greek_train) and evalu
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -85,6 +87,23 @@ def run(args: argparse.Namespace) -> dict:
     test_set, test_loader = greek_loader(Path(args.test), batch_size=1, shuffle=False)
     assert train_set.classes == test_set.classes, "train and test folders must have the same classes"
 
+    training_hashes = {hashlib.sha256(Path(path).read_bytes()).digest() for path, _ in train_set.samples}
+    held_out_indices, excluded_test_samples = [], []
+    for index, (path, _) in enumerate(test_set.samples):
+        if hashlib.sha256(Path(path).read_bytes()).digest() in training_hashes:
+            excluded_test_samples.append(Path(path).relative_to(test_set.root).as_posix())
+        else:
+            held_out_indices.append(index)
+    excluded_test_samples.sort()
+    print(f"excluded {len(excluded_test_samples)} test images identical to training images")
+    for path in excluded_test_samples:
+        print(f"  {path}")
+    if not held_out_indices:
+        raise ValueError("no held-out test images remain after excluding training duplicates")
+    test_loader = torch.utils.data.DataLoader(
+        torch.utils.data.Subset(test_set, held_out_indices), batch_size=1, shuffle=False,
+    )
+
     model = GreekNet(load_weights(args.weights))
     criterion = nn.NLLLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=0.003, momentum=0.9)
@@ -110,7 +129,8 @@ def run(args: argparse.Namespace) -> dict:
     print(f"test accuracy {100 * test_acc:.1f} % on {len(samples)} letters")
     for img, truth, pred in samples:
         print(f"  actual {classes[truth]:5s} predicted {classes[pred]}{'' if truth == pred else '   <-- wrong'}")
-    result = {"classes": classes, "test_accuracy": test_acc, "test_samples": len(samples), "training": history}
+    result = {"classes": classes, "test_accuracy": test_acc, "test_samples": len(samples),
+              "excluded_test_samples": excluded_test_samples, "training": history}
 
     if args.out:
         import matplotlib
