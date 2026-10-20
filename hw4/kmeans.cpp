@@ -16,6 +16,8 @@
  */
 #include "kmeans.h"
 
+#include <array>
+#include <cstdint>
 #include <cstdio>
 #include <random>
 
@@ -58,18 +60,18 @@ int kmeans(const std::vector<cv::Vec3b>& data, std::vector<cv::Vec3b>& means, in
         classify();
 
         // Update step: accumulate sums and counts per cluster.
-        std::vector<cv::Vec4i> tmeans(static_cast<size_t>(K), cv::Vec4i(0, 0, 0, 0));
+        std::vector<std::array<std::int64_t, 4>> tmeans(static_cast<size_t>(K), {0, 0, 0, 0});
         for (size_t j = 0; j < n; ++j) {
-            cv::Vec4i& t = tmeans[static_cast<size_t>(labels[j])];
+            auto& t = tmeans[static_cast<size_t>(labels[j])];
             t[0] += data[j][0];
             t[1] += data[j][1];
             t[2] += data[j][2];
             t[3]++;
         }
 
-        int moved = 0;
+        std::int64_t moved = 0;
         for (int k = 0; k < K; ++k) {
-            cv::Vec4i& t = tmeans[static_cast<size_t>(k)];
+            auto& t = tmeans[static_cast<size_t>(k)];
             if (t[3] == 0) continue;  // empty cluster: keep the old mean
             const cv::Vec3b updated(static_cast<uchar>((t[0] + t[3] / 2) / t[3]),
                                     static_cast<uchar>((t[1] + t[3] / 2) / t[3]),

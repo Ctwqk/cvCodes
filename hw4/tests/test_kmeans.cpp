@@ -40,6 +40,17 @@ TEST_CASE("K = 1 gives the (rounded) mean color") {
     CHECK(means[0] == Vec3b(5, 10, 16));  // 15.5 rounds up
 }
 
+TEST_CASE("K = 1 preserves a solid white image larger than eight megapixels") {
+    // This many bright samples overflow a signed 32-bit channel sum; data and
+    // labels together occupy under 60 MB, comparable to a --block 1 photo.
+    const std::vector<Vec3b> data(8500000, Vec3b(255, 255, 255));
+    std::vector<int> labels(data.size());
+    std::vector<Vec3b> means;
+    REQUIRE(kmeans(data, means, labels.data(), 1, 1) == 0);
+    REQUIRE(means.size() == 1);
+    CHECK(means[0] == Vec3b(255, 255, 255));
+}
+
 TEST_CASE("regression: data.size() a multiple of K used to divide by zero") {
     for (int n : {6, 12, 40}) {
         for (int K : {1, 2, 3, 6}) {
@@ -174,4 +185,20 @@ TEST_CASE("paletteStrip and toHex") {
     CHECK(strip.at<Vec3b>(5, 76) == palette[1]);
     CHECK(toHex(Vec3b(0, 0, 255)) == "#FF0000");
     CHECK(toHex(Vec3b(1, 2, 3)) == "#030201");
+}
+
+TEST_CASE("paletteStrip default output accommodates more than 800 colors") {
+    // colors accepts K up to 66000 and requests a strip without specifying a width.
+    std::vector<Vec3b> palette;
+    for (int i = 0; i < 801; ++i) palette.push_back(Vec3b(i % 256, i / 256, 0));
+    cv::Mat strip;
+    REQUIRE_NOTHROW(strip = paletteStrip(palette, {}));
+    REQUIRE_FALSE(strip.empty());
+    REQUIRE(strip.type() == CV_8UC3);
+    std::set<int> visible;
+    for (int x = 0; x < strip.cols; ++x) {
+        const Vec3b color = strip.at<Vec3b>(strip.rows / 2, x);
+        visible.insert(color[0] + 256 * color[1] + 65536 * color[2]);
+    }
+    CHECK(visible.size() == palette.size());
 }

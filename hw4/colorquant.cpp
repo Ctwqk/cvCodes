@@ -70,7 +70,8 @@ std::vector<double> paletteShares(const cv::Mat& bgr, const std::vector<cv::Vec3
 
 cv::Mat paletteStrip(const std::vector<cv::Vec3b>& palette, const std::vector<double>& shares,
                      int width, int height) {
-    CV_Assert(!palette.empty() && width >= static_cast<int>(palette.size()));
+    CV_Assert(!palette.empty());
+    width = std::max(width, static_cast<int>(palette.size()));
     cv::Mat strip(height, width, CV_8UC3, cv::Scalar::all(0));
     const bool weighted = shares.size() == palette.size();
     double total = 0;

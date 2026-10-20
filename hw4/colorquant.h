@@ -17,7 +17,8 @@ cv::Mat quantize(const cv::Mat& bgr, const std::vector<cv::Vec3b>& palette);
 std::vector<double> paletteShares(const cv::Mat& bgr, const std::vector<cv::Vec3b>& palette);
 
 // Horizontal strip with one swatch per color; swatch width is proportional to
-// `shares` when given (same length as palette), otherwise equal.
+// `shares` when given (same length as palette), otherwise equal. Width expands
+// when needed to give every palette color at least one pixel.
 cv::Mat paletteStrip(const std::vector<cv::Vec3b>& palette, const std::vector<double>& shares,
                      int width = 800, int height = 80);
 
