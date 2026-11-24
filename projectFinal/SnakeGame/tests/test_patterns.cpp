@@ -25,7 +25,7 @@ TEST_CASE("homography maps pattern into frame even with permuted descriptor indi
 }
 
 TEST_CASE("SIFT database roundtrip, matching, and malformed input") {
-    const auto path = (std::filesystem::temp_directory_path()/"pu-cvcodes-pattern-test.txt").string();
+    const auto path = (std::filesystem::temp_directory_path()/"cvcodes-pattern-test.txt").string();
     REQUIRE(establishPatterns(cvc::repoPath("project1"), path, 100, 1) == 0);
     std::vector<std::vector<cv::KeyPoint>> points;
     std::vector<cv::Mat> descriptors, corners;

@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     fs::path scratch;
     std::random_device random;
     for (int attempt = 0; attempt < 100; ++attempt) {
-        scratch = parent / ("pu-cvcodes-tests-" + std::to_string(random()));
+        scratch = parent / ("cvcodes-tests-" + std::to_string(random()));
         if (fs::create_directory(scratch)) break;
         scratch.clear();
     }

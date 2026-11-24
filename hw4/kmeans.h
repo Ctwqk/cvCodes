@@ -4,7 +4,7 @@
   CS 5330
 
   Header file for implementation of a K-means algorithm
-  (course skeleton; bug fixes and tests added in the portfolio upgrade)
+  (course skeleton; bug fixes and tests added later)
 */
 #ifndef KMEANS_H
 #define KMEANS_H

@@ -1,6 +1,6 @@
 # Reproducible results
 
-These are outputs from running the programs, not mockups. The full pipeline was verified on **2026-10-19** in Ubuntu 24.04 with GCC 13, CMake 3.28, OpenCV 4.6, Python 3.12, and PyTorch 2.8.0 / torchvision 0.23.0 CPU wheels. Containers were limited to 4 GB RAM and four CPUs; C++ builds used at most four jobs. Local heavy work used the workstation's global lock and a 6 GB systemd scope with no swap.
+These are outputs from running the programs, not mockups. The full pipeline was verified on **2026-10-19** in Ubuntu 24.04 with GCC 13, CMake 3.28, OpenCV 4.6, Python 3.12, and PyTorch 2.8.0 / torchvision 0.23.0 CPU wheels. Containers were limited to 4 GB RAM and four CPUs; C++ builds used at most four jobs.
 
 ## Verification
 
@@ -18,7 +18,7 @@ bash scripts/docker.sh bash -c 'bash scripts/verify.sh build-quickstart && pytho
 
 The independent review reproduced the original 145 C++ cases, nine Python tests, all nine standalone builds, all eight gallery JPEGs byte for byte, and the full MNIST confusion matrix from committed files in a fresh directory. It then demonstrated failures for quantization level counts, K-means accumulator overflow, palettes larger than 800 colors, ragged-row scaling, DNN crop distortion, and Greek train/test overlap. The corrected suite has the passing counts above. Project 2 was also configured independently with tests enabled; both its own and common suites passed.
 
-The review retained all **48 deleted source/configuration paths**, using byte-identical archival copies or explicit duplicate mappings, and restored the original Project 1 submission notes. See the [source archive and hash manifest](../archive/original-coursework/README.md). Generated binaries and duplicated data remain removed. The documented recognition example now uses `ball1.jpg` because `ball.jpg` produces no retained region; the headless demo exercises that command. Corrected square padding changes the DNN result from 16/26 to 18/26, and the included DNN feature CSV has been regenerated.
+The 48 deleted source/configuration paths remain in commit `ca45a26`; the review restored the original Project 1 submission notes. Generated binaries and duplicated data remain removed. The documented recognition example now uses `ball1.jpg` because `ball.jpg` produces no retained region; the headless demo exercises that command. Corrected square padding changes the DNN result from 16/26 to 18/26, and the included DNN feature CSV has been regenerated.
 
 ## Measurements
 
