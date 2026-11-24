@@ -2,7 +2,7 @@
 Author: Taiwei Cui
 TIme: 2024-1-22
 
-Portfolio upgrade: the filters keep their original behaviour and signatures
+The filters keep their original behaviour and signatures
 (const-correct now), with these fixes:
  - myRGB2Gray computed the grey image and then returned the blue channel instead;
  - sepia printed debug text on every call and accumulated into uchar;

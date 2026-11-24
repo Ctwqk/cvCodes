@@ -6,7 +6,7 @@
   Execute k-means on the colors of an image and re-render the image with the
   K colors chosen by the algorithm.
 
-  Original course skeleton, extended in the portfolio upgrade with a proper
+  Original course skeleton, extended with a proper
   command line, seeded sampling, a palette report and file output (so it can
   run without a display).
 */

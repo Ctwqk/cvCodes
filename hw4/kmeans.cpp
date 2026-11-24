@@ -5,7 +5,7 @@
 
   Implementation of a K-means algorithm.
 
-  Portfolio-upgrade fixes compared to the course skeleton:
+  Fixes compared to the course skeleton:
    - the comb-sampling offset did `rand() % (size % K)`, a division by zero
      whenever the number of samples was a multiple of K;
    - an empty cluster divided by a zero count; it now keeps its previous mean;

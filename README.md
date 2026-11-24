@@ -18,8 +18,6 @@ bash scripts/docker.sh bash -c 'bash scripts/verify.sh build-quickstart && pytho
 
 The script installs Ubuntu 24.04's OpenCV 4.6 packages and pinned PyTorch 2.8.0 / torchvision 0.23.0 CPU wheels inside a disposable container, limits it to **4 GB / 4 CPUs**, builds with at most four jobs, and writes files as your host UID/GID. Package installation needs internet access and repeats on each invocation. Build products stay in `build-quickstart/`; results and the compact gallery are in `results/demo/`. It opens no windows or host ports.
 
-On a shared production host, wrap this command in the host's global heavy-work lock and memory scope, and wait if less than 8 GB is available. The repository does not assume a particular host's lock path.
-
 With a native C++17 compiler, CMake 3.16+, and OpenCV 4.4+ development packages:
 
 ```bash
@@ -152,7 +150,8 @@ flowchart LR
 | `cmake/`, `tests/`, `third_party/doctest/` | Shared C++17 build and vendored test harness |
 | `scripts/` | Bounded Docker environment, full/standalone verification, headless demos, gallery curation |
 | `docs/` | Small result gallery and [verification record](docs/RESULTS.md) |
-| `archive/original-coursework/` | [Byte-identical historical sources and provenance manifest](archive/original-coursework/README.md), excluded from builds |
+
+The original coursework sources, before restructuring, are in commit `ca45a26`.
 
 Each project also builds independently, for example:
 

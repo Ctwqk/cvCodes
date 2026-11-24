@@ -2,7 +2,7 @@
  * Author: Taiwei Cui
  * Time: Feb 27 2024
  *
- * Portfolio upgrade: pixel coordinates live in heap vectors instead of
+ * Pixel coordinates live in heap vectors instead of
  * `int x[row*col]` on the stack (a 2 MB-plus stack frame per call), centred
  * coordinates keep their fractional part, the box measures pixel extents
  * (max - min + 1) and an empty region no longer divides by zero.
